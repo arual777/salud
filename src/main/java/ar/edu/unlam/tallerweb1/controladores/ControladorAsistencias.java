@@ -19,14 +19,7 @@ public class ControladorAsistencias {
 
         ModelMap model = new ModelMap();
 
-        //funcion del servicio Función(servicio lo que haria: Buscar "Asistencias" en la bd y traerlas.)
 
-        //Controller: Usa servicio (Que busca asistencias en este caso), hace pequeña lógica, y envia a la
-        //vista.
-
-        /*model.put("servicio",  "Cuidado de ancianos por día2");
-        model.put("servicio",  "Cuidado de ancianos por día3");
-        model.put("servicio",  "Cuidado de ancianos por día4");*/
         model.put("servicio2", "Cuidado de ancianos por mes");
         model.put("servicio3", "Cuidado de enfermos por día");
 

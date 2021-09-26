@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class RepositorioAsistentciaTest extends SpringTest {
+public class RepositorioAsistenciaTest extends SpringTest {
 
     @Autowired
     private RepositorioAsistencia repositorioAsistencia;
