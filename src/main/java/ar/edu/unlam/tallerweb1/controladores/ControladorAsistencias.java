@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,13 @@ import java.util.List;
 
 @Controller
 public class ControladorAsistencias {
+
+    private ServicioAsistencia servicioAsistencia;
+
+    @Autowired
+    public ControladorAsistencias(ServicioAsistencia servicioAsistencia) {
+        this.servicioAsistencia = servicioAsistencia;
+    }
 
     @RequestMapping (method = RequestMethod.GET, path = "/ir-a-asistencias")
     public ModelAndView MostrarServicios(){
@@ -36,4 +44,13 @@ public class ControladorAsistencias {
 
     }
 
+    @RequestMapping(method = RequestMethod.POST, path = "/crearService")
+    public ModelAndView crearServicio(@ModelAttribute("datos") DatosAsistencia datos) {
+        ModelMap model = new ModelMap();
+        servicioAsistencia.crearNuevoTipoDeAsistencia(datos.getNombre(), datos.getNombre());
+        model.put("datos",datos);
+
+        return new ModelAndView("servicioNuevo", model);
+        //falta vista
+    }
 }

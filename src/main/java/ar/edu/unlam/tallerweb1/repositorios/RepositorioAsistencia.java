@@ -9,4 +9,8 @@ public interface RepositorioAsistencia {
     List<Asistencia> buscarTodasLasAsistencias();
 
     List<Asistencia> buscarAsistenciaParaLaNoche();
+
+    void guardar(Asistencia nuevo);
+
+    Object buscar(String name);
 }
