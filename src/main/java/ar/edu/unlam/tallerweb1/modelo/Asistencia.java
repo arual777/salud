@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-import javax.persistence.*;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.*;
+@Transactional
 @Entity
 public class Asistencia {
     @Id

@@ -19,8 +19,15 @@
 <body>
 
 
-
 <div class="container">
+    <h1>${titulo}</h1>
+
+    <div>
+    <a href="/proyecto_limpio_spring_war_exploded/ir-a-asistencias"><button class="btn btn-primary">Todos Los Servicios</button></a>
+    <a href="/proyecto_limpio_spring_war_exploded/ir-a-asistencias-mensuales"><button class="btn btn-primary">Servicios Mensuales</button></a>
+    <a href="/proyecto_limpio_spring_war_exploded/ir-a-asistencias-diarias"><button class="btn btn-primary">Servicios Diarios</button></a>
+    </div>
+
     <h1>Servicios Ofrecidos</h1>
     <div class="row" >
         <div class="col-md-10">
@@ -33,7 +40,7 @@
                 <tbody>
                 <c:forEach  items="${servicio}" var="a">
                 <tr>
-                <td>  ${a}</td>
+                <td>  ${a.nombre}</td>
                 </tr>
                 </c:forEach>
                 </tbody>

@@ -28,17 +28,37 @@ public class ControladorAsistencias {
         ModelMap model = new ModelMap();
 
 
-        model.put("servicio2", "Cuidado de ancianos por mes");
-        model.put("servicio3", "Cuidado de enfermos por día");
-
-       /* List<String> asistencias = new ArrayList<>();
-        asistencias.add("Servicio 1");
-        asistencias.add("Servicio 2");
-        asistencias.add("Servicio 3");
-        asistencias.add("Servicio 4");*/
-
         List <Asistencia> asistencias = repositorioAsistencia.buscarTodasLasAsistencias();
 
+        model.put ("titulo", "Todos los servicios");
+        model.put("servicio", asistencias);
+        return new ModelAndView("asistencias", model);
+
+    }
+
+    @RequestMapping (method = RequestMethod.GET, path = "/ir-a-asistencias-diarias")
+    public ModelAndView MostrarServiciosDiarios(){
+
+        ModelMap model = new ModelMap();
+
+        List <Asistencia> asistencias = repositorioAsistencia.buscarAsistenciasPorDia();
+
+        model.put ("titulo", "Servicios Diarios");
+        model.put("servicio", asistencias);
+
+
+        return new ModelAndView("asistencias", model);
+
+    }
+
+    @RequestMapping (method = RequestMethod.GET, path = "/ir-a-asistencias-mensuales")
+    public ModelAndView MostrarServiciosMensuales(){
+
+        ModelMap model = new ModelMap();
+
+        List <Asistencia> asistencias = repositorioAsistencia.buscarAsistenciasMensuales();
+
+        model.put ("titulo", "Servicios Mensuales");
         model.put("servicio", asistencias);
 
 
