@@ -8,5 +8,11 @@ public interface RepositorioAsistencia {
 
     List<Asistencia> buscarTodasLasAsistencias();
 
+    List<Asistencia> buscarAsistenciasMensuales();
+
+    List<Asistencia> buscarAsistenciasPorDia();
+
     List<Asistencia> buscarAsistenciaParaLaNoche();
+
+
 }

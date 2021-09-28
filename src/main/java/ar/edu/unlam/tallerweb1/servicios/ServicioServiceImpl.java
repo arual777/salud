@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service ("servicioService")
 @Transactional
 public class ServicioServiceImpl implements ServicioService{
@@ -21,10 +23,17 @@ public class ServicioServiceImpl implements ServicioService{
 
     @Override
     public Servicio crearServicio(String name) {
-
         Servicio nuevo = new Servicio();
         nuevo.setName(name);
         repositorioService.guardar(nuevo);
         return nuevo;
     }
+
+    @Override
+    public List<Servicio> buscarTodos() {
+        //Aca creo que deberia ir la lógica de busqueda de todos los servicios a la DB
+        return null;
+    }
+
+
 }

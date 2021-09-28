@@ -28,6 +28,22 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
                 .list();
     }
 
+    @Override
+    public List<Asistencia> buscarAsistenciasMensuales() {
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<Asistencia>) session.createCriteria(Asistencia.class)
+                .add(Restrictions.eq("tipo", "Mensual"))
+                .list();
+    }
+
+    @Override
+    public List<Asistencia> buscarAsistenciasPorDia(){
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<Asistencia>) session.createCriteria(Asistencia.class)
+                .add(Restrictions.eq("tipo", "PorDia"))
+                .list();
+    }
+
 
     @Override
     public List<Asistencia> buscarAsistenciaParaLaNoche() {

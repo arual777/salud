@@ -8,6 +8,7 @@ public class Asistencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
+    private String tipo;
     @OneToOne(cascade = CascadeType.ALL)
     public Tipo_Turno idTurno;
 
@@ -27,7 +28,15 @@ public class Asistencia {
         this.nombre = nombre;
     }
 
-    public Tipo_Turno getIdTurno() {
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+   public Tipo_Turno getIdTurno() {
         return idTurno;
     }
 
