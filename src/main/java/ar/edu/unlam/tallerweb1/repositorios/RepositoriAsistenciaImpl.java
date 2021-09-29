@@ -50,4 +50,14 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
     public List<Asistencia> buscarAsistenciaParaLaNoche() {
         return null;
     }
+
+    @Override
+    public void guardar(Asistencia nuevo) {
+
+    }
+
+    @Override
+    public Object buscar(String name) {
+        return null;
+    }
 }
