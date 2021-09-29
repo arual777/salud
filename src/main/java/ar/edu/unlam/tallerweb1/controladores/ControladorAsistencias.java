@@ -4,7 +4,6 @@ import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import ar.edu.unlam.tallerweb1.modelo.Servicio;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsistencia;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
-import ar.edu.unlam.tallerweb1.servicios.ServicioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -19,7 +18,6 @@ import java.util.List;
 @Controller
 public class ControladorAsistencias {
 
-    @Inject private ServicioService servicioService;
     @Inject private RepositorioAsistencia repositorioAsistencia;
 
     @RequestMapping (method = RequestMethod.GET, path = "/ir-a-asistencias")
@@ -66,4 +64,7 @@ public class ControladorAsistencias {
 
     }
 
+    public ModelAndView crearServicio(DatosAsistencia datos) {
+        return null;
+    }
 }

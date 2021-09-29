@@ -30,7 +30,7 @@ import javax.transaction.Transactional;
             Asistencia nuevo = new Asistencia();
             nuevo.setNombre(name);
             repositorioAsistencia.guardar(nuevo);
-            return nuevo;
+        return nuevo;
         }
     }
 

@@ -10,34 +10,36 @@ import static org.mockito.Mockito.mock;
 public class ControladorAsistenciaTest {
 
     private ServicioAsistencia servicioAsistencia = mock(ServicioAsistencia.class);
-    private ControladorAsistencias controladorAsistencias = new ControladorAsistencias(servicioAsistencia);
+    private ControladorAsistencias controladorAsistencias = new ControladorAsistencias();
     private final static DatosAsistencia DATOS_ASISTENCIA = new DatosAsistencia("Cuidado Por Noche", "Consiste en la asistencia por noche");
 
-    @Test
+    /*@Test
     public void puedoRegistrarUnServicioConNombre(){
         givenNoExisteunServicio(DATOS_ASISTENCIA);
         ModelAndView mav = whenCreoUnServicio(DATOS_ASISTENCIA);
         thenLaCreacionEsExitosa(mav);
+    }*/
+
+    @Test
+    public void verificarSiHayServiciosDisponibles(){
+
     }
 
+    @Test
+    public void siBuscoLosServiciosMeLosTraeTodos(){
+
+    }
 
     private void givenNoExisteunServicio(DatosAsistencia datos)
     {
     }
 
-    private ModelAndView whenCreoUnServicio(DatosAsistencia datos)
-    {
+    private ModelAndView whenCreoUnServicio(DatosAsistencia datos) {
         return controladorAsistencias.crearServicio(datos);
     }
 
     private void thenLaCreacionEsExitosa(ModelAndView mav) {
         assertThat(mav.getModel().get("datos")).isEqualTo(DATOS_ASISTENCIA);
-    }
-
-    @Test
-    public void verificarSiHayServiciosDisponibles(){
-
-
     }
 
 
@@ -53,9 +55,7 @@ public class ControladorAsistenciaTest {
     //}
 
 
-    @Test
-    public void siBuscoLosServiciosMeLosTraeTodos(){
-    }
+
 }
 
 
