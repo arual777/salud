@@ -11,4 +11,8 @@ public interface ServicioAsistencia {
     Asistencia buscarAsistenciaPorId(long id) throws Exception;
 
     List<Asistencia> buscarTodasLasAsistencias();
+
+    List<Asistencia> buscarAsistenciasMensuales();
+
+    List<Asistencia> buscarAsistenciasPorDia();
 }

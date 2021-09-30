@@ -48,5 +48,15 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
     public List<Asistencia> buscarTodasLasAsistencias() {
         return repositorioAsistencia.buscarTodasLasAsistencias();
     }
+
+    @Override
+    public List<Asistencia> buscarAsistenciasMensuales() {
+        return repositorioAsistencia.buscarAsistenciasMensuales();
+    }
+
+    @Override
+    public List<Asistencia> buscarAsistenciasPorDia() {
+        return repositorioAsistencia.buscarAsistenciasPorDia();
+    }
 }
 

@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import ar.edu.unlam.tallerweb1.modelo.Servicio;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsistencia;
+import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
 import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +19,8 @@ import java.util.List;
 @Controller
 public class ControladorAsistencias {
 
-    @Inject private RepositorioAsistencia repositorioAsistencia;
+    @Inject private ServicioAsistencia servicioAsistencia;
+    //@Inject private RepositorioAsistencia repositorioAsistencia;
 
     @RequestMapping (method = RequestMethod.GET, path = "/ir-a-asistencias")
     public ModelAndView MostrarServicios(){
@@ -26,7 +28,7 @@ public class ControladorAsistencias {
         ModelMap model = new ModelMap();
 
 
-        List <Asistencia> asistencias = repositorioAsistencia.buscarTodasLasAsistencias();
+        List <Asistencia> asistencias = servicioAsistencia.buscarTodasLasAsistencias();
 
         model.put ("titulo", "Todos los servicios");
         model.put("servicio", asistencias);
@@ -39,7 +41,7 @@ public class ControladorAsistencias {
 
         ModelMap model = new ModelMap();
 
-        List <Asistencia> asistencias = repositorioAsistencia.buscarAsistenciasPorDia();
+        List <Asistencia> asistencias = servicioAsistencia.buscarAsistenciasPorDia();
 
         model.put ("titulo", "Servicios Diarios");
         model.put("servicio", asistencias);
@@ -54,7 +56,7 @@ public class ControladorAsistencias {
 
         ModelMap model = new ModelMap();
 
-        List <Asistencia> asistencias = repositorioAsistencia.buscarAsistenciasMensuales();
+        List <Asistencia> asistencias = servicioAsistencia.buscarAsistenciasMensuales();
 
         model.put ("titulo", "Servicios Mensuales");
         model.put("servicio", asistencias);
