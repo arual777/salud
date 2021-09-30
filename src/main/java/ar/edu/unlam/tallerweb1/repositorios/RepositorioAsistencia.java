@@ -15,7 +15,9 @@ public interface RepositorioAsistencia {
 
     List<Asistencia> buscarAsistenciaParaLaNoche();
 
-    void guardar(Asistencia nuevo);
+    List<Asistencia> buscarAsistenciaPorNombre(String nombre);
 
-    Object buscar(String name);
+    Asistencia buscarAsistenciaPorId(long id);
+
+    void guardar(Asistencia asistencia);
 }

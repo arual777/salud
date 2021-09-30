@@ -2,54 +2,44 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsistencia;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 import static org.mockito.Mockito.*;
 
 public class ServicioAsistenciaTest {
-
-    private static final String NAME = "CuidadoPorNoche";
+    private static final String NOMBRESERVICIO = "CuidadoPorNoche";
     private RepositorioAsistencia repositorioAsistencia = mock(RepositorioAsistencia.class);
     private ServicioAsistencia servicioAsistencia = new ServicioAsistenciaImpl(repositorioAsistencia);
 
+    @Test(expected = Exception.class)
+    public void SiBuscoUnServicioInexistenteDaError() throws Exception {
+        whenCreoUnServicio(NOMBRESERVICIO);
+        servicioAsistencia.buscarAsistenciaPorId(3);
+    }
+
     @Test
-    public void deberíaPoderAgregarUnServicioInexistente(){
-        givenNoExisteUnServicio(NAME);
-        Asistencia creada = whenCreoUnServicio(NAME);
-        thenLaCreacionEsExitosa(creada);
+    @Transactional
+    @Rollback
+    public void SiBuscoUnServicioExistenteLoRetorna() throws Exception {
+        when(repositorioAsistencia.buscarAsistenciaPorId(1)).thenReturn(new Asistencia());
+        Assertions.assertThat(servicioAsistencia.buscarAsistenciaPorId(1)).isOfAnyClassIn(Asistencia.class);
     }
 
-    private void givenNoExisteUnServicio(String name) {
-        when(repositorioAsistencia.buscar(name)).thenReturn(null);
-    }
-
-    private Asistencia whenCreoUnServicio(String name) {
-        return servicioAsistencia.crearServicio(NAME);
-    }
     private void thenLaCreacionEsExitosa(Asistencia creada){
-        assertThat(creada).isNotNull();
-        assertThat(creada.getNombre()).isEqualTo(NAME);
+        Assertions.assertThat(creada).isNotNull();
+        Assertions.assertThat(creada.getNombre()).isEqualTo(NOMBRESERVICIO);
         verify(repositorioAsistencia, times(1)).guardar(any());
     }
 
     @Test
-    public void SiBuscoUnServicioInexistenteDaError(){
-
-        givenNoExisteUnServicio(NAME);
-        whenBuscoUnServicioQueNoExiste();
-        thenElServicioNoSeEncuentraYLanzaUnaExcepcion();
+    public void debePoderAgregarUnServicio(){
+        Asistencia creada = whenCreoUnServicio(NOMBRESERVICIO);
+        thenLaCreacionEsExitosa(creada);
     }
 
-    private void thenElServicioNoSeEncuentraYLanzaUnaExcepcion() {
+    private Asistencia whenCreoUnServicio(String name) {
+        return servicioAsistencia.crearServicio(name);
     }
-
-    private void whenBuscoUnServicioQueNoExiste() {
-    }
-
-
-
-
 }
-
-

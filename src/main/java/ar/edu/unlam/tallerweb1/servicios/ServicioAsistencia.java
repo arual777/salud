@@ -2,10 +2,13 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 
+import java.util.List;
+
 public interface ServicioAsistencia {
 
-    Asistencia crearNuevoTipoDeAsistencia(String name, String descripcion);
-
-
     Asistencia crearServicio(String name);
+
+    Asistencia buscarAsistenciaPorId(long id) throws Exception;
+
+    List<Asistencia> buscarTodasLasAsistencias();
 }

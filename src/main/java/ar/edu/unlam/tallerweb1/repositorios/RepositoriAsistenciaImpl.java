@@ -4,6 +4,7 @@ import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -48,17 +49,29 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
 
     @Override
     public List<Asistencia> buscarAsistenciaParaLaNoche() {
-        return null;
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<Asistencia>) session.createCriteria(Asistencia.class)
+                .add(Restrictions.eq("tipo", "PorNoche"))
+                .list();
     }
 
     @Override
-    public void guardar(Asistencia nuevo) {
-
+    public List<Asistencia> buscarAsistenciaPorNombre(String nombre) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<Asistencia>) session.createCriteria(Asistencia.class)
+                .add(Restrictions.like("nombre", nombre, MatchMode.ANYWHERE))
+                .list();
     }
 
     @Override
-    public Object buscar(String name) {
-        return null;
+    public Asistencia buscarAsistenciaPorId(long id) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (Asistencia) session.createCriteria(Asistencia.class)
+                .add(Restrictions.eq("id", id)).uniqueResult();
     }
 
+    @Override
+    public void guardar(Asistencia asistencia) {
+        sessionFactory.getCurrentSession().save(asistencia);
+    }
 }

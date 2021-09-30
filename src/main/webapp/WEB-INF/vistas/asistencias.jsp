@@ -23,9 +23,9 @@
     <h1>${titulo}</h1>
 
     <div>
-    <a href="/proyecto_limpio_spring_war_exploded/ir-a-asistencias"><button class="btn btn-primary">Todos Los Servicios</button></a>
-    <a href="/proyecto_limpio_spring_war_exploded/ir-a-asistencias-mensuales"><button class="btn btn-primary">Servicios Mensuales</button></a>
-    <a href="/proyecto_limpio_spring_war_exploded/ir-a-asistencias-diarias"><button class="btn btn-primary">Servicios Diarios</button></a>
+    <a href="./ir-a-asistencias"><button class="btn btn-primary">Todos Los Servicios</button></a>
+    <a href="./ir-a-asistencias-mensuales"><button class="btn btn-primary">Servicios Mensuales</button></a>
+    <a href="./ir-a-asistencias-diarias"><button class="btn btn-primary">Servicios Diarios</button></a>
     </div>
 
     <h1>Servicios Ofrecidos</h1>
