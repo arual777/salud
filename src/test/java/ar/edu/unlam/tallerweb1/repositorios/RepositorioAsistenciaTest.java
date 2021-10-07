@@ -23,6 +23,7 @@ public class RepositorioAsistenciaTest extends SpringTest {
 
     private static final String ENFERMERO = "ENFERMERO";
     private static final String CUIDADOR = "CUIDADOR";
+    private static final String ASISTENCIA = "ASISTENCIA";
 
     @Test
     @Rollback
@@ -81,6 +82,28 @@ public class RepositorioAsistenciaTest extends SpringTest {
         givenExisteAsistenciaParaTurnoNoche(CUIDADOR, 3);
         List<Asistencia> asistencias = whenBuscoAsistenciaPorNombre("CUIDA");
         thenEncuentro(asistencias,3);
+    }
+
+    @Test
+    @Rollback
+    @Transactional
+    public void queSePuedaEditarUnaAsistencia(){
+        givenExisteAsistencia ( ASISTENCIA, 1);
+        Asistencia modificacion = cuandoQuieroEditarUnaAsistencia(ASISTENCIA);
+        entoncesSeModifica(modificacion);
+    }
+
+    private void entoncesSeModifica(Asistencia asistenciaAEditar) {
+
+        asistenciaAEditar.setNombre("Cuidados Anuales");
+        repositorioAsistencia.guardar(asistenciaAEditar);
+        Asistencia asistenciaModificada = repositorioAsistencia.buscarTodasLasAsistencias().get(0);
+        assertThat(asistenciaModificada.getNombre()).isEqualTo("Cuidados Anuales");
+    }
+
+    private Asistencia cuandoQuieroEditarUnaAsistencia(String asistencia) {
+        List <Asistencia> asistencias = repositorioAsistencia.buscarAsistenciaPorNombre(asistencia);
+        return asistencias.get(0);
     }
 
     private List<Asistencia> whenBuscoAsistenciaParaLaNoche() {

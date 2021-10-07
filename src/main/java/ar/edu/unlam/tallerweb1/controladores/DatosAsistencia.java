@@ -1,17 +1,15 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-public class DatosAsistencia  {
-
+public class DatosAsistencia {
     String nombre;
-    String descripcion;
+    String tipo;
+    long idTurno;
 
-    public DatosAsistencia(){
+    public long getIdTurno() {
+        return idTurno;
+    }
 
-    }
-    public DatosAsistencia(String nombre, String descripcion) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-    }
+    public void setIdTurno(long idTurno) { this.idTurno = idTurno; }
 
     public String getNombre() {
         return nombre;
@@ -21,11 +19,11 @@ public class DatosAsistencia  {
         this.nombre = nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getTipo() {
+        return tipo;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 }

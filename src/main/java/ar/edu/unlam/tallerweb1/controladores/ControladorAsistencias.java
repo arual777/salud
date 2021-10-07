@@ -1,26 +1,26 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
-import ar.edu.unlam.tallerweb1.modelo.Asistencia;
-import ar.edu.unlam.tallerweb1.modelo.Servicio;
-import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsistencia;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
-import ar.edu.unlam.tallerweb1.servicios.ServicioLogin;
+import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
 public class ControladorAsistencias {
 
-    @Inject private ServicioAsistencia servicioAsistencia;
-    //@Inject private RepositorioAsistencia repositorioAsistencia;
+    private ServicioAsistencia servicioAsistencia;
+
+    @Autowired
+    public ControladorAsistencias(ServicioAsistencia servicioAsistencia){
+        this.servicioAsistencia = servicioAsistencia;
+    }
+
+    public ControladorAsistencias() {
+    }
 
     @RequestMapping (method = RequestMethod.GET, path = "/ir-a-asistencias")
     public ModelAndView MostrarServicios(){
@@ -66,7 +66,26 @@ public class ControladorAsistencias {
 
     }
 
-    public ModelAndView crearServicio(DatosAsistencia datos) {
-        return null;
+    @RequestMapping(method = RequestMethod.GET, path = "/ir-a-crear-solicitud")
+    public ModelAndView irACrearSolicitud(){
+        ModelMap model = new ModelMap();
+        DatosAsistencia datos = new DatosAsistencia();
+
+        model.put("datos", datos);
+        return new ModelAndView("solicitudNueva", model);
+    }
+
+    @RequestMapping (method = RequestMethod.POST, path = "/crearSolicitud")
+    public ModelAndView crearNuevaSolicitudDeAsistencia(@ModelAttribute("datos") DatosAsistencia datos) {
+
+        ModelMap model = new ModelMap();
+        servicioAsistencia.crearServicio(datos);
+
+        model.put ("titulo", "NUEVA SOLICITUD PARA CUIDADOS");
+        model.put("nombre", datos.getNombre());
+        model.put("tipo", datos.getTipo());
+
+
+        return new ModelAndView ("solicitudNueva", model);
     }
 }

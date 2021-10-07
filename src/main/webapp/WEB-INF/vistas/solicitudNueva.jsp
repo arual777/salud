@@ -10,15 +10,26 @@
 </head>
 <body>
 <div class = "container">
-    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-        <form:form action="crearService" method="POST" modelAttribute="datos">
-            <h3 class="form-signin-heading">Nuevo Usuario ${parametro}</h3>
+    <div id="solicitudBox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <form:form action="crearSolicitud" method="POST" modelAttribute="datos">
+            <h3 class="form-signin-heading">Nueva Solicitud ${parametro}</h3>
             <hr class="colorgraph"><br>
 
-            <form:input path="name" id="name" class="form-control" />
-            <form:input path="descripcion" type="text" id="descripcion" class="form-control"/>
-            <form:input path="tarifa" id="tarifa" class="form-control"/>
-            <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Agregar Servicio</button>
+             <h5> Nombre de contacto: </h5>
+            <form:input path="nombre" id="nombre" class="form-control" />
+
+             <h5> Tipo de servicio: </h5>
+            <form:input path="tipo"  id="tipo" class="form-control"/>
+
+            <h5> Turno: </h5>
+            <select name="idTurno" required>
+                <option value="">  </option>
+              <option value="1"> MANANA </option>
+              <option value="2"> TARDE </option>
+              <option value="3">NOCHE</option>
+            </select>
+               <br> <br>
+             <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Publicar</button>
         </form:form>
 
         <c:if test="${not empty msg}">
