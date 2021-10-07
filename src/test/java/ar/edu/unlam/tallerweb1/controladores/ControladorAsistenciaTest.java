@@ -34,7 +34,7 @@ public class ControladorAsistenciaTest {
     private void entoncesLaCreacionEsExitosa(ModelAndView mav) {
         assertThat(mav.getModel().get("nombre")).isEqualTo(SOLICITUD_NUEVA.getNombre());
         assertThat(mav.getModel().get("tipo")).isEqualTo(SOLICITUD_NUEVA.getTipo());
-        assertThat(mav.getViewName()).isEqualTo("solicitudNueva");
+        assertThat(mav.getViewName()).isEqualTo("empleos-publicados");
     }
 
 
