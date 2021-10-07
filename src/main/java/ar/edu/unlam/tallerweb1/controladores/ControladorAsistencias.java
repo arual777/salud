@@ -61,9 +61,7 @@ public class ControladorAsistencias {
         model.put ("titulo", "Servicios Mensuales");
         model.put("servicio", asistencias);
 
-
         return new ModelAndView("asistencias", model);
-
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/ir-a-crear-solicitud")
@@ -82,10 +80,10 @@ public class ControladorAsistencias {
         servicioAsistencia.crearServicio(datos);
 
         model.put ("titulo", "NUEVA SOLICITUD PARA CUIDADOS");
-        model.put("nombre", datos.getNombre());
-        model.put("tipo", datos.getTipo());
+        List <Asistencia> asistencias = servicioAsistencia.buscarTodosLosEmpleos();
 
-
-        return new ModelAndView ("solicitudNueva", model);
+        model.put ("titulo", "Todos los empleos");
+        model.put("empleo", asistencias);
+        return new ModelAndView("empleos-publicados", model);
     }
 }

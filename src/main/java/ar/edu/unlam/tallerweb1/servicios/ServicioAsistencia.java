@@ -16,4 +16,6 @@ public interface ServicioAsistencia {
     List<Asistencia> buscarAsistenciasMensuales();
 
     List<Asistencia> buscarAsistenciasPorDia();
+
+    List<Asistencia> buscarTodosLosEmpleos();
 }

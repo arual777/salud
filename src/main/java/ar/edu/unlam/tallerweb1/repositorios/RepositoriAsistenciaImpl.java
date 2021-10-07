@@ -74,4 +74,11 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
     public void guardar(Asistencia asistencia) {
         sessionFactory.getCurrentSession().save(asistencia);
     }
+
+    @Override
+    public List<Asistencia> buscarTodosLosEmpleos(){
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<Asistencia>) session.createCriteria(Asistencia.class)
+                .list();
+    }
 }

@@ -65,5 +65,8 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
     public List<Asistencia> buscarAsistenciasPorDia() {
         return repositorioAsistencia.buscarAsistenciasPorDia();
     }
+
+    @Override
+    public List<Asistencia> buscarTodosLosEmpleos() { return repositorioAsistencia.buscarTodosLosEmpleos(); }
 }
 

@@ -29,7 +29,9 @@
               <option value="3">NOCHE</option>
             </select>
                <br> <br>
-             <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Publicar</button>
+             <a href="empleos-publicados">
+                 <button class="btn btn-primary">Empleos</button>
+             </a>
         </form:form>
 
         <c:if test="${not empty msg}">

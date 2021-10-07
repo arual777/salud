@@ -20,4 +20,6 @@ public interface RepositorioAsistencia {
     Asistencia buscarAsistenciaPorId(long id);
 
     void guardar(Asistencia asistencia);
+
+    List<Asistencia> buscarTodosLosEmpleos();
 }
