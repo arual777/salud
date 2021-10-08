@@ -17,21 +17,6 @@
 
              <label for="nombre">Nombre de contacto:</label>
             <form:input path="nombre" id="nombre" class="form-control" />
-             <h5> Tipo de servicio: </h5>
-            <form:input path="tipo"  id="tipo" class="form-control"/>
-
-            <h5> Turno: </h5>
-            <select name="idTurno" required>
-                <option value="">  </option>
-              <option value="1"> MANANA </option>
-              <option value="2"> TARDE </option>
-              <option value="3">NOCHE</option>
-            </select>
-               <br> <br>
-             <a href="empleos-publicados">
-                 <button class="btn btn-primary">Empleos</button>
-             </a>
-              <br/> <br/>
 
              <label for="descripcion"> Descripción del empleo: </label>
              <br/>
@@ -40,10 +25,10 @@
 
              <label for= "c"> Cama adentro: </h5>
              <br/>
-             <input type="radio" name="camaAdentro" id="si" value="SI">
+             <input type="radio" name="camaAdentro" id="si" value="1">
              <label for="si">SI: </label>
                <br/>
-             <input type="radio" name="camaAdentro" id="no" value="NO">
+             <input type="radio" name="camaAdentro" id="no" value="0">
              <label for="no">NO: </label>
               <br/> <br/>
 
@@ -81,8 +66,10 @@
                                                    <option value="4">ZONA OESTE</option>
                                                </select>
 
-             <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Publicar</button>
-        </form:form>
+            <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Publicar</button>
+                </form:form>
+
+
 
         <c:if test="${not empty msg}">
             <h4><span>${msg}</span></h4>

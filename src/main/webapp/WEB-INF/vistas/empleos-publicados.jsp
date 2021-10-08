@@ -32,7 +32,7 @@
                 <c:forEach  items="${empleo}" var="a">
                     <tr>
                         <td>  ${a.nombre}</td>
-                        <td>  ${a.tipo}</td>
+                        <td>  ${a.idFrecuencia.nombre}</td>
                         <td>  ${a.idTurno.franja}</td>
                     </tr>
                 </c:forEach>

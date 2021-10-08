@@ -35,7 +35,7 @@ public class ControladorAsistenciaTest {
         assertThat(mav.getModel().get("nombre")).isEqualTo(SOLICITUD_NUEVA.getNombre());
         assertThat(mav.getViewName()).isEqualTo("empleos-publicados");
         assertThat(mav.getModel().get("idFrecuencia")).isEqualTo(SOLICITUD_NUEVA.getIdFrecuencia());
-        assertThat(mav.getViewName()).isEqualTo("solicitudNueva");
+        assertThat(mav.getViewName()).isEqualTo("empleos-publicados");
     }
 
 

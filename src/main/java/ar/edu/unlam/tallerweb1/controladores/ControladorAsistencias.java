@@ -88,7 +88,6 @@ public class ControladorAsistencias {
         model.put("idTurno", datos.getIdTurno());
         model.put("idFrecuencia", datos.getIdFrecuencia());
         model.put("zona", datos.getZona());
-
         model.put ("titulo", "Todos los empleos");
         model.put("empleo", asistencias);
         return new ModelAndView("empleos-publicados", model);

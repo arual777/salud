@@ -86,8 +86,4 @@ public class Asistencia {
     public void setZona(Zona zona) {
         this.zona = zona;
     }
-
-
-
-
 }

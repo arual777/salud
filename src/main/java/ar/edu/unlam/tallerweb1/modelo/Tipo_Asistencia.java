@@ -13,9 +13,6 @@ public class Tipo_Asistencia {
     private Long id;
     private String nombre;
 
-
-
-
     public Long getId() {
         return id;
     }
@@ -31,7 +28,4 @@ public class Tipo_Asistencia {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
-
-
 }

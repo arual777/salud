@@ -38,7 +38,6 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
         nuevo.setDescripcion(datos.getDescripcion());
         nuevo.setCamaAdentro(datos.getCamaAdentro());
         nuevo.setTarifa(datos.getTarifa());
-
         turno.setId(datos.getIdTurno());
         frecuencia.setId(datos.getIdFrecuencia());
         zona.setId(datos.getZona());
