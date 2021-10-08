@@ -51,7 +51,7 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
     public List<Asistencia> buscarAsistenciaParaLaNoche() {
         final Session session = sessionFactory.getCurrentSession();
         return (List<Asistencia>) session.createCriteria(Asistencia.class)
-                .add(Restrictions.eq("tipo", "PorNoche"))
+                .add(Restrictions.eq("idTurno", "NOCHE"))
                 .list();
     }
 

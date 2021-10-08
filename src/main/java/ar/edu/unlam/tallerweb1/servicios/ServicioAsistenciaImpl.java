@@ -2,7 +2,9 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.controladores.DatosAsistencia;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
+import ar.edu.unlam.tallerweb1.modelo.Tipo_Asistencia;
 import ar.edu.unlam.tallerweb1.modelo.Tipo_Turno;
+import ar.edu.unlam.tallerweb1.modelo.Zona;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsistencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,13 +29,26 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
     public Asistencia crearServicio(DatosAsistencia datos) {
 
         Asistencia nuevo = new Asistencia();
+
         Tipo_Turno turno = new Tipo_Turno();
+        Tipo_Asistencia frecuencia = new Tipo_Asistencia();
+        Zona zona = new Zona();
 
         nuevo.setNombre(datos.getNombre());
-        nuevo.setTipo(datos.getTipo());
+        nuevo.setDescripcion(datos.getDescripcion());
+        nuevo.setCamaAdentro(datos.getCamaAdentro());
+        nuevo.setTarifa(datos.getTarifa());
+
         turno.setId(datos.getIdTurno());
+        frecuencia.setId(datos.getIdFrecuencia());
+        zona.setId(datos.getZona());
+
         nuevo.setIdTurno(turno);
+        nuevo.setIdFrecuencia(frecuencia);
+        nuevo.setZona(zona);
+
         repositorioAsistencia.guardar(nuevo);
+
     return nuevo;
     }
 

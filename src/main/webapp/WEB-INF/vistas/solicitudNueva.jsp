@@ -15,9 +15,8 @@
             <h3 class="form-signin-heading">Nueva Solicitud ${parametro}</h3>
             <hr class="colorgraph"><br>
 
-             <h5> Nombre de contacto: </h5>
+             <label for="nombre">Nombre de contacto:</label>
             <form:input path="nombre" id="nombre" class="form-control" />
-
              <h5> Tipo de servicio: </h5>
             <form:input path="tipo"  id="tipo" class="form-control"/>
 
@@ -32,6 +31,57 @@
              <a href="empleos-publicados">
                  <button class="btn btn-primary">Empleos</button>
              </a>
+              <br/> <br/>
+
+             <label for="descripcion"> Descripción del empleo: </label>
+             <br/>
+             <textarea id="descripcion" name="descripcion" rows="5" cols="40">
+              </textarea>
+
+             <label for= "c"> Cama adentro: </h5>
+             <br/>
+             <input type="radio" name="camaAdentro" id="si" value="SI">
+             <label for="si">SI: </label>
+               <br/>
+             <input type="radio" name="camaAdentro" id="no" value="NO">
+             <label for="no">NO: </label>
+              <br/> <br/>
+
+             <label for="tarifa"> Tarifa:</label>
+             <input type="number" id="tarifa" name="tarifa">
+
+              <br/> <br/>
+
+              <label for="turno"> Turno:</label>
+                 <select name="idTurno" required>
+                     <option value="">  </option>
+                    <option value="1"> MANANA </option>
+                    <option value="2"> TARDE </option>
+                    <option value="3">NOCHE</option>
+                </select>
+               <br/> <br/>
+
+               <label for="frecuencia"> Frecuencia:</label>
+                                <select name="idFrecuencia" required>
+                                    <option value="">  </option>
+                                   <option value="1"> CUIDADO POR DIA </option>
+                                   <option value="2"> CUIDADO POR SEMANA </option>
+                                   <option value="3">CUIDADO POR MES</option>
+                                   <option value="4">CUIDADO POR HORA</option>
+                                   <option value="5">CUIDADO POR NOCHE</option>
+                               </select>
+                  <br/> <br/>
+                <label for="zona"> Zona:</label>
+                                                <select name="zona" required>
+                                                    <option value="">  </option>
+                                                   <option value="1"> CABA </option>
+                                                   <option value="2"> ZONA NORTE </option>
+                                                   <option value="3">ZONA SUR</option>
+                                                   <option value="4">ZONA ESTE</option>
+                                                   <option value="4">ZONA OESTE</option>
+                                               </select>
+
+             <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Publicar</button>
         </form:form>
 
         <c:if test="${not empty msg}">

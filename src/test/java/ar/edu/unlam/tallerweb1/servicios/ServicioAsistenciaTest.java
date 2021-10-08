@@ -47,7 +47,14 @@ public class ServicioAsistenciaTest {
         DatosAsistencia datosAsistencia = new DatosAsistencia();
         datosAsistencia.setNombre("Asistencia");
         datosAsistencia.setIdTurno(1);
-        datosAsistencia.setTipo("CuidadoPorNoche");
+        datosAsistencia.setIdFrecuencia(1);
+        datosAsistencia.setDescripcion("Se necesita ");
+        datosAsistencia.setCamaAdentro(true);
+        datosAsistencia.setTarifa(200.0);
+        datosAsistencia.setZona(1);
+
+
+
 
         return datosAsistencia;
     }

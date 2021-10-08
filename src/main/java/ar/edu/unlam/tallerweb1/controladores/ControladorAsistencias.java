@@ -81,6 +81,13 @@ public class ControladorAsistencias {
 
         model.put ("titulo", "NUEVA SOLICITUD PARA CUIDADOS");
         List <Asistencia> asistencias = servicioAsistencia.buscarTodosLosEmpleos();
+        model.put("nombre", datos.getNombre());
+        model.put("descripcion" , datos.getDescripcion());
+        model.put("camaAdentro" , datos.getCamaAdentro());
+        model.put("tarifa" , datos.getTarifa());
+        model.put("idTurno", datos.getIdTurno());
+        model.put("idFrecuencia", datos.getIdFrecuencia());
+        model.put("zona", datos.getZona());
 
         model.put ("titulo", "Todos los empleos");
         model.put("empleo", asistencias);
