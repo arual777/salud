@@ -29,4 +29,11 @@ public class ServicioPerfilProfesionalImpl implements ServicioPerfilProfesional 
         return nuevo;
 
     }
+
+    @Override
+    public PerfilProfesional buscarCV(Long id) {
+
+        PerfilProfesional perfilProfesional = repositorioPerfilProfesional.buscarCV(id);
+        return perfilProfesional;
+    }
 }

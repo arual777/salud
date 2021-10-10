@@ -6,4 +6,7 @@ public interface ServicioPerfilProfesional {
 
 
     PerfilProfesional registrarPerfil(String nombreCompleto, String email, String experiencia, String numTelefono);
+
+    PerfilProfesional buscarCV(Long id);
+
 }
