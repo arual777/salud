@@ -53,15 +53,10 @@ public class ControladorPerfilProfesional {
         } catch (Exception e){
             model.put("msg", "No se pudo registrar su perfil profesional, complete todos los campos");
         }
-        
+
        return new ModelAndView("registroProfesional", model);
     }
 
-    public ModelAndView mostrarPerfilProfesional(){
-
-        ModelMap model = new ModelMap();
-        return new ModelAndView("cv", model);
-    }
 
     @RequestMapping (method = RequestMethod.GET, path = "/cv", params={"id"})
     public ModelAndView mostrarPerfilProfesional(@RequestParam Long id){
