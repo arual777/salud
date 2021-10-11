@@ -1,9 +1,7 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 @Entity
 public class PerfilProfesional {
@@ -11,10 +9,20 @@ public class PerfilProfesional {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String nombreCompleto;
+
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String experiencia;
+
+    @Column(nullable = false)
     private String numeroTelefono;
+
+    @Column(nullable = false)
     private String fechaNacimiento;
 
     public Long getId() {
