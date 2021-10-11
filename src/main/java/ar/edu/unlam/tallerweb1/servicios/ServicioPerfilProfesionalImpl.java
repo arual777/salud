@@ -16,19 +16,26 @@ public class ServicioPerfilProfesionalImpl implements ServicioPerfilProfesional 
     public ServicioPerfilProfesionalImpl (RepositorioPerfilProfesional repositorioPerfilProfesional){this.repositorioPerfilProfesional=repositorioPerfilProfesional;}
 
     @Override
-    public PerfilProfesional registrarPerfil(String nombreCompleto, String email, String experiencia, String numTelefono, String fechaNacimiento){
+    public PerfilProfesional registrarPerfil(String nombreCompleto, String email, String experiencia,
+                                             String numTelefono, String fechaNacimiento) throws Exception{
 
-        PerfilProfesional nuevo = new PerfilProfesional();
-        nuevo.setNombreCompleto(nombreCompleto);
-        nuevo.setEmail(email);
-        nuevo.setExperiencia(experiencia);
-        nuevo.setNumeroTelefono(numTelefono);
-        nuevo.setFechaNacimiento(fechaNacimiento);
+        if (nombreCompleto.length() > 5 && email.length() > 5 && experiencia.length() > 10
+                && numTelefono.length()>5) {
 
-        repositorioPerfilProfesional.guardar(nuevo);
+            PerfilProfesional nuevo = new PerfilProfesional();
+            nuevo.setNombreCompleto(nombreCompleto);
+            nuevo.setEmail(email);
+            nuevo.setExperiencia(experiencia);
+            nuevo.setNumeroTelefono(numTelefono);
+            nuevo.setFechaNacimiento(fechaNacimiento);
 
-        return nuevo;
+            repositorioPerfilProfesional.guardar(nuevo);
 
+            return nuevo;
+        }
+        else{
+            throw new Exception();
+        }
     }
 
     @Override

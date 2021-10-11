@@ -44,15 +44,16 @@ public class ControladorPerfilProfesional {
 
         ModelMap model = new ModelMap();
 
+
         try {
             servicioPerfilProfesional.registrarPerfil(datos.getNombreCompleto(), datos.getEmail(),
                     datos.getExperiencia(), datos.getNumeroTelefono(), datos.getFechaNacimiento());
+
+            model.put("msg", "Su perfil profesional ha sido cargado");
         } catch (Exception e){
-            model.put("msg", "No se pudo registrar, creo");
+            model.put("msg", "No se pudo registrar su perfil profesional, complete todos los campos");
         }
-
-        model.put("msg", "Se pudo registrar, creo");
-
+        
        return new ModelAndView("registroProfesional", model);
     }
 
