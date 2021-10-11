@@ -21,6 +21,8 @@
 
             <h4 class="my-2">Ingrese Su Nombre Completo</h4>
             <form:input path="nombreCompleto" id="text" class="form-control"/>
+            <h4 class="my-2">Ingrese su fecha de nacimiento</h4>
+            <form:input path="fechaNacimiento" type="date" id="fechaNacimiento" class="form-control"/>
             <h4 class="my-2">Ingrese Su Email de contacto</h4>
             <form:input path="email" id="email" class="form-control"/>
             <h4 class="my-2">Escriba aqui sus estudios y sus experiencias laborales como cuidador</h4>

@@ -15,6 +15,7 @@ public class PerfilProfesional {
     private String email;
     private String experiencia;
     private String numeroTelefono;
+    private String fechaNacimiento;
 
     public Long getId() {
         return id;
@@ -54,5 +55,13 @@ public class PerfilProfesional {
 
     public void setNumeroTelefono(String numeroTelefono) {
         this.numeroTelefono = numeroTelefono;
+    }
+
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 }

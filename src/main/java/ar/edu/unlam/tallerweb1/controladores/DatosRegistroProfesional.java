@@ -5,14 +5,16 @@ public class DatosRegistroProfesional {
     private String email;
     private String experiencia;
     private String numeroTelefono;
+    private String fechaNacimiento;
 
     public DatosRegistroProfesional(){}
 
-    public DatosRegistroProfesional(String nombreCompleto,String email, String experiencia, String numeroTelefono) {
+    public DatosRegistroProfesional(String nombreCompleto,String email, String experiencia, String numeroTelefono, String fechaNacimiento) {
         this.nombreCompleto = nombreCompleto;
         this.email = email;
         this.experiencia = experiencia;
         this.numeroTelefono = numeroTelefono;
+        this.fechaNacimiento = fechaNacimiento;
     }
 
     public String getNombreCompleto() {
@@ -45,5 +47,13 @@ public class DatosRegistroProfesional {
 
     public void setNumeroTelefono(String numeroTelefono) {
         this.numeroTelefono = numeroTelefono;
+    }
+
+    public String getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(String fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 }

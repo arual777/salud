@@ -46,7 +46,7 @@ public class ControladorPerfilProfesional {
 
         try {
             servicioPerfilProfesional.registrarPerfil(datos.getNombreCompleto(), datos.getEmail(),
-                    datos.getExperiencia(), datos.getNumeroTelefono());
+                    datos.getExperiencia(), datos.getNumeroTelefono(), datos.getFechaNacimiento());
         } catch (Exception e){
             model.put("msg", "No se pudo registrar, creo");
         }

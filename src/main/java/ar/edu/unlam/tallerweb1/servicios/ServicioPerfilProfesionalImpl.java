@@ -16,13 +16,14 @@ public class ServicioPerfilProfesionalImpl implements ServicioPerfilProfesional 
     public ServicioPerfilProfesionalImpl (RepositorioPerfilProfesional repositorioPerfilProfesional){this.repositorioPerfilProfesional=repositorioPerfilProfesional;}
 
     @Override
-    public PerfilProfesional registrarPerfil(String nombreCompleto, String email, String experiencia, String numTelefono){
+    public PerfilProfesional registrarPerfil(String nombreCompleto, String email, String experiencia, String numTelefono, String fechaNacimiento){
 
         PerfilProfesional nuevo = new PerfilProfesional();
         nuevo.setNombreCompleto(nombreCompleto);
         nuevo.setEmail(email);
         nuevo.setExperiencia(experiencia);
         nuevo.setNumeroTelefono(numTelefono);
+        nuevo.setFechaNacimiento(fechaNacimiento);
 
         repositorioPerfilProfesional.guardar(nuevo);
 
