@@ -81,7 +81,7 @@ public class ControladorAsistencias {
 
         model.put ("titulo", "NUEVA SOLICITUD PARA CUIDADOS");
         List <Asistencia> asistencias = servicioAsistencia.buscarTodosLosEmpleos();
-        model.put("nombre", datos.getNombre());
+       model.put("nombre", datos.getNombre());
         model.put("descripcion" , datos.getDescripcion());
         model.put("camaAdentro" , datos.getCamaAdentro());
         model.put("tarifa" , datos.getTarifa());
@@ -89,7 +89,28 @@ public class ControladorAsistencias {
         model.put("idFrecuencia", datos.getIdFrecuencia());
         model.put("zona", datos.getZona());
         model.put ("titulo", "Todos los empleos");
+
         model.put("empleo", asistencias);
         return new ModelAndView("empleos-publicados", model);
+    }
+
+
+    @RequestMapping (method = RequestMethod.POST, path = "/editarSolicitud")
+    public ModelAndView editar(@ModelAttribute("asistencia") DatosAsistencia datos) throws Exception {
+        ModelMap model = new ModelMap();
+        servicioAsistencia.actualizarAsistencia(datos);
+        List <Asistencia> asistencias = servicioAsistencia.buscarTodosLosEmpleos();
+        model.put("empleo", asistencias);
+        return new ModelAndView("empleos-publicados", model);
+    }
+
+    @RequestMapping (method = RequestMethod.GET, path = "/detalle-asistencia/{idAsistencia}")
+    public ModelAndView buscarAsistenciaPorId(@PathVariable("idAsistencia") long idAsistencia) throws Exception {
+
+        ModelMap model = new ModelMap();
+        Asistencia asistenciaBuscada  =servicioAsistencia.buscarAsistenciaPorId(idAsistencia);
+        model.put("asistencia", asistenciaBuscada);
+
+        return new ModelAndView("detalle-solicitud", model);
     }
 }

@@ -18,4 +18,7 @@ public interface ServicioAsistencia {
     List<Asistencia> buscarAsistenciasPorDia();
 
     List<Asistencia> buscarTodosLosEmpleos();
+
+    Asistencia actualizarAsistencia(DatosAsistencia datos);
+
 }

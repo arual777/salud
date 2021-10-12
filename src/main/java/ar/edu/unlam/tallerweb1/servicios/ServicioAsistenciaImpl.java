@@ -48,10 +48,34 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
 
         repositorioAsistencia.guardar(nuevo);
 
-    return nuevo;
+        return nuevo;
     }
 
     @Override
+    public Asistencia actualizarAsistencia(DatosAsistencia datos) {
+
+        Asistencia asistenciaAEditar = new Asistencia();
+        Tipo_Turno turno = new Tipo_Turno();
+        Tipo_Asistencia frecuencia = new Tipo_Asistencia();
+        Zona zona = new Zona();
+
+        asistenciaAEditar.setId(datos.getId());
+        asistenciaAEditar.setNombre(datos.getNombre());
+        asistenciaAEditar.setDescripcion(datos.getDescripcion());
+        asistenciaAEditar.setCamaAdentro(datos.getCamaAdentro());
+        asistenciaAEditar.setTarifa(datos.getTarifa());
+        turno.setId(datos.getIdTurno());
+        frecuencia.setId(datos.getIdFrecuencia());
+        zona.setId(datos.getZona());
+
+        asistenciaAEditar.setIdTurno(turno);
+        asistenciaAEditar.setIdFrecuencia(frecuencia);
+        asistenciaAEditar.setZona(zona);
+
+        repositorioAsistencia.guardar(asistenciaAEditar);
+        return asistenciaAEditar;
+    }
+        @Override
     @ExceptionHandler
     public Asistencia buscarAsistenciaPorId(long id) throws Exception {
 

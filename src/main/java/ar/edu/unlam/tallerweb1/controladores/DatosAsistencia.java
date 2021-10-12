@@ -3,10 +3,19 @@ package ar.edu.unlam.tallerweb1.controladores;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 public class DatosAsistencia {
-
+    private long id;
     private String nombre;
     private String descripcion;
     private Boolean camaAdentro;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
     private Double tarifa;
     private long idTurno;
     private long idFrecuencia;
@@ -66,5 +75,6 @@ public class DatosAsistencia {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
 
 }

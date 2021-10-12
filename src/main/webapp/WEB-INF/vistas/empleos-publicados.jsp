@@ -34,6 +34,12 @@
                         <td>  ${a.nombre}</td>
                         <td>  ${a.idFrecuencia.nombre}</td>
                         <td>  ${a.idTurno.franja}</td>
+                        <td>
+                            <a href="detalle-asistencia/${a.id}">
+                               <button class="btn btn-lg btn-primary btn-block">Editar</button>
+                            </a>
+                        </td>
+
                     </tr>
                 </c:forEach>
                 </tbody>

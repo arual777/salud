@@ -72,7 +72,7 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
 
     @Override
     public void guardar(Asistencia asistencia) {
-        sessionFactory.getCurrentSession().save(asistencia);
+        sessionFactory.getCurrentSession().merge(asistencia) ;
     }
 
     @Override
