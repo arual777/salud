@@ -81,4 +81,12 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
         return (List<Asistencia>) session.createCriteria(Asistencia.class)
                 .list();
     }
+
+    @Override
+    public void eliminarSolicitudDeEmpleo(Long id) {
+        final Session session = sessionFactory.getCurrentSession();
+        Asistencia asistenciaPorEliminar = new Asistencia();
+        asistenciaPorEliminar = buscarAsistenciaPorId(id);
+        session.delete(asistenciaPorEliminar);
+    }
 }

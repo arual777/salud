@@ -53,9 +53,6 @@ public class ServicioAsistenciaTest {
         datosAsistencia.setTarifa(200.0);
         datosAsistencia.setZona(1);
 
-
-
-
         return datosAsistencia;
     }
 }

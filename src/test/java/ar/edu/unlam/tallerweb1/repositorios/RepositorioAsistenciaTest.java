@@ -43,19 +43,17 @@ public class RepositorioAsistenciaTest extends SpringTest {
         givenExisteAsistencia(ENFERMERO, 1);
         List<Asistencia> asistencias = whenBuscoTodasLasAsistencias();
         long c = asistencias.get(0).getId();
-        Asistencia asistenciaPorId = repositorioAsistencia.buscarAsistenciaPorId(asistencias.get(0).getId());
-        assertThat(asistenciaPorId.getId()).isEqualTo(asistencias.get(0).getId());
+        Asistencia asistenciaPorId = repositorioAsistencia.buscarAsistenciaPorId(c);
+        assertThat(asistenciaPorId.getId()).isEqualTo(c);
     }
-
 
     @Test
     @Rollback
     @Transactional
-    public void retornaNuloCuandoBuscaPorIdYNoLoEncuentra(){
+    public void retornaNuloCuandoBuscaPorIdYNoLoEncuentra() {
         Asistencia asistenciaPorId = repositorioAsistencia.buscarAsistenciaPorId(100);
         assertThat(asistenciaPorId).isNull();
     }
-
 
     @Test
     @Rollback

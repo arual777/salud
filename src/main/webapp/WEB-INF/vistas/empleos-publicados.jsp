@@ -26,6 +26,13 @@
                 <thead>
                 <tr>
                     <th scope="col">Empleos</th>
+                    <th scope="col">Frecuencia</th>
+                    <th scope="col">Cama</th>
+                    <th scope="col">Descripcion</th>
+                    <th scope="col">Tarifa</th>
+                    <th scope="col">Zona</th>
+                    <th scope="col">Eliminar</th>
+                    <th scope="col">Editar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -33,7 +40,15 @@
                     <tr>
                         <td>  ${a.nombre}</td>
                         <td>  ${a.idFrecuencia.nombre}</td>
-                        <td>  ${a.idTurno.franja}</td>
+                        <td>  ${a.camaAdentro}</td>
+                        <td>  ${a.descripcion}</td>
+                        <td>  ${a.tarifa}</td>
+                        <td>  ${a.zona.nombre}</td>
+                        <td>
+                            <a href="eliminar/${a.id}">
+                                <button class="btn btn-lg btn-primary btn-block">Eliminar</button>
+                            </a>
+                        </td>
                         <td>
                             <a href="detalle-asistencia/${a.id}">
                                <button class="btn btn-lg btn-primary btn-block">Editar</button>
@@ -44,6 +59,8 @@
                 </c:forEach>
                 </tbody>
             </table>
+
+
         </div>
     </div>
 </div>

@@ -19,6 +19,8 @@ public interface ServicioAsistencia {
 
     List<Asistencia> buscarTodosLosEmpleos();
 
+    void eliminarSolicitudDeEmpleo(Long id);
+
     Asistencia actualizarAsistencia(DatosAsistencia datos);
 
 }

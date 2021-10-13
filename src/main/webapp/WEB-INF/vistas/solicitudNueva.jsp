@@ -11,20 +11,20 @@
 <body>
 <div class = "container">
     <div id="solicitudBox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-        <form:form action="crearSolicitud" method="POST" modelAttribute="datos">
+        <form:form action="empleos-publicados" method="POST" modelAttribute="datos">
             <h3 class="form-signin-heading">Nueva Solicitud ${parametro}</h3>
             <hr class="colorgraph"><br>
 
              <label for="nombre">Nombre de contacto:</label>
             <form:input path="nombre" id="nombre" class="form-control" />
 
-             <label for="descripcion"> Descripción del empleo: </label>
+             <label for="descripcion"> Descripcion del empleo: </label>
              <br/>
              <textarea id="descripcion" name="descripcion" rows="5" cols="40">
               </textarea>
 
              <label for= "c"> Cama adentro: </h5>
-             <br/>
+                 <br/>
              <input type="radio" name="camaAdentro" id="si" value="1">
              <label for="si">SI: </label>
                <br/>
@@ -66,8 +66,8 @@
                                                    <option value="4">ZONA OESTE</option>
                                                </select>
 
-            <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Publicar</button>
-                </form:form>
+                 <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Publicar</button>
+                 </form:form>
         <c:if test="${not empty msg}">
             <h4><span>${msg}</span></h4>
             <br>

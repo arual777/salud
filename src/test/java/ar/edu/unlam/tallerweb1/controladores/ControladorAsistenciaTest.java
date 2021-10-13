@@ -24,7 +24,7 @@ public class ControladorAsistenciaTest {
    }
 
     private ModelAndView cuandoCreoUnaSolicitud(DatosAsistencia datos) {
-        return controladorAsistencias.crearNuevaSolicitudDeAsistencia(datos);
+        return controladorAsistencias.mostrarTodosLosEmpleos(datos);
 
     }
 

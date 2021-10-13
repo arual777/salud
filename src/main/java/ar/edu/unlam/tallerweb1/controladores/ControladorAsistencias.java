@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -73,8 +76,8 @@ public class ControladorAsistencias {
         return new ModelAndView("solicitudNueva", model);
     }
 
-    @RequestMapping (method = RequestMethod.POST, path = "/crearSolicitud")
-    public ModelAndView crearNuevaSolicitudDeAsistencia(@ModelAttribute("datos") DatosAsistencia datos) {
+    @RequestMapping (method = RequestMethod.GET, path = "/empleos-publicados")
+    public ModelAndView mostrarTodosLosEmpleos(@ModelAttribute("datos") DatosAsistencia datos) {
 
         ModelMap model = new ModelMap();
         servicioAsistencia.crearServicio(datos);
@@ -104,6 +107,18 @@ public class ControladorAsistencias {
         return new ModelAndView("empleos-publicados", model);
     }
 
+    @RequestMapping(path = "/eliminar/{id}", method = RequestMethod.GET)
+    public ModelAndView eliminarSolicitudDeEmpleo(@ModelAttribute("id") Long id) throws Exception {
+        ModelMap modelo = new ModelMap();
+        servicioAsistencia.eliminarSolicitudDeEmpleo(id);
+        modelo.put("mensaje", "Solicitud de empleo eliminada con exito!");
+
+        List <Asistencia> asistencias = servicioAsistencia.buscarTodosLosEmpleos();
+        modelo.put("empleo", asistencias);
+        return new ModelAndView("redirect:/empleos-publicados", modelo);
+    }
+
+
     @RequestMapping (method = RequestMethod.GET, path = "/detalle-asistencia/{idAsistencia}")
     public ModelAndView buscarAsistenciaPorId(@PathVariable("idAsistencia") long idAsistencia) throws Exception {
 
@@ -113,4 +128,6 @@ public class ControladorAsistencias {
 
         return new ModelAndView("detalle-solicitud", model);
     }
+
+
 }
