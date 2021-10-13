@@ -6,19 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-
-public class Servicio {
+public class Zona {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    public Servicio(String name) {
-        this.name = name;
-    }
-
-    public Servicio() {
-    }
+    private String nombre;
 
     public Long getId() {
         return id;
@@ -28,19 +21,11 @@ public class Servicio {
         this.id = id;
     }
 
-    private String name;
-
-    public String getName() {
-        return name;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
-
-
-
-    //¿COMO HACE HIBERNATE PARA GUARDAR ENUM?
-
-
 }

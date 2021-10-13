@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.controladores.DatosAsistencia;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsistencia;
 import org.assertj.core.api.Assertions;
@@ -9,13 +10,12 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.mockito.Mockito.*;
 
 public class ServicioAsistenciaTest {
-    private static final String NOMBRESERVICIO = "CuidadoPorNoche";
     private RepositorioAsistencia repositorioAsistencia = mock(RepositorioAsistencia.class);
     private ServicioAsistencia servicioAsistencia = new ServicioAsistenciaImpl(repositorioAsistencia);
 
     @Test(expected = Exception.class)
     public void SiBuscoUnServicioInexistenteDaError() throws Exception {
-        whenCreoUnServicio(NOMBRESERVICIO);
+        whenCreoUnServicio(obtenerAsistencia());
         servicioAsistencia.buscarAsistenciaPorId(3);
     }
 
@@ -29,17 +29,30 @@ public class ServicioAsistenciaTest {
 
     private void thenLaCreacionEsExitosa(Asistencia creada){
         Assertions.assertThat(creada).isNotNull();
-        Assertions.assertThat(creada.getNombre()).isEqualTo(NOMBRESERVICIO);
+        Assertions.assertThat(creada.getNombre()).isEqualTo(obtenerAsistencia().getNombre());
         verify(repositorioAsistencia, times(1)).guardar(any());
     }
 
     @Test
     public void debePoderAgregarUnServicio(){
-        Asistencia creada = whenCreoUnServicio(NOMBRESERVICIO);
+        Asistencia creada = whenCreoUnServicio(obtenerAsistencia());
         thenLaCreacionEsExitosa(creada);
     }
 
-    private Asistencia whenCreoUnServicio(String name) {
-        return servicioAsistencia.crearServicio(name);
+    private Asistencia whenCreoUnServicio(DatosAsistencia datos) {
+        return servicioAsistencia.crearServicio(datos);
+    }
+
+    private  DatosAsistencia obtenerAsistencia(){
+        DatosAsistencia datosAsistencia = new DatosAsistencia();
+        datosAsistencia.setNombre("Asistencia");
+        datosAsistencia.setIdTurno(1);
+        datosAsistencia.setIdFrecuencia(1);
+        datosAsistencia.setDescripcion("Se necesita ");
+        datosAsistencia.setCamaAdentro(true);
+        datosAsistencia.setTarifa(200.0);
+        datosAsistencia.setZona(1);
+
+        return datosAsistencia;
     }
 }
