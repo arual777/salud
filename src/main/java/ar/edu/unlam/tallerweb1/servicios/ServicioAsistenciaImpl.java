@@ -106,5 +106,9 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
 
     @Override
     public List<Asistencia> buscarTodosLosEmpleos() { return repositorioAsistencia.buscarTodosLosEmpleos(); }
+
+    @Override
+    public void eliminarSolicitudDeEmpleo(Long id) { repositorioAsistencia.eliminarSolicitudDeEmpleo(id);}
+
 }
 

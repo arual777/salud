@@ -116,4 +116,15 @@ public class ControladorAsistencias {
 
         return new ModelAndView("detalle-solicitud", model);
     }
+
+    @RequestMapping(path = "/eliminar/{id}", method = RequestMethod.GET)
+    public ModelAndView eliminarSolicitudDeEmpleo(@ModelAttribute("id") Long id) throws Exception {
+        ModelMap modelo = new ModelMap();
+        servicioAsistencia.eliminarSolicitudDeEmpleo(id);  //ACA TIRA ERROR AL ELIMINAR
+
+        modelo.put("mensaje", "Solicitud de empleo eliminada con exito!");
+
+        return new ModelAndView("redirect:/ir-a-asistencias", modelo);
+    }
+
 }

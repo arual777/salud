@@ -66,14 +66,14 @@ public class RepositorioAsistenciaTest extends SpringTest {
         thenEncuentro(asistencias, 1);
     }
 
-   // @Test
-    //@Rollback
-    //@Transactional
-    //public void buscarTodasLasAsistenciasTipoTurnoNoche() {
-      //  givenExisteAsistenciaParaTurnoNoche(CUIDADOR, 2);
-    //List<Asistencia> asistencias = whenBuscoAsistenciaParaLaNoche();
-     //   thenEncuentro(asistencias,2);
-    //}
+  /* @Test
+   @Rollback
+   @Transactional
+   public void buscarTodasLasAsistenciasTipoTurnoNoche() {
+        givenExisteAsistenciaParaTurnoNoche(CUIDADOR, 2);
+        List<Asistencia> asistencias = whenBuscoAsistenciaParaLaNoche();
+        thenEncuentro(asistencias,2);
+    }*/
 
     @Test
     @Rollback

@@ -21,4 +21,5 @@ public interface ServicioAsistencia {
 
     Asistencia actualizarAsistencia(DatosAsistencia datos);
 
+    void eliminarSolicitudDeEmpleo(Long id);
 }

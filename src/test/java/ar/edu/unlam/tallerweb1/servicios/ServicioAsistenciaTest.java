@@ -27,16 +27,32 @@ public class ServicioAsistenciaTest {
         Assertions.assertThat(servicioAsistencia.buscarAsistenciaPorId(1)).isOfAnyClassIn(Asistencia.class);
     }
 
+    @Test
+    public void debePoderAgregarUnServicio(){
+        Asistencia creada = whenCreoUnServicio(obtenerAsistencia());
+        thenLaCreacionEsExitosa(creada);
+    }
+
+    @Test
+    public void debePoderEliminarUnServicio(){
+        Asistencia creada = whenCreoUnServicio(obtenerAsistencia());
+        eliminarSolicitudDeEmpleo(creada.getId());
+        thenLaEliminacionEsExitosa(creada);
+    }
+
     private void thenLaCreacionEsExitosa(Asistencia creada){
         Assertions.assertThat(creada).isNotNull();
         Assertions.assertThat(creada.getNombre()).isEqualTo(obtenerAsistencia().getNombre());
         verify(repositorioAsistencia, times(1)).guardar(any());
     }
 
-    @Test
-    public void debePoderAgregarUnServicio(){
-        Asistencia creada = whenCreoUnServicio(obtenerAsistencia());
-        thenLaCreacionEsExitosa(creada);
+    private void thenLaEliminacionEsExitosa(Asistencia creada) {
+        Assertions.assertThat(creada.getId()).isNull();
+        verify(repositorioAsistencia, times(1)).guardar(any());
+    }
+
+    private void eliminarSolicitudDeEmpleo(Long id) {
+        servicioAsistencia.eliminarSolicitudDeEmpleo(id);
     }
 
     private Asistencia whenCreoUnServicio(DatosAsistencia datos) {
@@ -52,9 +68,6 @@ public class ServicioAsistenciaTest {
         datosAsistencia.setCamaAdentro(true);
         datosAsistencia.setTarifa(200.0);
         datosAsistencia.setZona(1);
-
-
-
 
         return datosAsistencia;
     }
