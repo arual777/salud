@@ -51,7 +51,7 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
     public List<Asistencia> buscarAsistenciaParaLaNoche() {
         final Session session = sessionFactory.getCurrentSession();
         return (List<Asistencia>) session.createCriteria(Asistencia.class)
-                .add(Restrictions.eq("tipo", "PorNoche"))
+                .add(Restrictions.eq("idTurno", "NOCHE"))
                 .list();
     }
 
@@ -72,6 +72,22 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
 
     @Override
     public void guardar(Asistencia asistencia) {
-        sessionFactory.getCurrentSession().save(asistencia);
+        sessionFactory.getCurrentSession().merge(asistencia) ;
     }
+
+    @Override
+    public List<Asistencia> buscarTodosLosEmpleos(){
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<Asistencia>) session.createCriteria(Asistencia.class)
+                .list();
+    }
+
+    @Override
+    public void eliminarSolicitudDeEmpleo(Long id) {
+        final Session session = sessionFactory.getCurrentSession();
+        Asistencia asistenciaPorEliminar = new Asistencia();
+        asistenciaPorEliminar = buscarAsistenciaPorId(id);
+        session.delete(asistenciaPorEliminar);
+    }
+
 }

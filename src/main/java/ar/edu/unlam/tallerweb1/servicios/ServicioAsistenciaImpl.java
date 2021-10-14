@@ -1,6 +1,10 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.controladores.DatosAsistencia;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
+import ar.edu.unlam.tallerweb1.modelo.Tipo_Asistencia;
+import ar.edu.unlam.tallerweb1.modelo.Tipo_Turno;
+import ar.edu.unlam.tallerweb1.modelo.Zona;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsistencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,15 +26,56 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
     }
 
     @Override
-    public Asistencia crearServicio(String name) {
+    public Asistencia crearServicio(DatosAsistencia datos) {
 
         Asistencia nuevo = new Asistencia();
-        nuevo.setNombre(name);
+
+        Tipo_Turno turno = new Tipo_Turno();
+        Tipo_Asistencia frecuencia = new Tipo_Asistencia();
+        Zona zona = new Zona();
+
+        nuevo.setNombre(datos.getNombre());
+        nuevo.setDescripcion(datos.getDescripcion());
+        nuevo.setCamaAdentro(datos.getCamaAdentro());
+        nuevo.setTarifa(datos.getTarifa());
+        turno.setId(datos.getIdTurno());
+        frecuencia.setId(datos.getIdFrecuencia());
+        zona.setId(datos.getZona());
+
+        nuevo.setIdTurno(turno);
+        nuevo.setIdFrecuencia(frecuencia);
+        nuevo.setZona(zona);
+
         repositorioAsistencia.guardar(nuevo);
-    return nuevo;
+
+        return nuevo;
     }
 
     @Override
+    public Asistencia actualizarAsistencia(DatosAsistencia datos) {
+
+        Asistencia asistenciaAEditar = new Asistencia();
+        Tipo_Turno turno = new Tipo_Turno();
+        Tipo_Asistencia frecuencia = new Tipo_Asistencia();
+        Zona zona = new Zona();
+
+        asistenciaAEditar.setId(datos.getId());
+        asistenciaAEditar.setNombre(datos.getNombre());
+        asistenciaAEditar.setDescripcion(datos.getDescripcion());
+        asistenciaAEditar.setCamaAdentro(datos.getCamaAdentro());
+        asistenciaAEditar.setTarifa(datos.getTarifa());
+        turno.setId(datos.getIdTurno());
+        frecuencia.setId(datos.getIdFrecuencia());
+        zona.setId(datos.getZona());
+
+        asistenciaAEditar.setIdTurno(turno);
+        asistenciaAEditar.setIdFrecuencia(frecuencia);
+        asistenciaAEditar.setZona(zona);
+
+        repositorioAsistencia.guardar(asistenciaAEditar);
+        return asistenciaAEditar;
+    }
+        @Override
     @ExceptionHandler
     public Asistencia buscarAsistenciaPorId(long id) throws Exception {
 
@@ -58,5 +103,12 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
     public List<Asistencia> buscarAsistenciasPorDia() {
         return repositorioAsistencia.buscarAsistenciasPorDia();
     }
+
+    @Override
+    public List<Asistencia> buscarTodosLosEmpleos() { return repositorioAsistencia.buscarTodosLosEmpleos(); }
+
+    @Override
+    public void eliminarSolicitudDeEmpleo(Long id) { repositorioAsistencia.eliminarSolicitudDeEmpleo(id);}
+
 }
 

@@ -1,12 +1,13 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.controladores.DatosAsistencia;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 
 import java.util.List;
 
 public interface ServicioAsistencia {
 
-    Asistencia crearServicio(String name);
+    Asistencia crearServicio(DatosAsistencia datos);
 
     Asistencia buscarAsistenciaPorId(long id) throws Exception;
 
@@ -15,4 +16,10 @@ public interface ServicioAsistencia {
     List<Asistencia> buscarAsistenciasMensuales();
 
     List<Asistencia> buscarAsistenciasPorDia();
+
+    List<Asistencia> buscarTodosLosEmpleos();
+
+    Asistencia actualizarAsistencia(DatosAsistencia datos);
+
+    void eliminarSolicitudDeEmpleo(Long id);
 }
