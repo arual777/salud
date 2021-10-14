@@ -14,13 +14,13 @@ public class Asistencia {
     private Boolean camaAdentro;
     private Double tarifa;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     public Tipo_Turno idTurno;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     public Tipo_Asistencia idFrecuencia;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     public Zona zona;
 
     public String getDescripcion() {
