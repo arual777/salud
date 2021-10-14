@@ -4,6 +4,7 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,12 +28,11 @@ public class ControladorAsistencias {
 
         ModelMap model = new ModelMap();
 
-
         List <Asistencia> asistencias = servicioAsistencia.buscarTodasLasAsistencias();
 
         model.put ("titulo", "Todos los servicios");
-        model.put("servicio", asistencias);
-        return new ModelAndView("asistencias", model);
+        model.put("empleo", asistencias);
+        return new ModelAndView("empleos-publicados", model);
 
     }
 
@@ -91,17 +91,20 @@ public class ControladorAsistencias {
         model.put ("titulo", "Todos los empleos");
 
         model.put("empleo", asistencias);
-        return new ModelAndView("empleos-publicados", model);
+
+
+        ModelAndView modelView = new ModelAndView();
+        modelView.setViewName("redirect:/ir-a-asistencias");
+        return modelView;
     }
 
 
     @RequestMapping (method = RequestMethod.POST, path = "/editarSolicitud")
     public ModelAndView editar(@ModelAttribute("asistencia") DatosAsistencia datos) throws Exception {
-        ModelMap model = new ModelMap();
         servicioAsistencia.actualizarAsistencia(datos);
-        List <Asistencia> asistencias = servicioAsistencia.buscarTodosLosEmpleos();
-        model.put("empleo", asistencias);
-        return new ModelAndView("empleos-publicados", model);
+        ModelAndView modelView = new ModelAndView();
+        modelView.setViewName("redirect:/ir-a-asistencias");
+        return modelView;
     }
 
     @RequestMapping (method = RequestMethod.GET, path = "/detalle-asistencia/{idAsistencia}")

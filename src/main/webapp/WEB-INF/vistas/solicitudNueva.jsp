@@ -63,7 +63,7 @@
                                                    <option value="2"> ZONA NORTE </option>
                                                    <option value="3">ZONA SUR</option>
                                                    <option value="4">ZONA ESTE</option>
-                                                   <option value="4">ZONA OESTE</option>
+                                                   <option value="5">ZONA OESTE</option>
                                                </select>
 
             <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Publicar</button>
