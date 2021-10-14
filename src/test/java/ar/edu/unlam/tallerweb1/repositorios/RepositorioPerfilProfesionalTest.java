@@ -15,7 +15,7 @@ public class RepositorioPerfilProfesionalTest extends SpringTest {
     private RepositorioPerfilProfesional repositorioPerfilProfesional;
 
     @Test
-    @Rollback
+    @Rollback(value = false)
     @Transactional
     public void retornaNuloCuandoBuscaPorIdYNoLoEncuentra(){
         givenExisteCV( 1);
@@ -24,16 +24,15 @@ public class RepositorioPerfilProfesionalTest extends SpringTest {
         assertThat(perfilProfesional).isNull();
     }
 
-    /* Comentado porque no funciona al correr los dos
     @Test
-    @Rollback
+    @Rollback(value = false)
     @Transactional
     public void buscarCVPorIDDebeDevolverSoloEseCVConEseID(){
         givenExisteCV( 1);
         long id = 1;
         PerfilProfesional perfilEncontrado = whenBuscoPerfilProfesionalPorId(id);
         thenEncuentro(perfilEncontrado,1);
-    }*/
+    }
 
     private void givenExisteCV(int cantidadDeCV) {
         for(int i = 0; i < cantidadDeCV; i++){
