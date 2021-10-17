@@ -14,18 +14,19 @@ public class RepositorioPerfilProfesionalTest extends SpringTest {
     @Autowired
     private RepositorioPerfilProfesional repositorioPerfilProfesional;
 
+    //Probar que al guardar 2CV los busco y encuentro. QUe al buscar cv por atributo lo encuentro.
     @Test
-    @Rollback(value = false)
+    @Rollback
     @Transactional
     public void retornaNuloCuandoBuscaPorIdYNoLoEncuentra(){
-        givenExisteCV( 1);
-        long id = 2;
+        long id = 1;
         PerfilProfesional perfilProfesional = repositorioPerfilProfesional.buscarCV(id);
         assertThat(perfilProfesional).isNull();
     }
 
+
     @Test
-    @Rollback(value = false)
+    @Rollback
     @Transactional
     public void buscarCVPorIDDebeDevolverSoloEseCVConEseID(){
         givenExisteCV( 1);
