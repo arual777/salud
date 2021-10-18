@@ -14,17 +14,17 @@ public class RepositorioPerfilProfesionalTest extends SpringTest {
     @Autowired
     private RepositorioPerfilProfesional repositorioPerfilProfesional;
 
+    //Probar que al guardar 2CV los busco y encuentro. QUe al buscar cv por atributo lo encuentro.
     @Test
     @Rollback
     @Transactional
     public void retornaNuloCuandoBuscaPorIdYNoLoEncuentra(){
-        givenExisteCV( 1);
-        long id = 2;
+        long id = 1;
         PerfilProfesional perfilProfesional = repositorioPerfilProfesional.buscarCV(id);
         assertThat(perfilProfesional).isNull();
     }
 
-    /* Comentado porque no funciona al correr los dos
+
     @Test
     @Rollback
     @Transactional
@@ -33,7 +33,7 @@ public class RepositorioPerfilProfesionalTest extends SpringTest {
         long id = 1;
         PerfilProfesional perfilEncontrado = whenBuscoPerfilProfesionalPorId(id);
         thenEncuentro(perfilEncontrado,1);
-    }*/
+    }
 
     private void givenExisteCV(int cantidadDeCV) {
         for(int i = 0; i < cantidadDeCV; i++){
