@@ -21,6 +21,8 @@ public interface RepositorioAsistencia {
 
     void guardar(Asistencia asistencia);
 
+    void actualizar(Asistencia asistencia);
+
     List<Asistencia> buscarTodosLosEmpleos();
 
     void eliminarSolicitudDeEmpleo(Long id);
