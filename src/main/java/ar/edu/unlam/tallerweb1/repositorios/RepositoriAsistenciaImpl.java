@@ -72,8 +72,14 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
 
     @Override
     public void guardar(Asistencia asistencia) {
-        sessionFactory.getCurrentSession().merge(asistencia) ;
+        sessionFactory.getCurrentSession().save(asistencia) ;
     }
+
+    @Override
+    public void actualizar(Asistencia asistencia) {
+        sessionFactory.getCurrentSession().update(asistencia) ;
+    }
+
 
     @Override
     public List<Asistencia> buscarTodosLosEmpleos(){

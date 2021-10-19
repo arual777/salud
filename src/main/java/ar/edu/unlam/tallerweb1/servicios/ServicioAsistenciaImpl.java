@@ -72,7 +72,7 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
         asistenciaAEditar.setIdFrecuencia(frecuencia);
         asistenciaAEditar.setZona(zona);
 
-        repositorioAsistencia.guardar(asistenciaAEditar);
+        repositorioAsistencia.actualizar(asistenciaAEditar);
         return asistenciaAEditar;
     }
         @Override
