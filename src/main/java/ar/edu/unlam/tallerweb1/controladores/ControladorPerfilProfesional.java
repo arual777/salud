@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
+import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
@@ -27,15 +27,24 @@ public class ControladorPerfilProfesional {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/ir-a-registrar-perfil-profesional")
-    public ModelAndView irARegistrarPerfilProfesional(){
+    public ModelAndView irARegistrarPerfilProfesional(HttpServletRequest request){
 
         ModelMap model = new ModelMap();
+        String logeado;
 
-        DatosRegistroProfesional datos = new DatosRegistroProfesional();
-        model.put("datosRegistroProfesional", datos);
+        if (request.getSession().getAttribute("userID")==null){
+            logeado = "No ingresaste en el sistema";
+            model.put("msglogeado", logeado);
+            return new ModelAndView("errorAcceso", model);
+        }
+        else{
+            logeado = "siLogeado";
+            DatosRegistroProfesional datos = new DatosRegistroProfesional();
+            model.put("datosRegistroProfesional", datos);
 
-        return new ModelAndView("registroProfesional", model);
-
+            model.put("msglogeado", logeado);
+            return new ModelAndView("registroProfesional", model);
+        }
     }
 
 
