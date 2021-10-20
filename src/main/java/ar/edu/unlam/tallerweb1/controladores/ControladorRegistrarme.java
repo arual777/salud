@@ -34,7 +34,7 @@ public class ControladorRegistrarme {
         if (esValido(datos.getEmail())) {
 
             try {
-                servicioLogin.registrar(datos.getEmail(), datos.getClave());
+                servicioLogin.registrar(datos.getEmail(), datos.getClave(), datos.getRolId());
             } catch (Exception e) {
                 model.put("msg", "El usuario ya existe");
                 return new ModelAndView("registro-usuario", model);

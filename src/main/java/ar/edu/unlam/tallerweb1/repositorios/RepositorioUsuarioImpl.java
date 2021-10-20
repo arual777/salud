@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,7 +21,7 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 	// el mismo esta difinido en el archivo hibernateContext.xml
 	private SessionFactory sessionFactory;
 
-    @Autowired
+	@Autowired
 	public RepositorioUsuarioImpl(SessionFactory sessionFactory){
 		this.sessionFactory = sessionFactory;
 	}
@@ -56,13 +57,10 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 	}
 
 	@Override
-	public List<Usuario> buscarUsuarioPorRol(String rol) {
+	public List<Usuario> buscarUsuarioPorRol(Long rolId) {
 		final Session session = sessionFactory.getCurrentSession();
-//		final Query namedQuery = session.getNamedQuery("userByRol");
-//		namedQuery.setParameter("lalala", rol);
-//		return namedQuery.list();
 		return session.createCriteria(Usuario.class)
-				.add(Restrictions.eq("rol", rol))
+				.add(Restrictions.eq("rol.id", rolId))
 				.list();
 	}
 
@@ -72,6 +70,13 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 		return session.createCriteria(Usuario.class)
 				.add(Restrictions.like("email", "%"+mail+"%"))
 				.list();
+	}
+
+	@Override
+	public Rol obtenerRol(long id) {
+		return (Rol) sessionFactory.getCurrentSession().createCriteria(Rol.class)
+				.add(Restrictions.eq("id", id))
+				.uniqueResult();
 	}
 
 }

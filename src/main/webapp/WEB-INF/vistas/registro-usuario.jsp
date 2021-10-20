@@ -18,6 +18,14 @@
             <form:input path="email" id="email" class="form-control" />
             <form:input path="clave" type="password" id="clave" class="form-control"/>
             <form:input path="repiteClave" type="password" id="clave" class="form-control"/>
+
+            <label for="rol">Rol:</label>
+                 <select id="rolId" name="rolId" required>
+                       <option value="">  </option>
+                        <option value="1"> CLIENTE </option>
+                        <option value="2"> PROFESIONAL </option>
+                </select>
+                           <br/> <br/>
             <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Registrarme</button>
         </form:form>
 
