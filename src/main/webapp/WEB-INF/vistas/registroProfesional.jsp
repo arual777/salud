@@ -36,6 +36,8 @@
             <h4><span>${msg}</span></h4>
             <br>
         </c:if>
+
+        ${msglogeado}
     </div>
 </div>
 
