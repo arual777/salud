@@ -1,11 +1,9 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.controladores.DatosAsistencia;
-import ar.edu.unlam.tallerweb1.modelo.Asistencia;
-import ar.edu.unlam.tallerweb1.modelo.Tipo_Asistencia;
-import ar.edu.unlam.tallerweb1.modelo.Tipo_Turno;
-import ar.edu.unlam.tallerweb1.modelo.Zona;
+import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsistencia;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,36 +17,39 @@ import java.util.List;
 public class ServicioAsistenciaImpl implements ServicioAsistencia{
 
     private RepositorioAsistencia repositorioAsistencia;
+    private RepositorioUsuario repositorioUsuario;
 
     @Autowired
-    public ServicioAsistenciaImpl(RepositorioAsistencia repositorioAsistencia){
+    public ServicioAsistenciaImpl(RepositorioAsistencia repositorioAsistencia, RepositorioUsuario repositorioUsuario){
         this.repositorioAsistencia = repositorioAsistencia;
+        this.repositorioUsuario = repositorioUsuario;
     }
 
     @Override
     public Asistencia crearServicio(DatosAsistencia datos) {
 
-        Asistencia nuevo = new Asistencia();
-
+        Asistencia nuevaAsistencia = new Asistencia();
+        Usuario usuario = repositorioUsuario.buscarUsuario(datos.getIdUsuario());
         Tipo_Turno turno = new Tipo_Turno();
         Tipo_Asistencia frecuencia = new Tipo_Asistencia();
         Zona zona = new Zona();
 
-        nuevo.setNombre(datos.getNombre());
-        nuevo.setDescripcion(datos.getDescripcion());
-        nuevo.setCamaAdentro(datos.getCamaAdentro());
-        nuevo.setTarifa(datos.getTarifa());
+        nuevaAsistencia.setNombre(datos.getNombre());
+        nuevaAsistencia.setDescripcion(datos.getDescripcion());
+        nuevaAsistencia.setCamaAdentro(datos.getCamaAdentro());
+        nuevaAsistencia.setTarifa(datos.getTarifa());
+        nuevaAsistencia.setUsuario(usuario);
         turno.setId(datos.getIdTurno());
         frecuencia.setId(datos.getIdFrecuencia());
         zona.setId(datos.getZona());
 
-        nuevo.setIdTurno(turno);
-        nuevo.setIdFrecuencia(frecuencia);
-        nuevo.setZona(zona);
+        nuevaAsistencia.setIdTurno(turno);
+        nuevaAsistencia.setIdFrecuencia(frecuencia);
+        nuevaAsistencia.setZona(zona);
 
-        repositorioAsistencia.guardar(nuevo);
+        repositorioAsistencia.guardar(nuevaAsistencia);
 
-        return nuevo;
+        return nuevaAsistencia;
     }
 
     @Override

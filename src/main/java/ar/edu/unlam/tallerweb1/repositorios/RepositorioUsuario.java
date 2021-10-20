@@ -16,4 +16,5 @@ public interface RepositorioUsuario {
     List<Usuario> buscarUsuarioPorRol(Long rolId);
     List<Usuario> buscarUsuarioConMailLike(String mail);
     Rol obtenerRol(long id);
+    Usuario buscarUsuario(long idUsuario);
 }

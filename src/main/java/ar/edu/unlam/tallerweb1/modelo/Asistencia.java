@@ -23,6 +23,13 @@ public class Asistencia {
     @OneToOne
     public Zona zona;
 
+    @ManyToOne
+    @JoinColumn(updatable = false) //ponemos esto para evitar que se actualice a nulo cuando se actualiza una asistencia
+    public Usuario usuario;
+
+    public Usuario getUsuario() { return usuario; }
+    public void setUsuario(Usuario usuario){ this.usuario = usuario; }
+
     public String getDescripcion() {
         return descripcion;
     }

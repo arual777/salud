@@ -18,8 +18,18 @@ public class DatosAsistencia {
 
     private Double tarifa;
     private long idTurno;
+
+    public long getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(long idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+
     private long idFrecuencia;
     private long zona;
+    private long idUsuario;
 
     public long getZona() {
         return zona;

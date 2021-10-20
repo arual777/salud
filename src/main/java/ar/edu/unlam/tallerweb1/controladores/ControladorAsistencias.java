@@ -9,6 +9,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+
 
 @Controller
 public class ControladorAsistencias {
@@ -74,24 +76,11 @@ public class ControladorAsistencias {
     }
 
     @RequestMapping (method = RequestMethod.POST, path = "/crearSolicitud")
-    public ModelAndView crearNuevaSolicitudDeAsistencia(@ModelAttribute("datos") DatosAsistencia datos) {
+    public ModelAndView crearNuevaSolicitudDeAsistencia(HttpServletRequest request, @ModelAttribute("datos") DatosAsistencia datos) {
 
-        ModelMap model = new ModelMap();
+        Long idUsuario = Long.parseLong(request.getSession().getAttribute("userID").toString());
+        datos.setIdUsuario(idUsuario);
         servicioAsistencia.crearServicio(datos);
-
-        model.put ("titulo", "NUEVA SOLICITUD PARA CUIDADOS");
-        List <Asistencia> asistencias = servicioAsistencia.buscarTodosLosEmpleos();
-       model.put("nombre", datos.getNombre());
-        model.put("descripcion" , datos.getDescripcion());
-        model.put("camaAdentro" , datos.getCamaAdentro());
-        model.put("tarifa" , datos.getTarifa());
-        model.put("idTurno", datos.getIdTurno());
-        model.put("idFrecuencia", datos.getIdFrecuencia());
-        model.put("zona", datos.getZona());
-        model.put ("titulo", "Todos los empleos");
-
-        model.put("empleo", asistencias);
-
 
         ModelAndView modelView = new ModelAndView();
         modelView.setViewName("redirect:/ir-a-asistencias");
@@ -126,5 +115,7 @@ public class ControladorAsistencias {
 
         return new ModelAndView("redirect:/ir-a-asistencias", modelo);
     }
+
+
 
 }
