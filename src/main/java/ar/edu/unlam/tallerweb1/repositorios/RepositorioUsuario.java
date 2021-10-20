@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import ar.edu.unlam.tallerweb1.modelo.Rol;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 
 import java.util.List;
@@ -12,6 +13,7 @@ public interface RepositorioUsuario {
 	void guardar(Usuario usuario);
     Usuario buscar(String email);
 	void modificar(Usuario usuario);
-    List<Usuario> buscarUsuarioPorRol(String rol);
+    List<Usuario> buscarUsuarioPorRol(Long rolId);
     List<Usuario> buscarUsuarioConMailLike(String mail);
+    Rol obtenerRol(long id);
 }

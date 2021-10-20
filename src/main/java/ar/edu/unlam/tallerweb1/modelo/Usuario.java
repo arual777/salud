@@ -17,7 +17,10 @@ public class Usuario {
 	// el atributo, la misma admite nulos, y el tipo de dato se deduce del tipo de dato de java.
 	private String email;
 	private String password;
-	private String rol;
+
+	@ManyToOne
+	private Rol rol;
+
 	private Boolean activo = false;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Cuenta cuenta;
@@ -46,10 +49,10 @@ public class Usuario {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getRol() {
+	public Rol getRol() {
 		return rol;
 	}
-	public void setRol(String rol) {
+	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
 	public Boolean getActivo() {

@@ -13,9 +13,9 @@ public class ControladorRegistrarmeTest {
     private ServicioLogin servicioLogin = mock(ServicioLogin.class);
     private ControladorRegistrarme controladorRegistrarme = new ControladorRegistrarme(servicioLogin);
     private static final DatosRegistro USUARIO_CON_MAIL_INCORRECTO
-            = new DatosRegistro("seba.com", "1234", "1234");;
+            = new DatosRegistro("seba.com", "1234", "1234",1L);;
     private static final DatosRegistro USUARIO
-            = new DatosRegistro("seba@seba.com", "1234", "1234");
+            = new DatosRegistro("seba@seba.com", "1234", "1234",1L);
 
     @Test
     public void puedoRegistrarmeConUsuarioNuevoYClaveCorrecta() {
@@ -38,7 +38,7 @@ public class ControladorRegistrarmeTest {
     }
 
     private void givenQueElUsuarioExiste(DatosRegistro usuario) throws Exception {
-        doThrow(Exception.class).when(servicioLogin).registrar(USUARIO.getEmail(), USUARIO.getClave());
+        doThrow(Exception.class).when(servicioLogin).registrar(USUARIO.getEmail(), USUARIO.getClave(),1L);
     }
 
     private void givenQueElUsuarioNoExiste(DatosRegistro usuario) {
