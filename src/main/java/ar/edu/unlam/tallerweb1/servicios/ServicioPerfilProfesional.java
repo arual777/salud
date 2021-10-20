@@ -2,6 +2,8 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.PerfilProfesional;
 
+import java.util.List;
+
 public interface ServicioPerfilProfesional {
 
 
@@ -9,4 +11,5 @@ public interface ServicioPerfilProfesional {
 
     PerfilProfesional buscarCV(Long id);
 
+    List<PerfilProfesional> buscarTodos();
 }

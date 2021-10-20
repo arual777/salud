@@ -5,6 +5,7 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioPerfilProfesional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
 @Service("servicioPerfilProfesional")
 @Transactional
@@ -43,5 +44,11 @@ public class ServicioPerfilProfesionalImpl implements ServicioPerfilProfesional 
 
         PerfilProfesional perfilProfesional = repositorioPerfilProfesional.buscarCV(id);
         return perfilProfesional;
+    }
+
+    @Override
+    public List <PerfilProfesional> buscarTodos(){
+        return repositorioPerfilProfesional.buscarTodos();
+
     }
 }

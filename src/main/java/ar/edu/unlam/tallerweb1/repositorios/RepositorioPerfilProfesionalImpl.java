@@ -1,11 +1,14 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import ar.edu.unlam.tallerweb1.modelo.PerfilProfesional;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+
+import java.util.List;
 
 @Repository("repositorioPerfilProfesional")
 public class RepositorioPerfilProfesionalImpl implements RepositorioPerfilProfesional {
@@ -27,6 +30,13 @@ public class RepositorioPerfilProfesionalImpl implements RepositorioPerfilProfes
         final Session session = sessionFactory.getCurrentSession();
         return (PerfilProfesional) session.createCriteria(PerfilProfesional.class)
                 .add(Restrictions.eq("id", id)).uniqueResult();
+    }
+
+    @Override
+    public List<PerfilProfesional> buscarTodos() {
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<PerfilProfesional>) session.createCriteria(PerfilProfesional.class)
+                .list();
     }
 
 }

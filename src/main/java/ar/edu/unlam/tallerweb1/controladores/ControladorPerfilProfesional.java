@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 
 
+import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPerfilProfesional;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPerfilProfesionalImpl;
 import ar.edu.unlam.tallerweb1.modelo.PerfilProfesional;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 
 @Controller
@@ -78,6 +80,25 @@ public class ControladorPerfilProfesional {
 
 
         return new ModelAndView("cv", model);
+    }
+
+    @RequestMapping (method = RequestMethod.GET, path = "/ver-todos-perfiles-profesionales")
+    public ModelAndView mostrarTodosPerfilProfesional(HttpServletRequest request){
+
+        ModelMap model = new ModelMap();
+
+        if (request.getSession().getAttribute("userID")==null) {
+            String logeado = "No ingresaste en el sistema";
+            model.put("msglogeado", logeado);
+            return new ModelAndView("errorAcceso", model);
+        }else {
+
+            List<PerfilProfesional> perfilProfesionalList = servicioPerfilProfesional.buscarTodos();
+
+            model.put("cvs", perfilProfesionalList);
+
+            return new ModelAndView("verTodosPerfilProfesional", model);
+        }
     }
 
 
