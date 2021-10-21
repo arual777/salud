@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 import ar.edu.unlam.tallerweb1.controladores.DatosAsistencia;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsistencia;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.springframework.test.annotation.Rollback;
@@ -11,7 +12,8 @@ import static org.mockito.Mockito.*;
 
 public class ServicioAsistenciaTest {
     private RepositorioAsistencia repositorioAsistencia = mock(RepositorioAsistencia.class);
-    private ServicioAsistencia servicioAsistencia = new ServicioAsistenciaImpl(repositorioAsistencia);
+    private RepositorioUsuario repositorioUsuario = mock(RepositorioUsuario.class);
+    private ServicioAsistencia servicioAsistencia = new ServicioAsistenciaImpl(repositorioAsistencia, repositorioUsuario);
 
     @Test(expected = Exception.class)
     public void SiBuscoUnServicioInexistenteDaError() throws Exception {

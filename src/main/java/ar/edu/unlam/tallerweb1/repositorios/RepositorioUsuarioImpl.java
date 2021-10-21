@@ -79,4 +79,11 @@ public class RepositorioUsuarioImpl implements RepositorioUsuario {
 				.uniqueResult();
 	}
 
+    @Override
+    public Usuario buscarUsuario(long idUsuario) {
+		return (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
+				.add(Restrictions.eq("id", idUsuario))
+				.uniqueResult();
+    }
+
 }
