@@ -14,7 +14,7 @@ public class Asistencia {
     private Boolean camaAdentro;
     private Double tarifa;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     public Tipo_Turno idTurno;
 
     @OneToOne
@@ -28,6 +28,7 @@ public class Asistencia {
     public Usuario usuario;
 
     public Usuario getUsuario() { return usuario; }
+
     public void setUsuario(Usuario usuario){ this.usuario = usuario; }
 
     public String getDescripcion() {
@@ -93,4 +94,13 @@ public class Asistencia {
     public void setZona(Zona zona) {
         this.zona = zona;
     }
+
+    public Asistencia(Long id){
+        this.id = id;
+    }
+
+    public Asistencia(String nombre) {
+        this.nombre =nombre;
+    }
+    public Asistencia(){}
 }

@@ -106,10 +106,20 @@ public class ControladorAsistencias {
         return new ModelAndView("detalle-solicitud", model);
     }
 
+    @RequestMapping (method = RequestMethod.GET, path = "/detalle-asistencia/{nombre}")
+    public ModelAndView buscarAsistenciaPorNombreEspecifico(@PathVariable("nombre") String nombre) throws Exception {
+
+        ModelMap model = new ModelMap();
+        Asistencia asistenciaBuscada  =servicioAsistencia.buscarAsistenciaPorNombreEspecifico(nombre);
+        model.put("asistencia", asistenciaBuscada);
+
+        return new ModelAndView("detalle-solicitud", model);
+    }
+
     @RequestMapping(path = "/eliminar/{id}", method = RequestMethod.GET)
     public ModelAndView eliminarSolicitudDeEmpleo(@ModelAttribute("id") Long id) throws Exception {
         ModelMap modelo = new ModelMap();
-        servicioAsistencia.eliminarSolicitudDeEmpleo(id);  //ACA TIRA ERROR AL ELIMINAR
+        servicioAsistencia.eliminarSolicitudDeEmpleo(id);
 
         modelo.put("mensaje", "Solicitud de empleo eliminada con exito!");
 
