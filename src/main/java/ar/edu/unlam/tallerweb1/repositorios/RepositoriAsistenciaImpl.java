@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
+import ar.edu.unlam.tallerweb1.modelo.Tipo_Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -48,10 +49,10 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
 
 
     @Override
-    public List<Asistencia> buscarAsistenciaParaLaNoche() {
+    public List<Asistencia> buscarAsistenciaParaLaNoche(String tipo_turno) {
         final Session session = sessionFactory.getCurrentSession();
         return (List<Asistencia>) session.createCriteria(Asistencia.class)
-                .add(Restrictions.eq("idTurno", "NOCHE"))
+                .add(Restrictions.eq("idTurno", tipo_turno))
                 .list();
     }
 
@@ -94,6 +95,13 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
         Asistencia asistenciaPorEliminar = new Asistencia();
         asistenciaPorEliminar = buscarAsistenciaPorId(id);
         session.delete(asistenciaPorEliminar);
+    }
+
+    @Override
+    public Asistencia buscarAsistenciaPorNombreEspecifico(String nombre) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (Asistencia) session.createCriteria(Asistencia.class)
+                .add(Restrictions.eq("nombre", nombre)).uniqueResult();
     }
 
 }

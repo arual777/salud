@@ -21,32 +21,60 @@ public class RepositorioAsistenciaTest extends SpringTest {
     @Autowired
     private RepositorioAsistencia repositorioAsistencia;
 
+    private static final Long ENFERMERO_ID = 2L;
     private static final String ENFERMERO = "ENFERMERO";
-    private static final String CUIDADOR = "CUIDADOR";
+
+    private static final String ASISTENCIA_CON_NOMBRE = "Juan";
+    private static final String CUIDADOR = "Turno noche";
     private static final String ASISTENCIA = "ASISTENCIA";
 
     @Test
     @Rollback
     @Transactional
     public void creoYBuscoAsistencia(){
+        givenUnaNuevaAsistencia();
+        List<Asistencia> asistencias = whenCreoYBuscoAsistenciaPorNombre("prueba");
+        thenEncuentro(asistencias, 1);
+    }
+
+    private void givenUnaNuevaAsistencia() {
         Asistencia asistencia = new Asistencia();
         asistencia.setNombre("prueba");
         repositorioAsistencia.guardar(asistencia);
-        List<Asistencia> asistencias = whenBuscoAsistenciaPorNombre("prueba");
-        thenEncuentro(asistencias, 1);
+    }
+
+    private List<Asistencia> whenCreoYBuscoAsistenciaPorNombre(String nombreAsistencia) {
+        return repositorioAsistencia.buscarAsistenciaPorNombre(nombreAsistencia);
+    }
+
+    private void thenEncuentro (List < Asistencia > asistencias,int asistenciasEncontradas){
+        assertThat(asistencias).hasSize(asistenciasEncontradas);
     }
 
     @Test
     @Rollback
     @Transactional
     public void buscarAsistenciaPorId(){
-        givenExisteAsistencia(ENFERMERO, 1);
-        List<Asistencia> asistencias = whenBuscoTodasLasAsistencias();
-        long c = asistencias.get(0).getId();
-        Asistencia asistenciaPorId = repositorioAsistencia.buscarAsistenciaPorId(asistencias.get(0).getId());
-        assertThat(asistenciaPorId.getId()).isEqualTo(asistencias.get(0).getId());
+        givenExisteAsistenciaPorId(ENFERMERO_ID, 2);
+        List<Asistencia> asistencias = whenBuscoTodasLasAsistenciasPorId();
+        long getASistenciaPorId = asistencias.get(0).getId();
+        Asistencia asistenciaPorId = repositorioAsistencia.buscarAsistenciaPorId(getASistenciaPorId);
+        assertThat(getASistenciaPorId).isEqualTo(asistencias.get(0).getId());
+
     }
 
+    private void givenExisteAsistenciaPorId (Long asistenciaNom,int cantAsitencias){
+        for (int i = 0; i < cantAsitencias; i++) {
+            Asistencia asistencia = new Asistencia();
+            asistencia.setId(1L);
+
+            session().save(asistencia);
+        }
+    }
+
+    private List<Asistencia> whenBuscoTodasLasAsistenciasPorId () {
+        return repositorioAsistencia.buscarTodasLasAsistencias();
+    }
 
     @Test
     @Rollback
@@ -56,66 +84,17 @@ public class RepositorioAsistenciaTest extends SpringTest {
         assertThat(asistenciaPorId).isNull();
     }
 
-
     @Test
     @Rollback
     @Transactional
     public void buscarTodasLasAsistencias(){
         givenExisteAsistencia(ENFERMERO, 1);
         List<Asistencia> asistencias = whenBuscoTodasLasAsistencias();
-        thenEncuentro(asistencias, 1);
+        thenEncuentroTodas(asistencias, 1);
     }
 
-  /* @Test
-   @Rollback
-   @Transactional
-   public void buscarTodasLasAsistenciasTipoTurnoNoche() {
-        givenExisteAsistenciaParaTurnoNoche(CUIDADOR, 2);
-        List<Asistencia> asistencias = whenBuscoAsistenciaParaLaNoche();
-        thenEncuentro(asistencias,2);
-    }*/
-
-   /* @Test
-    @Rollback
-    @Transactional
-    public void buscarTodasLasAsistenciasConNombre() {
-        givenExisteAsistenciaParaTurnoNoche(CUIDADOR, 0);
-        List<Asistencia> asistencias = whenBuscoAsistenciaPorNombre("CUIDA");
-        thenEncuentro(asistencias,0);
-    }*/
-
-    @Test
-    @Rollback
-    @Transactional
-    public void queSePuedaEditarUnaAsistencia(){
-        givenExisteAsistencia ( ASISTENCIA, 1);
-        Asistencia modificacion = cuandoQuieroEditarUnaAsistencia(ASISTENCIA);
-        entoncesSeModifica(modificacion);
-    }
-
-    private void entoncesSeModifica(Asistencia asistenciaAEditar) {
-
-        asistenciaAEditar.setNombre("Cuidados Anuales");
-        repositorioAsistencia.guardar(asistenciaAEditar);
-        Asistencia asistenciaModificada = repositorioAsistencia.buscarTodasLasAsistencias().get(0);
-        assertThat(asistenciaModificada.getNombre()).isEqualTo("Cuidados Anuales");
-    }
-
-    private Asistencia cuandoQuieroEditarUnaAsistencia(String asistencia) {
-        List <Asistencia> asistencias = repositorioAsistencia.buscarAsistenciaPorNombre(asistencia);
-        return asistencias.get(0);
-    }
-
-    private List<Asistencia> whenBuscoAsistenciaParaLaNoche() {
-        return repositorioAsistencia.buscarAsistenciaParaLaNoche();
-    }
-
-    private List<Asistencia> whenBuscoAsistenciaPorNombre(String nombreAsistencia) {
-        return repositorioAsistencia.buscarAsistenciaPorNombre(nombreAsistencia);
-    }
-
-    private void givenExisteAsistencia(String asistenciaNom, int cantAsitencias) {
-        for(int i = 0; i < cantAsitencias; i++){
+    private void givenExisteAsistencia (String asistenciaNom,int cantAsitencias){
+        for (int i = 0; i < cantAsitencias; i++) {
             Asistencia asistencia = new Asistencia();
             asistencia.setNombre(asistenciaNom);
 
@@ -123,13 +102,33 @@ public class RepositorioAsistenciaTest extends SpringTest {
         }
     }
 
-    private void givenExisteAsistenciaParaTurnoNoche(String asistenciaNom, int cantAsitencias) {
-        for(int i = 0; i < cantAsitencias; i++){
+    private List<Asistencia> whenBuscoTodasLasAsistencias () {
+        return repositorioAsistencia.buscarTodasLasAsistencias();
+    }
+
+    private void thenEncuentroTodas (List < Asistencia > asistencias,int asistenciasEncontradas){
+        assertThat(asistencias).hasSize(asistenciasEncontradas);
+    }
+
+   /*@Test
+   @Rollback
+   @Transactional
+   public void buscarTodasLasAsistenciasTipoTurnoNoche() {
+        givenExisteAsistenciaParaTurnoNoche(CUIDADOR, 2);
+        List<Asistencia> asistencias = whenBuscoAsistenciaParaLaNoche(CUIDADOR);
+        thenEncuentroTodasParaTurnoNoche(asistencias,2);
+    }
+
+    private List<Asistencia> whenBuscoAsistenciaParaLaNoche(String cuidador) {
+              return repositorioAsistencia.buscarAsistenciaParaLaNoche(cuidador);
+    }
+
+    private void givenExisteAsistenciaParaTurnoNoche(String cuidador, int cantAsitenciasPorNoche) {
+        for (int i = 0; i < cantAsitenciasPorNoche; i++) {
             Asistencia asistencia = new Asistencia();
-            asistencia.setNombre(asistenciaNom);
-            //asistencia.setTipo("PorNoche");
+
             Tipo_Turno tipo_turno = new Tipo_Turno();
-            tipo_turno.setFranja("noche");
+            tipo_turno.setFranja(cuidador);
 
             asistencia.setIdTurno(tipo_turno);
 
@@ -137,11 +136,63 @@ public class RepositorioAsistenciaTest extends SpringTest {
         }
     }
 
-    private void thenEncuentro(List<Asistencia> asistencias, int asistenciasEncontradas) {
+    private void thenEncuentroTodasParaTurnoNoche (List < Asistencia > asistencias,int asistenciasEncontradas){
         assertThat(asistencias).hasSize(asistenciasEncontradas);
-    }
+    }*/
 
-    private List<Asistencia> whenBuscoTodasLasAsistencias() {
-        return repositorioAsistencia.buscarTodasLasAsistencias();
+        @Test
+        @Rollback
+        @Transactional
+        public void buscarTodasLasAsistenciasConNombre () {
+            givenExisteAsistenciaConNombre(ASISTENCIA_CON_NOMBRE, 0);
+            List<Asistencia> asistencias = whenBuscoAsistenciaPorNombre("Juan");
+            thenEncuentroAsistenciaConNombre(asistencias, 0);
+        }
+
+        private void givenExisteAsistenciaConNombre (String asistenciaNom,int cantAsitencias){
+            for (int i = 0; i < cantAsitencias; i++) {
+                Asistencia asistencia = new Asistencia();
+                asistencia.setNombre(asistenciaNom);
+
+                session().save(asistencia);
+            }
+        }
+
+        private List<Asistencia> whenBuscoAsistenciaPorNombre(String juan) {
+             return repositorioAsistencia.buscarTodasLasAsistencias();
+        }
+
+        private void thenEncuentroAsistenciaConNombre (List < Asistencia > asistencias,int asistenciasEncontradas){
+            assertThat(asistencias).hasSize(asistenciasEncontradas);
+        }
+
+        @Test
+        @Rollback
+        @Transactional
+        public void queSePuedaEditarUnaAsistencia () {
+            givenExisteAsistenciaCreada(ASISTENCIA, 1);
+            Asistencia modificacion = cuandoQuieroEditarUnaAsistencia(ASISTENCIA);
+            entoncesSeModifica(modificacion);
+        }
+
+        private void givenExisteAsistenciaCreada (String asistenciaNom,int cantAsitencias){
+            for (int i = 0; i < cantAsitencias; i++) {
+                Asistencia asistencia = new Asistencia();
+                asistencia.setNombre(asistenciaNom);
+
+                session().save(asistencia);
+            }
+        }
+
+        private Asistencia cuandoQuieroEditarUnaAsistencia (String asistencia){
+            List<Asistencia> asistencias = repositorioAsistencia.buscarAsistenciaPorNombre(asistencia);
+            return asistencias.get(0);
+        }
+
+        private void entoncesSeModifica (Asistencia asistenciaAEditar){
+            asistenciaAEditar.setNombre("Cuidados Anuales");
+            repositorioAsistencia.guardar(asistenciaAEditar);
+            Asistencia asistenciaModificada = repositorioAsistencia.buscarTodasLasAsistencias().get(0);
+            assertThat(asistenciaModificada.getNombre()).isEqualTo("Cuidados Anuales");
+        }
     }
-}

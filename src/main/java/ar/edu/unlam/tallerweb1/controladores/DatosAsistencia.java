@@ -7,15 +7,6 @@ public class DatosAsistencia {
     private String nombre;
     private String descripcion;
     private Boolean camaAdentro;
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
     private Double tarifa;
     private long idTurno;
 
@@ -30,6 +21,14 @@ public class DatosAsistencia {
     private long idFrecuencia;
     private long zona;
     private long idUsuario;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public long getZona() {
         return zona;
@@ -74,7 +73,6 @@ public class DatosAsistencia {
     public void setIdFrecuencia(long idFrecuencia) {
         this.idFrecuencia = idFrecuencia;
     }
-
 
     public void setIdTurno(long idTurno) { this.idTurno = idTurno; }
 
