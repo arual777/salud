@@ -39,4 +39,8 @@ public class RepositorioPerfilProfesionalImpl implements RepositorioPerfilProfes
                 .list();
     }
 
+    @Override
+    public void editarPerfilProfesional(PerfilProfesional perfilProfesional){
+    sessionFactory.getCurrentSession().update(perfilProfesional) ;
+    }
 }

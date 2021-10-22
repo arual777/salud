@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.controladores.DatosRegistroProfesional;
 import ar.edu.unlam.tallerweb1.modelo.PerfilProfesional;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPerfilProfesional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,21 @@ public class ServicioPerfilProfesionalImpl implements ServicioPerfilProfesional 
         else{
             throw new Exception();
         }
+    }
+
+    @Override
+    public PerfilProfesional editarPerfil(DatosRegistroProfesional datos){
+
+        PerfilProfesional perfilProfesionalAEditar = new PerfilProfesional();
+        perfilProfesionalAEditar.setId(datos.getId());
+        perfilProfesionalAEditar.setNombreCompleto(datos.getNombreCompleto());
+        perfilProfesionalAEditar.setEmail(datos.getEmail());
+        perfilProfesionalAEditar.setExperiencia(datos.getExperiencia());
+        perfilProfesionalAEditar.setNumeroTelefono(datos.getNumeroTelefono());
+        perfilProfesionalAEditar.setFechaNacimiento(datos.getFechaNacimiento());
+
+        repositorioPerfilProfesional.editarPerfilProfesional(perfilProfesionalAEditar);
+        return perfilProfesionalAEditar;
     }
 
     @Override

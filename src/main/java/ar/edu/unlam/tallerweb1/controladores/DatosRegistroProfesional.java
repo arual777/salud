@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 public class DatosRegistroProfesional {
+    private long id;
     private String nombreCompleto;
     private String email;
     private String experiencia;
@@ -15,6 +16,14 @@ public class DatosRegistroProfesional {
         this.experiencia = experiencia;
         this.numeroTelefono = numeroTelefono;
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getNombreCompleto() {

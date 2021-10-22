@@ -10,4 +10,6 @@ public interface RepositorioPerfilProfesional {
     PerfilProfesional buscarCV(Long id);
 
     List<PerfilProfesional> buscarTodos();
+
+    void editarPerfilProfesional(PerfilProfesional perfilProfesionalAEditar);
 }
