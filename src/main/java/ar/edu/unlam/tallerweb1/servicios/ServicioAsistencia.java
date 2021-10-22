@@ -1,7 +1,9 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.controladores.DatosAsistencia;
+import ar.edu.unlam.tallerweb1.controladores.DatosPostulacion;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
+import ar.edu.unlam.tallerweb1.modelo.Postulacion;
 import ar.edu.unlam.tallerweb1.modelo.Zona;
 
 import java.util.List;
@@ -25,4 +27,8 @@ public interface ServicioAsistencia {
     void eliminarSolicitudDeEmpleo(Long id);
 
     Asistencia buscarAsistenciaPorNombreEspecifico(String nombre);
+
+    void crearPostulacion(DatosPostulacion datosPostulacion);
+
+    List<Postulacion> buscarPostulacionesPorUsuario(long id);
 }

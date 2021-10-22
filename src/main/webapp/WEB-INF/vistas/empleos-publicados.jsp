@@ -33,27 +33,35 @@
                     <th scope="col">Zona</th>
                     <th scope="col">Editar</th>
                     <th scope="col">Eliminar</th>
+
                 </tr>
                 </thead>
                 <tbody>
-                <c:forEach  items="${empleo}" var="a">
+                <c:forEach  items="${empleos}" var="empleo">
                     <tr>
-                        <td>  ${a.nombre}</td>
-                        <td>  ${a.idFrecuencia.nombre}</td>
-                        <td>  ${a.camaAdentro}</td>
-                        <td>  ${a.descripcion}</td>
-                        <td>  ${a.tarifa}</td>
-                        <td>  ${a.zona.nombre}</td>
+                        <td>  ${empleo.nombre}</td>
+                        <td>  ${empleo.idFrecuencia.nombre}</td>
+                        <td>  ${empleo.camaAdentro}</td>
+                        <td>  ${empleo.descripcion}</td>
+                        <td>  ${empleo.tarifa}</td>
+                        <td>  ${empleo.zona.nombre}</td>
                         <td>
-                            <a href="detalle-asistencia/${a.id}">
+                            <a href="detalle-asistencia/${empleo.id}">
                                <button class="btn btn-lg btn-primary btn-block">Editar</button>
                             </a>
                         </td>
                         <td>
-                            <a href="eliminar/${a.id}">
+                            <a href="eliminar/${empleo.id}">
                                 <button class="btn btn-lg btn-primary btn-block">Eliminar</button>
                             </a>
                         </td>
+
+                     <td>
+                      <form action="postularme" method="POST" modelAttribute="datosPostulacion">
+                           <button class="btn btn-lg btn-primary btn-block" onclick="parentNode.submit();">Postularme</button>
+                         <input id="idAsistencia" name="idAsistencia" type="hidden" value= "${empleo.id}" >
+                      </form>
+                    </td>
 
                     </tr>
                 </c:forEach>

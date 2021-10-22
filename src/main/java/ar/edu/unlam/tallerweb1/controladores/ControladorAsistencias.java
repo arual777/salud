@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Postulacion;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class ControladorAsistencias {
         List <Asistencia> asistencias = servicioAsistencia.buscarTodasLasAsistencias();
 
         model.put ("titulo", "Todos los servicios");
-        model.put("empleo", asistencias);
+        model.put("empleos", asistencias);
         return new ModelAndView("empleos-publicados", model);
 
     }
@@ -126,6 +127,20 @@ public class ControladorAsistencias {
         return new ModelAndView("redirect:/ir-a-asistencias", modelo);
     }
 
+    @RequestMapping(path="/postularme", method=RequestMethod.POST)
+    public ModelAndView postularmeAEmpleo(HttpServletRequest request, @ModelAttribute("datosPostulacion") DatosPostulacion datosPostulacion) throws Exception {
 
+        Long idUsuario = Long.parseLong(request.getSession().getAttribute("userID").toString());
+        datosPostulacion.setIdUsuario(idUsuario);
+        servicioAsistencia.crearPostulacion(datosPostulacion);
+
+        List <Postulacion> postulaciones = servicioAsistencia.buscarPostulacionesPorUsuario(idUsuario);
+        ModelMap modelo = new ModelMap();
+
+        modelo.put ("titulo", "Mis postulaciones");
+        modelo.put("postulaciones", postulaciones);
+
+        return new ModelAndView("postulaciones",modelo);
+    }
 
 }

@@ -1,8 +1,10 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.controladores.DatosAsistencia;
+import ar.edu.unlam.tallerweb1.controladores.DatosPostulacion;
 import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsistencia;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioPostulacion;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,11 +20,32 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
 
     private RepositorioAsistencia repositorioAsistencia;
     private RepositorioUsuario repositorioUsuario;
+    private RepositorioPostulacion repositorioPostulacion;
 
     @Autowired
-    public ServicioAsistenciaImpl(RepositorioAsistencia repositorioAsistencia, RepositorioUsuario repositorioUsuario){
+    public ServicioAsistenciaImpl(RepositorioAsistencia repositorioAsistencia, RepositorioUsuario repositorioUsuario, RepositorioPostulacion repositorioPostulacion){
         this.repositorioAsistencia = repositorioAsistencia;
         this.repositorioUsuario = repositorioUsuario;
+        this.repositorioPostulacion = repositorioPostulacion;
+    }
+
+    @Override
+    public void crearPostulacion(DatosPostulacion datosPostulacion){
+
+        Postulacion nuevaPostulacion = new Postulacion();
+        Usuario usuario = repositorioUsuario.buscarUsuario(datosPostulacion.getIdUsuario());
+        Asistencia asistencia = repositorioAsistencia.buscarAsistenciaPorId(datosPostulacion.getIdAsistencia());
+
+        nuevaPostulacion.setProfesional(usuario);
+        nuevaPostulacion.setAsistencia(asistencia);
+        nuevaPostulacion.setAceptado(false);
+
+        repositorioPostulacion.guardar(nuevaPostulacion);
+    }
+
+    @Override
+    public List<Postulacion> buscarPostulacionesPorUsuario(long id) {
+        return repositorioPostulacion.buscarPostulacionesPorIdUsuario(id);
     }
 
     @Override
@@ -89,6 +112,7 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
 
         return asistencia;
     }
+
 
     @Override
     public List<Asistencia> buscarTodasLasAsistencias() {
