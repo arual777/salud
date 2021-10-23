@@ -37,14 +37,14 @@ public class ControladorPerfilProfesional {
             model.put("msglogeado", logeado);
             return new ModelAndView("errorAcceso", model);
         }
-        else{
-            logeado = "siLogeado";
-            DatosRegistroProfesional datos = new DatosRegistroProfesional();
-            model.put("datosRegistroProfesional", datos);
 
-            model.put("msglogeado", logeado);
-            return new ModelAndView("registroProfesional", model);
-        }
+        logeado = "siLogeado";
+        DatosRegistroProfesional datos = new DatosRegistroProfesional();
+        model.put("datosRegistroProfesional", datos);
+
+        model.put("msglogeado", logeado);
+        return new ModelAndView("registroProfesional", model);
+
     }
 
 
@@ -52,6 +52,12 @@ public class ControladorPerfilProfesional {
     public ModelAndView registroPerfilProfesional(@ModelAttribute("datosRegistroProfesional") DatosRegistroProfesional datos, HttpServletRequest request) {
 
         ModelMap model = new ModelMap();
+        if (request.getSession().getAttribute("userID")==null){
+            String msgSesion = "No ingresaste en el sistema";
+            model.put("msglogeado", msgSesion);
+            return new ModelAndView("errorAcceso", model);
+        }
+
         long idUsuario = (Long) request.getSession().getAttribute("userID");
         try {
             servicioPerfilProfesional.registrarPerfil(datos.getNombreCompleto(), datos.getEmail(),
@@ -83,15 +89,15 @@ public class ControladorPerfilProfesional {
         ModelMap model = new ModelMap();
 
         if (request.getSession().getAttribute("userID")==null) {
-            String logeado = "No ingresaste en el sistema";
-            model.put("msglogeado", logeado);
+            String msgSesion = "No ingresaste en el sistema";
+            model.put("msglogeado", msgSesion);
             return new ModelAndView("errorAcceso", model);
-        }else {
-
-            List<PerfilProfesional> perfilProfesionalList = servicioPerfilProfesional.buscarTodos();
-            model.put("cvs", perfilProfesionalList);
-            return new ModelAndView("verTodosPerfilProfesional", model);
         }
+
+        List<PerfilProfesional> perfilProfesionalList = servicioPerfilProfesional.buscarTodos();
+        model.put("cvs", perfilProfesionalList);
+        return new ModelAndView("verTodosPerfilProfesional", model);
+
     }
 
     @RequestMapping (method = RequestMethod.GET, path = "/ir-a-editar-perfil-profesional", params={"id"} )
@@ -99,19 +105,21 @@ public class ControladorPerfilProfesional {
 
         if (request.getSession().getAttribute("userID")==null) {
             ModelMap model = new ModelMap();
-            String logeado = "No ingresaste en el sistema";
-            model.put("msglogeado", logeado);
+            String msgSesion = "No ingresaste en el sistema";
+            model.put("msglogeado", msgSesion);
             return new ModelAndView("errorAcceso", model);
-        }else {
-            PerfilProfesional perfilProfesional = servicioPerfilProfesional.buscarCV(id);
+        }
 
-            if (!request.getSession().getAttribute("userID").equals(perfilProfesional.getId())) {
-                return new ModelAndView("errorAcceso");
-            }
+        PerfilProfesional perfilProfesional = servicioPerfilProfesional.buscarCV(id);
+
+        if (request.getSession().getAttribute("userID").equals(perfilProfesional.getIdUsuario())) {
             ModelMap model = new ModelMap();
             model.put("curriculum", perfilProfesional);
             return new ModelAndView("editarPerfilProfesional", model);
         }
+
+        return new ModelAndView("errorAcceso");
+
     }
 
     @RequestMapping (method = RequestMethod.POST, path = "/editarPerfilProfesional")
