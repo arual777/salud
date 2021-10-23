@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
+
 public class DatosRegistroProfesional {
     private long id;
     private String nombreCompleto;
@@ -7,15 +9,17 @@ public class DatosRegistroProfesional {
     private String experiencia;
     private String numeroTelefono;
     private String fechaNacimiento;
+    private long idUsuario;
 
     public DatosRegistroProfesional(){}
 
-    public DatosRegistroProfesional(String nombreCompleto,String email, String experiencia, String numeroTelefono, String fechaNacimiento) {
+    public DatosRegistroProfesional(String nombreCompleto,String email, String experiencia, String numeroTelefono, String fechaNacimiento, long idUsuario) {
         this.nombreCompleto = nombreCompleto;
         this.email = email;
         this.experiencia = experiencia;
         this.numeroTelefono = numeroTelefono;
         this.fechaNacimiento = fechaNacimiento;
+        this.idUsuario = idUsuario;
     }
 
     public long getId() {
@@ -65,4 +69,8 @@ public class DatosRegistroProfesional {
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
     }
+
+    public long getIdUsuario() { return idUsuario;}
+
+    public void setIdUsuario(long idUsuario) {this.idUsuario = idUsuario;}
 }

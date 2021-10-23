@@ -49,12 +49,13 @@ public class ControladorPerfilProfesional {
 
 
     @RequestMapping(method = RequestMethod.POST, path = "/registroProfesional")
-    public ModelAndView registroPerfilProfesional(@ModelAttribute("datosRegistroProfesional") DatosRegistroProfesional datos) {
+    public ModelAndView registroPerfilProfesional(@ModelAttribute("datosRegistroProfesional") DatosRegistroProfesional datos, HttpServletRequest request) {
 
         ModelMap model = new ModelMap();
+        long idUsuario = (Long) request.getSession().getAttribute("userID");
         try {
             servicioPerfilProfesional.registrarPerfil(datos.getNombreCompleto(), datos.getEmail(),
-                    datos.getExperiencia(), datos.getNumeroTelefono(), datos.getFechaNacimiento());
+                    datos.getExperiencia(), datos.getNumeroTelefono(), datos.getFechaNacimiento(), idUsuario);
 
             model.put("msg", "Su perfil profesional ha sido cargado");
         } catch (Exception e){

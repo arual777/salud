@@ -25,6 +25,9 @@ public class PerfilProfesional {
     @Column(nullable = false)
     private String fechaNacimiento;
 
+    @OneToOne
+    public Usuario idUsuario;
+
     public Long getId() {
         return id;
     }
@@ -71,5 +74,13 @@ public class PerfilProfesional {
 
     public void setFechaNacimiento(String fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public Usuario getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Usuario idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }

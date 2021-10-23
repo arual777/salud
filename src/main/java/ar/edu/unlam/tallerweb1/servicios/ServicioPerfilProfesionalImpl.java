@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.controladores.DatosRegistroProfesional;
 import ar.edu.unlam.tallerweb1.modelo.PerfilProfesional;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPerfilProfesional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class ServicioPerfilProfesionalImpl implements ServicioPerfilProfesional 
 
     @Override
     public PerfilProfesional registrarPerfil(String nombreCompleto, String email, String experiencia,
-                                             String numTelefono, String fechaNacimiento) throws Exception{
+                                             String numTelefono, String fechaNacimiento, long idUsuario) throws Exception{
 
         if (nombreCompleto.length() > 5 && email.length() > 5 && experiencia.length() > 10
                 && numTelefono.length()>5) {
@@ -30,6 +31,8 @@ public class ServicioPerfilProfesionalImpl implements ServicioPerfilProfesional 
             nuevo.setExperiencia(experiencia);
             nuevo.setNumeroTelefono(numTelefono);
             nuevo.setFechaNacimiento(fechaNacimiento);
+            Usuario usuario = repositorioPerfilProfesional.obtenerIdUsuario(idUsuario);
+            nuevo.setIdUsuario(usuario);
 
             repositorioPerfilProfesional.guardar(nuevo);
 

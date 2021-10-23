@@ -2,6 +2,8 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import ar.edu.unlam.tallerweb1.modelo.PerfilProfesional;
+import ar.edu.unlam.tallerweb1.modelo.Rol;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -42,5 +44,12 @@ public class RepositorioPerfilProfesionalImpl implements RepositorioPerfilProfes
     @Override
     public void editarPerfilProfesional(PerfilProfesional perfilProfesional){
     sessionFactory.getCurrentSession().update(perfilProfesional) ;
+    }
+
+    @Override
+    public Usuario obtenerIdUsuario(long id) {
+        return (Usuario) sessionFactory.getCurrentSession().createCriteria(Usuario.class)
+                .add(Restrictions.eq("id", id))
+                .uniqueResult();
     }
 }
