@@ -30,7 +30,10 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
     }
 
     @Override
-    public void crearPostulacion(DatosPostulacion datosPostulacion){
+    public void crearPostulacion(DatosPostulacion datosPostulacion) throws Exception {
+        if(repositorioPostulacion.verSiElUsuarioYaEstaPostulado(datosPostulacion.getIdAsistencia(), datosPostulacion.getIdUsuario())){
+            throw new Exception("El usuario ya se postuló");
+        }
 
         Postulacion nuevaPostulacion = new Postulacion();
         Usuario usuario = repositorioUsuario.buscarUsuario(datosPostulacion.getIdUsuario());

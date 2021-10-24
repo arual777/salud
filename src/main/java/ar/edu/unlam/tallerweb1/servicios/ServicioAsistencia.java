@@ -28,7 +28,7 @@ public interface ServicioAsistencia {
 
     Asistencia buscarAsistenciaPorNombreEspecifico(String nombre);
 
-    void crearPostulacion(DatosPostulacion datosPostulacion);
+    void crearPostulacion(DatosPostulacion datosPostulacion) throws Exception;
 
     List<Postulacion> buscarPostulacionesPorUsuario(long id);
 }

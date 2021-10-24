@@ -31,8 +31,7 @@
                     <th scope="col">Descripcion</th>
                     <th scope="col">Tarifa</th>
                     <th scope="col">Zona</th>
-                    <th scope="col">Editar</th>
-                    <th scope="col">Eliminar</th>
+
 
                 </tr>
                 </thead>
@@ -45,27 +44,32 @@
                         <td>  ${empleo.descripcion}</td>
                         <td>  ${empleo.tarifa}</td>
                         <td>  ${empleo.zona.nombre}</td>
-                        <td>
-                            <a href="detalle-asistencia/${empleo.id}">
-                               <button class="btn btn-lg btn-primary btn-block">Editar</button>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="eliminar/${empleo.id}">
-                                <button class="btn btn-lg btn-primary btn-block">Eliminar</button>
-                            </a>
-                        </td>
 
-                     <td>
-                      <form action="postularme" method="POST" modelAttribute="datosPostulacion">
-                           <button class="btn btn-lg btn-primary btn-block" onclick="parentNode.submit();">Postularme</button>
-                         <input id="idAsistencia" name="idAsistencia" type="hidden" value= "${empleo.id}" >
-                      </form>
-                    </td>
-
+                        <c:choose>
+                       <c:when test="${idRol==1}">
+                                <td>
+                                    <a href="detalle-asistencia/${empleo.id}">
+                                       <button class="btn btn-lg btn-primary btn-block">Editar</button>
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="eliminar/${empleo.id}">
+                                        <button class="btn btn-lg btn-primary btn-block">Eliminar</button>
+                                    </a>
+                                </td>
+                          </c:when>
+                          <c:otherwise>
+                         <td>
+                          <form action="postularme" method="POST" modelAttribute="datosPostulacion">
+                             <button type="submit" class="btn btn-lg btn-primary btn-block">Postularme</button>
+                             <input id="idAsistencia" name="idAsistencia" type="hidden" value= "${empleo.id}" >
+                          </form>
+                        </td>
+                         </c:otherwise>
+                     </c:choose>
                     </tr>
                 </c:forEach>
-                </tbody>
+                </body>
             </table>
         </div>
     </div>

@@ -25,6 +25,9 @@ public class Usuario {
 	@OneToOne(cascade = CascadeType.ALL)
 	private Cuenta cuenta;
 
+	@OneToOne(optional = true)
+	private PerfilProfesional perfilProfesional;
+
 	public Cuenta getCuenta() {
 		return cuenta;
 	}

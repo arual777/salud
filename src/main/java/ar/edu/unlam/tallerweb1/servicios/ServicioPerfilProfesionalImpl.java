@@ -31,6 +31,11 @@ public class ServicioPerfilProfesionalImpl implements ServicioPerfilProfesional 
 
             repositorioPerfilProfesional.guardar(nuevo);
 
+            //obtener el usuario logueado
+            // para esto tienen que agarrar el id del usuario en sesion y buscarlo en el repo
+            // hacer un metodo que sea asignar perfil a usuario
+            //fin
+
             return nuevo;
         }
         else{
