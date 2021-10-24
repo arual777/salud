@@ -39,5 +39,10 @@
     </div>
 </div>
 
+      <c:if test="${not empty msg}">
+            <h4><span>${msg}</span></h4>
+            <br>
+        </c:if>
+
 </body>
 </html>

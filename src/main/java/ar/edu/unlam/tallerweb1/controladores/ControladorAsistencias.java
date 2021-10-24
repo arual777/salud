@@ -23,18 +23,17 @@ public class ControladorAsistencias {
         this.servicioAsistencia = servicioAsistencia;
     }
 
-    public ControladorAsistencias() {
-    }
-
     @RequestMapping (method = RequestMethod.GET, path = "/ir-a-asistencias")
-    public ModelAndView MostrarServicios(){
-
+    public ModelAndView MostrarServicios(HttpServletRequest request){
+        Long idUsuario = obtenerIdUsuario(request);
+        Long idRol = obtenerIdRol(request);
         ModelMap model = new ModelMap();
 
         List <Asistencia> asistencias = servicioAsistencia.buscarTodasLasAsistencias();
 
         model.put ("titulo", "Todos los servicios");
         model.put("empleos", asistencias);
+        model.put("idRol", idRol);
         return new ModelAndView("empleos-publicados", model);
 
     }
@@ -106,7 +105,9 @@ public class ControladorAsistencias {
 
         return new ModelAndView("detalle-solicitud", model);
     }
-
+/*
+    al tener el mismo path que detalle-asistencia/{idAsistencia} , cuando se edita la asistencia se rompe.
+    hay que cambiar el path de este metodo
     @RequestMapping (method = RequestMethod.GET, path = "/detalle-asistencia/{nombre}")
     public ModelAndView buscarAsistenciaPorNombreEspecifico(@PathVariable("nombre") String nombre) throws Exception {
 
@@ -116,7 +117,7 @@ public class ControladorAsistencias {
 
         return new ModelAndView("detalle-solicitud", model);
     }
-
+*/
     @RequestMapping(path = "/eliminar/{id}", method = RequestMethod.GET)
     public ModelAndView eliminarSolicitudDeEmpleo(@ModelAttribute("id") Long id) throws Exception {
         ModelMap modelo = new ModelMap();
@@ -130,17 +131,32 @@ public class ControladorAsistencias {
     @RequestMapping(path="/postularme", method=RequestMethod.POST)
     public ModelAndView postularmeAEmpleo(HttpServletRequest request, @ModelAttribute("datosPostulacion") DatosPostulacion datosPostulacion) throws Exception {
 
-        Long idUsuario = Long.parseLong(request.getSession().getAttribute("userID").toString());
+        Long idUsuario = obtenerIdUsuario(request);
+        Long idRol = obtenerIdRol(request);
+
+        ModelMap modelo = new ModelMap();
+        try {
         datosPostulacion.setIdUsuario(idUsuario);
         servicioAsistencia.crearPostulacion(datosPostulacion);
-
+        modelo.put("msg", "Usted se ha postulado exitosamente");
         List <Postulacion> postulaciones = servicioAsistencia.buscarPostulacionesPorUsuario(idUsuario);
-        ModelMap modelo = new ModelMap();
-
+        modelo.put("idRol", idRol);
         modelo.put ("titulo", "Mis postulaciones");
         modelo.put("postulaciones", postulaciones);
 
+        } catch (Exception e){
+            modelo.put("msg", "No puede postularse por segunda vez");
+        }
+
         return new ModelAndView("postulaciones",modelo);
+    }
+
+    private Long obtenerIdUsuario(HttpServletRequest request){
+        return Long.parseLong(request.getSession().getAttribute("userID").toString());
+    }
+
+    private Long obtenerIdRol(HttpServletRequest request){
+        return Long.parseLong(request.getSession().getAttribute("rolID").toString());
     }
 
 }

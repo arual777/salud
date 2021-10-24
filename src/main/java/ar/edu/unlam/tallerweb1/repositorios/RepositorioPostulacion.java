@@ -11,4 +11,8 @@ public interface RepositorioPostulacion {
     void guardar(Postulacion postulacion);
 
     List<Postulacion> buscarPostulacionesPorIdUsuario(Long id);
+
+    boolean verSiElUsuarioYaEstaPostulado(Long idAsistencia, Long idUsuario);
+
+    List<Postulacion>  buscarPostulacionesPorId(Long id);
 }

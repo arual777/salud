@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.controladores.DatosAsistencia;
+import ar.edu.unlam.tallerweb1.controladores.DatosPostulacion;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsistencia;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPostulacion;
@@ -14,12 +15,33 @@ import static org.mockito.Mockito.*;
 public class ServicioAsistenciaTest {
     private RepositorioAsistencia repositorioAsistencia = mock(RepositorioAsistencia.class);
     private RepositorioUsuario repositorioUsuario = mock(RepositorioUsuario.class);
-    private ServicioAsistencia servicioAsistencia = new ServicioAsistenciaImpl(repositorioAsistencia, repositorioUsuario, mock(RepositorioPostulacion.class));
+    private RepositorioPostulacion repositorioPostulacion = mock(RepositorioPostulacion.class);
+
+    private ServicioAsistencia servicioAsistencia = new ServicioAsistenciaImpl(repositorioAsistencia, repositorioUsuario, repositorioPostulacion);
+
+
 
     @Test(expected = Exception.class)
     public void SiBuscoUnServicioInexistenteDaError() throws Exception {
         whenCreoUnServicio(obtenerAsistencia());
         servicioAsistencia.buscarAsistenciaPorId(3);
+    }
+
+    @Test(expected = Exception.class)
+    public void SiUnProfesionalSePostulaDosVecesAlMismoEmpleoDaError() throws Exception {
+        whenSePostulaDeNuevoAlMismoEmpleo();
+        thenNoSePuedePostularyDaError();
+    }
+
+    private void whenSePostulaDeNuevoAlMismoEmpleo() throws Exception{
+        when(repositorioPostulacion.verSiElUsuarioYaEstaPostulado(1l, 1l)).thenReturn(true);
+    }
+
+    private void thenNoSePuedePostularyDaError() throws Exception {
+        DatosPostulacion datosPostulacion = new DatosPostulacion();
+        datosPostulacion.setIdAsistencia(1L);
+        datosPostulacion.setIdUsuario(1L);
+        servicioAsistencia.crearPostulacion(datosPostulacion);
     }
 
     @Test

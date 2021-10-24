@@ -46,30 +46,46 @@ public class ControladorLogin {
 	@RequestMapping(path = "/validar-login", method = RequestMethod.POST)
 	public ModelAndView validarLogin(@ModelAttribute("datosLogin") DatosLogin datosLogin, HttpServletRequest request) {
 		ModelMap model = new ModelMap();
-
-		// invoca el metodo consultarUsuario del servicio y hace un redirect a la URL /home, esto es, en lugar de enviar a una vista
-		// hace una llamada a otro action a traves de la URL correspondiente a esta
 		Usuario usuarioBuscado = servicioLogin.consultarUsuario(datosLogin.getEmail(), datosLogin.getPassword());
 		if (usuarioBuscado != null) {
 			request.getSession().setAttribute("ROL", usuarioBuscado.getRol());
 			request.getSession().setAttribute("userID", usuarioBuscado.getId());
-			return new ModelAndView("redirect:/home");
+			request.getSession().setAttribute("rolID", usuarioBuscado.getRol().getId());
+
+			long idRol = usuarioBuscado.getRol().getId();
+			model.put("idRol", idRol);
+
+			return new ModelAndView("home", model);
 		} else {
-			// si el usuario no existe agrega un mensaje de error en el modelo.
 			model.put("error", "Usuario o clave incorrecta");
 		}
 		return new ModelAndView("login", model);
 	}
 
 	// Escucha la URL /home por GET, y redirige a una vista.
-	@RequestMapping(path = "/home", method = RequestMethod.GET)
-	public ModelAndView irAHome() {
-		return new ModelAndView("home");
+	@RequestMapping(method = RequestMethod.GET, path = "/home" )
+	public ModelAndView irAHome(HttpServletRequest request) {
+		Long idUsuario = obtenerIdUsuario(request);
+		Long idRol = obtenerIdRol(request);
+
+		ModelMap model = new ModelMap();
+
+		model.put("idUsuario", idUsuario);
+		model.put("idRol", idRol);
+		return new ModelAndView("home", model);
 	}
 
 	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {
 		return new ModelAndView("redirect:/login");
+	}
+
+	private Long obtenerIdUsuario(HttpServletRequest request){
+		return Long.parseLong(request.getSession().getAttribute("userID").toString());
+	}
+
+	private Long obtenerIdRol(HttpServletRequest request){
+		return Long.parseLong(request.getSession().getAttribute("rolID").toString());
 	}
 }

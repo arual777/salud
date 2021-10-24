@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
 import org.junit.Test;
 import org.mockito.Mockito;
@@ -27,7 +28,33 @@ public class ControladorAsistenciaTest {
     private ControladorAsistencias controladorAsistenciasMock = new ControladorAsistencias(servicioAsistenciaMock);
     private final static Asistencia SOLICITUD_CON_ID = new Asistencia(33L);
     private final static Asistencia SOLICITUD_CON_NOMBRE = new Asistencia("Ana");
+    private DatosPostulacion datosPostulacion = new DatosPostulacion();
+ 
 
+
+    @Test
+    public void queUnProfesionalPuedaPostularseAUnEmpleo() throws Exception {
+        dadoQueExisteUnProfesionalLogueadoYUnaSolicitudAsistencia();
+        ModelAndView mav = cuandoSePostulaAUnEmpleo(datosPostulacion);
+        entoncesMeLlevaALaVistaDePostulacionConMensaje(mav);
+
+    }
+
+    private void entoncesMeLlevaALaVistaDePostulacionConMensaje(ModelAndView mav) {
+        assertThat(mav.getViewName()).isEqualTo("postulaciones");
+    }
+
+    private void dadoQueExisteUnProfesionalLogueadoYUnaSolicitudAsistencia() {
+           }
+
+    private ModelAndView cuandoSePostulaAUnEmpleo(DatosPostulacion datosPostulacion) throws Exception {
+
+        when(this.httpServletRequestMock.getSession()).thenReturn(httpSessionMock);
+
+        when(this.httpSessionMock.getAttribute("userID")).thenReturn("1");
+        when(this.httpSessionMock.getAttribute("rolID")).thenReturn("1");
+        return controladorAsistencias.postularmeAEmpleo(httpServletRequestMock, datosPostulacion);
+    }
 
     @Test
     public void queLaSolicitudAsistenciaTengaIdEspecificado() throws Exception {
