@@ -7,19 +7,26 @@
     <link href="css/bootstrap.min.css" rel="stylesheet" >
     <!-- Bootstrap theme -->
     <link href="css/bootstrap-theme.min.css" rel="stylesheet">
-    <title>Servicios Ofrecidos</title>
+    <link href="css/menu.css" rel="stylesheet">
 </head>
 <body>
-
-
+<c:choose>
+    <c:when test="${idRol==1}">
+        <ul>
+            <li><a href="ir-a-crear-solicitud">Nueva Solicitud</a></li>
+            <li><a href="ver-postulados">Postulantes</a></li>
+            <li><a href="ir-a-asistencias">Empleos</a></li>
+        </ul>
+    </c:when>
+    <c:otherwise>
+        <ul>
+            <li><a href="ir-a-asistencias">Empleos</a></li>
+            <li><a href="#">Mi perfil</a></li>
+        </ul>
+    </c:otherwise>
+</c:choose>
 <div class="container">
     <h1>${titulo}</h1>
-
-    <div>
-        <a href="#"><button class="btn btn-primary">Empleos</button></a>
-        <a href="./ir-a-crear-solicitud"><button class="btn btn-primary">Crear nueva solicitud</button></a>
-    </div>
-
     <div class="row" >
         <div class="col-md-10">
             <table class="table table-striped">

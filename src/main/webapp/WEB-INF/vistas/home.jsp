@@ -15,7 +15,7 @@
             <c:when test="${idRol==1}">
                   <ul>
                     <li><a href="ir-a-crear-solicitud">Nueva Solicitud</a></li>
-                    <li><a href="#">Postulantes</a></li>
+                    <li><a href="ver-postulados">Postulantes</a></li>
                     <li><a href="ir-a-asistencias">Empleos</a></li>
                   </ul>
             </c:when>

@@ -1,7 +1,5 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
-import ar.edu.unlam.tallerweb1.modelo.Asistencia;
-import ar.edu.unlam.tallerweb1.modelo.PerfilProfesional;
 import ar.edu.unlam.tallerweb1.modelo.Postulacion;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import org.hibernate.Session;
@@ -48,5 +46,32 @@ public class RepositorioPostulacionImpl implements RepositorioPostulacion {
     final Session session = sessionFactory.getCurrentSession();
     return (List<Postulacion>) session.createCriteria(Postulacion.class)
             .add(Restrictions.eq("id", id)).list();
+  }
+
+  @Override
+  public void actualizarPostulacionAContratada(Postulacion postulacionAContratar) {
+    sessionFactory.getCurrentSession().update(postulacionAContratar) ;
+  }
+
+  @Override
+  public List<Postulacion> buscarPostulacionesPorCreador(Long usuarioId) {
+    final Session session = sessionFactory.getCurrentSession();
+    return (List<Postulacion>) session.createCriteria(Postulacion.class)
+            .add(Restrictions.eq("asistencia.usuario.id", usuarioId)).list();
+
+    //postulacion.asistencia.usuario.id
+  }
+
+  @Override
+  public List<Postulacion> buscarPostulaciones() {
+    final Session session = sessionFactory.getCurrentSession();
+    return (List<Postulacion>) session.createCriteria(Postulacion.class).list();
+  }
+
+  @Override
+  public Postulacion buscarPostulacionesPorId(long idProfesional) {
+    final Session session = sessionFactory.getCurrentSession();
+    return (Postulacion) session.createCriteria(Postulacion.class)
+            .add(Restrictions.eq("profesional.id", idProfesional)).uniqueResult();
   }
 }

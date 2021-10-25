@@ -5,6 +5,11 @@ public class DatosPostulacion {
     private long idAsistencia;
     private long idUsuario;
 
+    public DatosPostulacion(long idAsistencia) {
+        this.idAsistencia = idAsistencia;
+    }
+
+    public DatosPostulacion(){}
 
     public long getIdAsistencia() {
         return idAsistencia;

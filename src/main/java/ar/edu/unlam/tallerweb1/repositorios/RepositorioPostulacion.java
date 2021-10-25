@@ -12,7 +12,16 @@ public interface RepositorioPostulacion {
 
     List<Postulacion> buscarPostulacionesPorIdUsuario(Long id);
 
+    Postulacion buscarPostulacionesPorId(long idProfesional);
+
     boolean verSiElUsuarioYaEstaPostulado(Long idAsistencia, Long idUsuario);
 
     List<Postulacion>  buscarPostulacionesPorId(Long id);
+
+    void actualizarPostulacionAContratada(Postulacion postulacionAContratar);
+
+    List<Postulacion> buscarPostulacionesPorCreador(Long usuarioId);
+
+    List<Postulacion> buscarPostulaciones();
+
 }

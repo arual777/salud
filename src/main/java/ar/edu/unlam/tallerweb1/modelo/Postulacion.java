@@ -19,6 +19,12 @@ public class Postulacion {
 
     private Boolean Aceptado;
 
+    public Postulacion(Long id) {
+        this.id = id;
+    }
+
+    public Postulacion(){}
+
     public Boolean getAceptado() {
         return Aceptado;
     }

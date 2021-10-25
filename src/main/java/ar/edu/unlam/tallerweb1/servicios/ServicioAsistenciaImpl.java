@@ -4,6 +4,7 @@ import ar.edu.unlam.tallerweb1.controladores.DatosAsistencia;
 import ar.edu.unlam.tallerweb1.controladores.DatosPostulacion;
 import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsistencia;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioPerfilProfesional;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPostulacion;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,14 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
     private RepositorioAsistencia repositorioAsistencia;
     private RepositorioUsuario repositorioUsuario;
     private RepositorioPostulacion repositorioPostulacion;
+    private RepositorioPerfilProfesional repositorioPerfilProfesional;
 
     @Autowired
-    public ServicioAsistenciaImpl(RepositorioAsistencia repositorioAsistencia, RepositorioUsuario repositorioUsuario, RepositorioPostulacion repositorioPostulacion){
+    public ServicioAsistenciaImpl(RepositorioAsistencia repositorioAsistencia, RepositorioUsuario repositorioUsuario, RepositorioPostulacion repositorioPostulacion, RepositorioPerfilProfesional repositorioPerfilProfesional){
         this.repositorioAsistencia = repositorioAsistencia;
         this.repositorioUsuario = repositorioUsuario;
         this.repositorioPostulacion = repositorioPostulacion;
+        this.repositorioPerfilProfesional = repositorioPerfilProfesional;
     }
 
     @Override
@@ -36,6 +39,7 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
         }
 
         Postulacion nuevaPostulacion = new Postulacion();
+//        PerfilProfesional perfilProfesional = repositorioPerfilProfesional.buscarCV(1L); //(datosPostulacion.getIdProfesional());
         Usuario usuario = repositorioUsuario.buscarUsuario(datosPostulacion.getIdUsuario());
         Asistencia asistencia = repositorioAsistencia.buscarAsistenciaPorId(datosPostulacion.getIdAsistencia());
 
@@ -49,6 +53,11 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
     @Override
     public List<Postulacion> buscarPostulacionesPorUsuario(long id) {
         return repositorioPostulacion.buscarPostulacionesPorIdUsuario(id);
+    }
+
+    @Override
+    public Postulacion buscarPostulacionesPorId(long idProfesional) {
+        return  repositorioPostulacion.buscarPostulacionesPorId(idProfesional);
     }
 
     @Override
@@ -76,6 +85,30 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
         repositorioAsistencia.guardar(nuevaAsistencia);
 
         return nuevaAsistencia;
+    }
+
+    public Postulacion actualizarPostulacionContratada(DatosPostulacion datosPostulacion) {
+        Postulacion postulacionAContratar = new Postulacion();
+        Usuario usuario = new Usuario();
+        Asistencia asistencia = new Asistencia();
+
+        postulacionAContratar.setId(datosPostulacion.getIdAsistencia());
+        postulacionAContratar.setAsistencia(asistencia);
+        postulacionAContratar.setProfesional(usuario);
+        postulacionAContratar.setAceptado(true);
+
+        repositorioPostulacion.actualizarPostulacionAContratada(postulacionAContratar);
+        return postulacionAContratar;
+    }
+
+    @Override
+    public List<Postulacion> buscarPostulacionesPorCreador(Long usuarioId) {
+        return repositorioPostulacion.buscarPostulacionesPorCreador(usuarioId);
+    }
+
+    @Override
+    public List<Postulacion> buscarPostulaciones() {
+        return repositorioPostulacion.buscarPostulaciones();
     }
 
     @Override
