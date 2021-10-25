@@ -18,7 +18,7 @@ public class ServicioAsistenciaTest {
     private RepositorioUsuario repositorioUsuario = mock(RepositorioUsuario.class);
     private RepositorioPostulacion repositorioPostulacion = mock(RepositorioPostulacion.class);
     private RepositorioPerfilProfesional repositorioPerfilProfesional = mock(RepositorioPerfilProfesional.class);
-    private ServicioAsistencia servicioAsistencia = new ServicioAsistenciaImpl(repositorioAsistencia, repositorioUsuario, mock(RepositorioPostulacion.class), repositorioPerfilProfesional);
+    private ServicioAsistencia servicioAsistencia = new ServicioAsistenciaImpl(repositorioAsistencia, repositorioUsuario, repositorioPostulacion, repositorioPerfilProfesional);
 
     @Test(expected = Exception.class)
     public void SiBuscoUnServicioInexistenteDaError() throws Exception {

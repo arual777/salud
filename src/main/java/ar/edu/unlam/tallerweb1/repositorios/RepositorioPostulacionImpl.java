@@ -2,6 +2,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Postulacion;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -56,10 +57,11 @@ public class RepositorioPostulacionImpl implements RepositorioPostulacion {
   @Override
   public List<Postulacion> buscarPostulacionesPorCreador(Long usuarioId) {
     final Session session = sessionFactory.getCurrentSession();
-    return (List<Postulacion>) session.createCriteria(Postulacion.class)
-            .add(Restrictions.eq("asistencia.usuario.id", usuarioId)).list();
 
-    //postulacion.asistencia.usuario.id
+    Criteria criteria = session.createCriteria(Postulacion.class, "a");
+    criteria.createAlias("a.asistencia","asistencia");
+    criteria.createAlias("asistencia.usuario","usuario");
+       return (List<Postulacion>)     criteria.add(Restrictions.eq("usuario.id", usuarioId)).list();
   }
 
   @Override

@@ -169,9 +169,9 @@ public class ControladorAsistencias {
             Long idCreador = usuario.setId(idUsuario);*/
 
             //datosPostulacion.setIdUsuario(idUsuario);
-            //List <Postulacion> postulaciones = servicioAsistencia.buscarPostulacionesPorCreador(idUsuario);
+            List <Postulacion> postulaciones = servicioAsistencia.buscarPostulacionesPorCreador(idUsuario);
 
-            List <Postulacion> postulaciones = servicioAsistencia.buscarPostulaciones();
+            //List <Postulacion> postulaciones = servicioAsistencia.buscarPostulaciones();
             modelo.put("idRol", idRol);
             modelo.put("titulo", "Postulados");
             modelo.put("postulaciones", postulaciones);
