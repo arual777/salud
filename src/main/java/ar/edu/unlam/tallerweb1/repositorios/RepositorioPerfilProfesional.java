@@ -15,4 +15,6 @@ public interface RepositorioPerfilProfesional {
     void editarPerfilProfesional(PerfilProfesional perfilProfesionalAEditar);
 
     Usuario obtenerIdUsuario(long id);
+
+    PerfilProfesional buscarCVPorIdUsuario(Long id);
 }

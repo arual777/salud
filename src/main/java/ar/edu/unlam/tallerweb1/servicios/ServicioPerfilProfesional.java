@@ -15,5 +15,7 @@ public interface ServicioPerfilProfesional {
 
     PerfilProfesional buscarCV(Long id);
 
+    PerfilProfesional buscarCVPorIdUsuario(Long id);
+
     List<PerfilProfesional> buscarTodos();
 }

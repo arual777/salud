@@ -54,6 +54,9 @@ public class ServicioPerfilProfesionalImpl implements ServicioPerfilProfesional 
         perfilProfesionalAEditar.setNumeroTelefono(datos.getNumeroTelefono());
         perfilProfesionalAEditar.setFechaNacimiento(datos.getFechaNacimiento());
 
+        Usuario usuario = repositorioPerfilProfesional.obtenerIdUsuario(datos.getIdUsuario());
+        perfilProfesionalAEditar.setIdUsuario(usuario);
+
         repositorioPerfilProfesional.editarPerfilProfesional(perfilProfesionalAEditar);
         return perfilProfesionalAEditar;
     }
@@ -62,6 +65,13 @@ public class ServicioPerfilProfesionalImpl implements ServicioPerfilProfesional 
     public PerfilProfesional buscarCV(Long id) {
 
         PerfilProfesional perfilProfesional = repositorioPerfilProfesional.buscarCV(id);
+        return perfilProfesional;
+    }
+
+    @Override
+    public PerfilProfesional buscarCVPorIdUsuario(Long id) {
+
+        PerfilProfesional perfilProfesional = repositorioPerfilProfesional.buscarCVPorIdUsuario(id);
         return perfilProfesional;
     }
 

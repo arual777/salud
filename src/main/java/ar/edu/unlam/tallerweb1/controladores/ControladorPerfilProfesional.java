@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPerfilProfesional;
 import ar.edu.unlam.tallerweb1.servicios.ServicioPerfilProfesionalImpl;
 import ar.edu.unlam.tallerweb1.modelo.PerfilProfesional;
@@ -26,6 +27,22 @@ public class ControladorPerfilProfesional {
         this.servicioPerfilProfesional= servicioPerfilProfesional;
     }
 
+    @RequestMapping(method = RequestMethod.GET, path = "/home-profesional")
+    public ModelAndView irAHomeProfesional(HttpServletRequest request){
+        ModelMap model = new ModelMap();
+        if (request.getSession().getAttribute("userID")==null){
+            String msg = "No ingresaste en el sistema";
+            model.put("msglogeado", msg);
+            return new ModelAndView("errorAcceso", model);
+        }
+
+        long idUsuarioSesion = (Long) request.getSession().getAttribute("userID");
+        model.put("idUsuario", idUsuarioSesion);
+
+        return new ModelAndView("homeProfesional", model);
+
+    }
+
     @RequestMapping(method = RequestMethod.GET, path = "/ir-a-registrar-perfil-profesional")
     public ModelAndView irARegistrarPerfilProfesional(HttpServletRequest request){
 
@@ -36,6 +53,17 @@ public class ControladorPerfilProfesional {
             logeado = "No ingresaste en el sistema";
             model.put("msglogeado", logeado);
             return new ModelAndView("errorAcceso", model);
+        }
+
+        long idUsuario = (Long) request.getSession().getAttribute("userID");
+
+        PerfilProfesional perfilProfesional = servicioPerfilProfesional.buscarCVPorIdUsuario(idUsuario);
+
+        if(perfilProfesional!=null){
+            ModelAndView modelView = new ModelAndView();
+            long idPerfilProfesional = perfilProfesional.getId();
+            modelView.setViewName("redirect:/ir-a-editar-perfil-profesional"+"?id="+idPerfilProfesional);
+            return modelView;
         }
 
         logeado = "siLogeado";
@@ -57,8 +85,9 @@ public class ControladorPerfilProfesional {
             model.put("msglogeado", msgSesion);
             return new ModelAndView("errorAcceso", model);
         }
-
         long idUsuario = (Long) request.getSession().getAttribute("userID");
+
+
         try {
             servicioPerfilProfesional.registrarPerfil(datos.getNombreCompleto(), datos.getEmail(),
                     datos.getExperiencia(), datos.getNumeroTelefono(), datos.getFechaNacimiento(), idUsuario);
@@ -68,7 +97,7 @@ public class ControladorPerfilProfesional {
             model.put("msg", "No se pudo registrar su perfil profesional, complete todos los campos");
         }
 
-       return new ModelAndView("registroProfesional", model);
+       return new ModelAndView("homeProfesional", model);
     }
 
 
@@ -111,25 +140,37 @@ public class ControladorPerfilProfesional {
         }
 
         PerfilProfesional perfilProfesional = servicioPerfilProfesional.buscarCV(id);
+        Usuario usuario = perfilProfesional.getIdUsuario();
+        long idUsuarioEnPerfilProfesional = usuario.getId();
+        long idUsuarioSesion = (Long) request.getSession().getAttribute("userID");
 
-        if (request.getSession().getAttribute("userID").equals(perfilProfesional.getIdUsuario())) {
-            ModelMap model = new ModelMap();
-            model.put("curriculum", perfilProfesional);
-            return new ModelAndView("editarPerfilProfesional", model);
+        if (idUsuarioSesion != idUsuarioEnPerfilProfesional ) {
+            ModelAndView modelView = new ModelAndView();
+            modelView.setViewName("redirect:/ir-a-registrar-perfil-profesional");
+            return modelView;
         }
-
-        return new ModelAndView("errorAcceso");
+        ModelMap model = new ModelMap();
+        model.put("curriculum", perfilProfesional);
+        return new ModelAndView("editarPerfilProfesional", model);
 
     }
+
+
 
     @RequestMapping (method = RequestMethod.POST, path = "/editarPerfilProfesional")
     public ModelAndView editarPerfilProfesional(@ModelAttribute ("datosRegistroProfesional") DatosRegistroProfesional datos, HttpServletRequest request){
         ModelAndView modelView = new ModelAndView();
 
+        long id = datos.getId();
+        PerfilProfesional perfilProfesional = servicioPerfilProfesional.buscarCV(id);
+        Usuario usuario = perfilProfesional.getIdUsuario();
+        long idUsuarioEnPerfilProfesional = usuario.getId();
+        long idUsuarioSesion = (Long) request.getSession().getAttribute("userID");
 
-        if (request.getSession().getAttribute("userID").equals(datos.getId())) {
+        if (idUsuarioSesion == idUsuarioEnPerfilProfesional) {
+            datos.setIdUsuario(idUsuarioEnPerfilProfesional);
             servicioPerfilProfesional.editarPerfil(datos);
-            modelView.setViewName("redirect:/ver-todos-perfiles-profesionales");
+            modelView.setViewName("redirect:/home-profesional");
             return modelView;
         }
         else{

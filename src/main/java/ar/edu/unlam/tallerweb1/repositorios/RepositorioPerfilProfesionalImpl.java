@@ -35,6 +35,13 @@ public class RepositorioPerfilProfesionalImpl implements RepositorioPerfilProfes
     }
 
     @Override
+    public PerfilProfesional buscarCVPorIdUsuario(Long id) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (PerfilProfesional) session.createCriteria(PerfilProfesional.class)
+                .add(Restrictions.eq("idUsuario.id", id)).uniqueResult();
+    }
+
+    @Override
     public List<PerfilProfesional> buscarTodos() {
         final Session session = sessionFactory.getCurrentSession();
         return (List<PerfilProfesional>) session.createCriteria(PerfilProfesional.class)
