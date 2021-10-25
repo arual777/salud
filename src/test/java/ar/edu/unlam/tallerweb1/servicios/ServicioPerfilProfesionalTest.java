@@ -2,7 +2,6 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.modelo.PerfilProfesional;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPerfilProfesional;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -25,12 +24,12 @@ public class ServicioPerfilProfesionalTest {
     }
 
     private void whenNoCompletoForm() throws Exception{
-        servicioPerfilProfesional.registrarPerfil("s", "s", "s", "s","s");
+        servicioPerfilProfesional.registrarPerfil("s", "s", "s", "s","s", 1);
     }
 
     private PerfilProfesional whenCompletoForm() throws Exception{
         return servicioPerfilProfesional.registrarPerfil("Rodrigo", "rodri@gmail.com",
-                "Tengo experiencia, creeme xd", "1136008787","2020-10-06");
+                "Tengo experiencia, creeme xd", "1136008787","2020-10-06", 1);
     }
 
 }
