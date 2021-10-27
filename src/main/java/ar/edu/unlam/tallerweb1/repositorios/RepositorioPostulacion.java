@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import ar.edu.unlam.tallerweb1.controladores.DatosPostulacion;
 import ar.edu.unlam.tallerweb1.modelo.Postulacion;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,7 +19,21 @@ public interface RepositorioPostulacion {
 
     List<Postulacion>  buscarPostulacionesPorId(Long id);
 
-    void actualizarPostulacionAContratada(Postulacion postulacionAContratar);
+   // void actualizarPostulacionAContratada(Postulacion postulacionAContratar);
+
+  //  void actualizarPostulacionAContratada(Long idAsistencia);
+
+    /*@Override
+    public void actualizarPostulacionAContratada(Postulacion postulacionAContratar) {
+      sessionFactory.getCurrentSession().update(postulacionAContratar) ;
+    }
+  */
+   /* @Override
+    public void actualizarPostulacionAContratada(Long idAsistencia) {
+      sessionFactory.getCurrentSession().update(idAsistencia);
+    }
+  */
+    void actualizarPostulacionAContratada(DatosPostulacion datosPostulacion);
 
     List<Postulacion> buscarPostulacionesPorCreador(Long usuarioId);
 

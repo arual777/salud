@@ -28,7 +28,13 @@ public class Usuario {
 	@OneToOne(optional = true)
 	private PerfilProfesional perfilProfesional;
 
-	public Cuenta getCuenta() {
+    public Usuario(long id) {
+		this.id = id;
+    }
+
+	public Usuario(){}
+
+    public Cuenta getCuenta() {
 		return cuenta;
 	}
 	public void setCuenta(Cuenta cuenta) {

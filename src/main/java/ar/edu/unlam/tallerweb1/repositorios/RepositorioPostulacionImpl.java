@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import ar.edu.unlam.tallerweb1.controladores.DatosPostulacion;
 import ar.edu.unlam.tallerweb1.modelo.Postulacion;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import org.hibernate.Criteria;
@@ -49,9 +50,19 @@ public class RepositorioPostulacionImpl implements RepositorioPostulacion {
             .add(Restrictions.eq("id", id)).list();
   }
 
-  @Override
+  /*@Override
   public void actualizarPostulacionAContratada(Postulacion postulacionAContratar) {
     sessionFactory.getCurrentSession().update(postulacionAContratar) ;
+  }
+*/
+ /* @Override
+  public void actualizarPostulacionAContratada(Long idAsistencia) {
+    sessionFactory.getCurrentSession().update(idAsistencia);
+  }
+*/
+  @Override
+  public void actualizarPostulacionAContratada(DatosPostulacion datosPostulacion) {
+    sessionFactory.getCurrentSession().update(datosPostulacion);
   }
 
   @Override

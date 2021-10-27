@@ -2,7 +2,9 @@ package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import ar.edu.unlam.tallerweb1.modelo.Postulacion;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
+import javafx.geometry.Pos;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -30,8 +34,7 @@ public class ControladorAsistenciaTest {
     private final static Asistencia SOLICITUD_CON_NOMBRE = new Asistencia("Ana");
     private final static Postulacion POSTULACION = new Postulacion(1L);
     private DatosPostulacion datosPostulacion = new DatosPostulacion();
-
-
+    private final static Usuario usuarioProfesiona = new Usuario(1L);
 
     @Test
     public void queUnProfesionalPuedaPostularseAUnEmpleo() throws Exception {
@@ -151,7 +154,6 @@ public class ControladorAsistenciaTest {
 
     @Test
     public void queSeBusqueUnaSolicitudDeAsistenciaPorId() throws Exception {
-
         existeUnaSolicitud(SOLICITUD_NUEVA);
         ModelAndView mav = cuandoBuscoUnaSolicitudDeAsistencia(SOLICITUD_NUEVA);
         entoncesEncuentroLaSolicitudDeAsistencia(mav);
@@ -168,20 +170,31 @@ public class ControladorAsistenciaTest {
     }
 
     /*@Test
-    public void verTodosLosProfesionalesPostulados(){
-        givenProfesionalesPostulados();
-        ModelAndView mav = whenLosProfesionalesSePostularonAAsistenciaEspecificadaPorId();
+    public void verTodosLosProfesionalesPostuladosParaAsistenciasDeUnUsuario(){
+        Postulacion postulacion = new Postulacion();
+        //postulacion.setId(1L);
+        givenProfesionalesPostulados(postulacion);
+        ModelAndView mav = whenLosProfesionalesSePostularonAAsistenciaEspecificadaPorId(usuarioProfesiona);
         thenVeoTodosLosPostulados(mav);
     }
 
-    private void givenProfesionalesPostulados() {
+    private void thenVeoTodosLosPostulados(ModelAndView mav) {
+        assertThat(mav.getViewName()).isEqualTo("postulaciones");
+        //assertThat(mav.getModel().get("postulaciones")).isEqualTo(usuarioProfesiona.getId());
+    }
 
-        PerfilProfesional perfilProfesional = new PerfilProfesional();
-        perfilProfesional.setId(1L);
-        Mockito.when(servicioAsistenciaMock.buscarProfesionalesPostulados().thenReturn(solicitudConNombre);
+    private ModelAndView whenLosProfesionalesSePostularonAAsistenciaEspecificadaPorId(Usuario usuarioProfesional) {
+        ModelMap model = new ModelMap();
+        List<Postulacion> postulaciones = servicioAsistenciaMock.buscarPostulacionesPorCreador(usuarioProfesional.getId());
 
-    }*/
+        model.put("postulaciones", postulaciones);
+        return new ModelAndView("postulaciones", model);
+    }
 
+    private void givenProfesionalesPostulados(Postulacion postulacion) {
+        when(servicioAsistenciaMock.buscarPostulacionesPorCreador(postulacion.getProfesional().getId())).thenReturn(postulacion);
+    }
+*/
  /*   @Test
     public void contratarUnProfesionalDeLaListaDePostulados() {
         givenPostuladoId(POSTULACION);

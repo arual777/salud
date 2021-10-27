@@ -164,14 +164,8 @@ public class ControladorAsistencias {
         ModelMap modelo = new ModelMap();
 
         try {
-        /*  Asistencia asistencia = postulacion.getAsistencia();
-            Usuario usuario = asistencia.getUsuario();
-            Long idCreador = usuario.setId(idUsuario);*/
-
-            //datosPostulacion.setIdUsuario(idUsuario);
             List <Postulacion> postulaciones = servicioAsistencia.buscarPostulacionesPorCreador(idUsuario);
 
-            //List <Postulacion> postulaciones = servicioAsistencia.buscarPostulaciones();
             modelo.put("idRol", idRol);
             modelo.put("titulo", "Postulados");
             modelo.put("postulaciones", postulaciones);
@@ -184,13 +178,14 @@ public class ControladorAsistencias {
     }
 
     @RequestMapping(path="/contratado", method=RequestMethod.POST)
-    public ModelAndView contratado(HttpServletRequest request, @ModelAttribute("datosPostulacion") DatosPostulacion datosPostulacion) throws Exception {
+    public ModelAndView contratarPostulado(HttpServletRequest request, @ModelAttribute("datosPostulacion") DatosPostulacion datosPostulacion) throws Exception {
 
         Long idUsuario = obtenerIdUsuario(request);
         Long idRol = obtenerIdRol(request);
 
         ModelMap modelo = new ModelMap();
         try {
+            /*Lo cambie para que lo traiga por el idAsistencia, va al catch*/
             Postulacion postulacionElegida = servicioAsistencia.actualizarPostulacionContratada(datosPostulacion);
             modelo.put("idRol", idRol);
             modelo.put ("titulo", "Contratado");
