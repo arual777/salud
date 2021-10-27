@@ -24,7 +24,7 @@ public class RepositorioPerfilProfesionalTest extends SpringTest {
         assertThat(perfilProfesional).isNull();
     }
 
-
+/*
     @Test
     @Rollback
     @Transactional
@@ -33,6 +33,15 @@ public class RepositorioPerfilProfesionalTest extends SpringTest {
         long id = 1;
         PerfilProfesional perfilEncontrado = whenBuscoPerfilProfesionalPorId(id);
         thenEncuentro(perfilEncontrado,1);
+    }
+*/
+    @Test
+    @Rollback
+    @Transactional
+    public void buscarTodosLosPerfilesProfesionales(){
+        givenExisteCV(2);
+        List <PerfilProfesional> perfilesProfesionales = whenBuscoTodosLosPerfilesProfesionales();
+        thenEncuentroLista(perfilesProfesionales, 2);
     }
 
     private void givenExisteCV(int cantidadDeCV) {
@@ -52,8 +61,18 @@ public class RepositorioPerfilProfesionalTest extends SpringTest {
         return repositorioPerfilProfesional.buscarCV(id);
     }
 
+    private List<PerfilProfesional> whenBuscoTodosLosPerfilesProfesionales(){
+        return repositorioPerfilProfesional.buscarTodos();
+    }
+
     private void thenEncuentro(PerfilProfesional perfilProfesional, int idPerfil) {
         assertThat(perfilProfesional.getId()).isEqualTo(idPerfil);
     }
+
+    private void thenEncuentroLista(List<PerfilProfesional> perfiles, int encontradas ){
+        assertThat(perfiles).hasSize(encontradas);
+    }
+
+
 
 }
