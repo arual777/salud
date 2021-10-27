@@ -9,6 +9,12 @@ public class DatosPostulacion {
         this.idAsistencia = idAsistencia;
     }
 
+    public DatosPostulacion(Long idAsistencia, Long idUsuario, Long idPostulacion){
+        this.idAsistencia = idAsistencia;
+        this.idUsuario = idUsuario;
+        this.idPostulacion = idPostulacion;
+    }
+
     public DatosPostulacion(){}
 
     public long getIdAsistencia() {

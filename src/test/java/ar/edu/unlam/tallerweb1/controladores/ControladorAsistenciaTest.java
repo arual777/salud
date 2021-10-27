@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,8 +32,9 @@ public class ControladorAsistenciaTest {
     private ControladorAsistencias controladorAsistenciasMock = new ControladorAsistencias(servicioAsistenciaMock);
     private final static Asistencia SOLICITUD_CON_ID = new Asistencia(33L);
     private final static Asistencia SOLICITUD_CON_NOMBRE = new Asistencia("Ana");
-    private final static Postulacion POSTULACION = new Postulacion(1L);
+    //private final static Postulacion POSTULACION = new Postulacion(1L);
     private DatosPostulacion datosPostulacion = new DatosPostulacion();
+    private DatosPostulacion datosPostulacionContratado = new DatosPostulacion(2l, 2L, 2L);
     private final static Usuario usuarioProfesiona = new Usuario(1L);
 
     @Test
@@ -168,18 +170,15 @@ public class ControladorAsistenciaTest {
       return controladorAsistencias.buscarAsistenciaPorId(solicitudDeAsistencia.getId());
     }
 
-    /*@Test
-    public void verTodosLosProfesionalesPostuladosParaAsistenciasDeUnUsuario(){
-        Postulacion postulacion = new Postulacion();
-        //postulacion.setId(1L);
-        givenProfesionalesPostulados(postulacion);
+    @Test
+    public void verTodosLosProfesionalesPostuladosParaLasAsistenciasDeUnUsuario(){
+        givenProfesionalesPostulados();
         ModelAndView mav = whenLosProfesionalesSePostularonAAsistenciaEspecificadaPorId(usuarioProfesiona);
         thenVeoTodosLosPostulados(mav);
     }
 
     private void thenVeoTodosLosPostulados(ModelAndView mav) {
         assertThat(mav.getViewName()).isEqualTo("postulaciones");
-        //assertThat(mav.getModel().get("postulaciones")).isEqualTo(usuarioProfesiona.getId());
     }
 
     private ModelAndView whenLosProfesionalesSePostularonAAsistenciaEspecificadaPorId(Usuario usuarioProfesional) {
@@ -190,35 +189,46 @@ public class ControladorAsistenciaTest {
         return new ModelAndView("postulaciones", model);
     }
 
-    private void givenProfesionalesPostulados(Postulacion postulacion) {
-        when(servicioAsistenciaMock.buscarPostulacionesPorCreador(postulacion.getProfesional().getId())).thenReturn(postulacion);
+    private void givenProfesionalesPostulados() {
+        List<Postulacion> postulacion = new ArrayList<Postulacion>();
+        Usuario profesional = new Usuario(1L);
+        Asistencia asistencia = new Asistencia(1L);
+        postulacion.add(new Postulacion(1L, profesional, asistencia, false));
+        Mockito.when(servicioAsistenciaMock.buscarPostulacionesPorCreador(postulacion.get(0).getId())).thenReturn(postulacion);
     }
-*/
- /*   @Test
+
+    /*@Test
     public void contratarUnProfesionalDeLaListaDePostulados() {
-        givenPostuladoId(POSTULACION);
-        ModelAndView mav = whenContratoAUnProfesional(POSTULACION);
+        givenPostuladoId();
+        ModelAndView mav = whenContratoAUnProfesional(datosPostulacionContratado);
         thenLoContratoYUpdateEnPostulacion(mav);
     }
 
-    private ModelAndView whenContratoAUnProfesional(Postulacion postulacion) {
+    private ModelAndView whenContratoAUnProfesional(DatosPostulacion datosPostulacion) {
         ModelMap model = new ModelMap();
-        Postulacion datosPostulacion = servicioAsistenciaMock.buscarPostulacionesPorId(postulacion.getProfesional().getId());
-        model.put("idUsuario", datosPostulacion.getProfesional().getId());
-        model.put("msg", "Usted ha contratado a " + datosPostulacion.getProfesional().getId() + " para la asistencia " + datosPostulacion.getAsistencia().getDescripcion());
+        Postulacion postulacionElegida = servicioAsistenciaMock.actualizarPostulacionContratada(datosPostulacion);
+        //model.put("idUsuario", datosPostulacion.getIdUsuario());
+        model.put("msg", "Usted ha contratado a " + postulacionElegida.getProfesional().getEmail() + " para la asistencia " + postulacionElegida.getAsistencia().getDescripcion());
 
-        return new ModelAndView("contratado/{id}", model);
+        return new ModelAndView("contratado", model);
     }
 
-    private void givenPostuladoId(Postulacion postulacion) {
-        Mockito.when(servicioAsistenciaMock.buscarPostulacionesPorId(postulacion.getProfesional().getId())).thenReturn((postulacion));
+    private void givenPostuladoId() {
+        DatosPostulacion datosPostulacion = new DatosPostulacion(2L);
+        Usuario profesional = new Usuario(2L);
+        Asistencia asistencia = new Asistencia(2L);
+        Postulacion postulacion = new Postulacion(2L, profesional, asistencia, false);
+        profesional.setId(2L);
+        profesional.setEmail("hola@gmail.com");
+        asistencia.setId(2L);
+        asistencia.setDescripcion("Cuidador");
+        Mockito.when(servicioAsistenciaMock.actualizarPostulacionContratada(datosPostulacion)).thenReturn(postulacion);
     }
 
     private void thenLoContratoYUpdateEnPostulacion(ModelAndView mav) {
         assertThat(mav.getViewName()).isEqualTo("contratado");
-        assertThat(mav.getModel().get("idUsuario")).isEqualTo(POSTULACION);
-    }
-  */
+        //assertThat(mav.getModel().get("idUsuario")).isEqualTo(POSTULACION);
+    }*/
 }
 
 

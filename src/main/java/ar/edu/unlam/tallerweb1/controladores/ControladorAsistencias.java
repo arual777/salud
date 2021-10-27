@@ -165,11 +165,14 @@ public class ControladorAsistencias {
 
         try {
             List <Postulacion> postulaciones = servicioAsistencia.buscarPostulacionesPorCreador(idUsuario);
-
+            if(postulaciones.isEmpty()){
+                modelo.put("msg", "Usted no tiene postulados para contratar");
+            }else{
+                modelo.put("msg", "Estos son los postulantes");
+            }
             modelo.put("idRol", idRol);
             modelo.put("titulo", "Postulados");
             modelo.put("postulaciones", postulaciones);
-            modelo.put("msg", "Estos son los postulantes");
        } catch(Exception e){
             modelo.put("msg", "No tiene postulados para ver");
         }
@@ -185,12 +188,11 @@ public class ControladorAsistencias {
 
         ModelMap modelo = new ModelMap();
         try {
-            /*Lo cambie para que lo traiga por el idAsistencia, va al catch*/
             Postulacion postulacionElegida = servicioAsistencia.actualizarPostulacionContratada(datosPostulacion);
             modelo.put("idRol", idRol);
             modelo.put ("titulo", "Contratado");
             //modelo.put("postulaciones", postulacionElegida);
-            modelo.put("msg", "Usted ha contratado a " + postulacionElegida.getProfesional() + " para la asistencia " + postulacionElegida.getAsistencia());
+            modelo.put("msg", "Usted ha contratado a " + postulacionElegida.getProfesional().getEmail() + " para la asistencia " + postulacionElegida.getAsistencia().getDescripcion());
         } catch (Exception e){
             modelo.put("msg", "No puede contratarlo");
         }

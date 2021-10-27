@@ -62,7 +62,8 @@ public class RepositorioPostulacionImpl implements RepositorioPostulacion {
     Criteria criteria = session.createCriteria(Postulacion.class, "a");
     criteria.createAlias("a.asistencia","asistencia");
     criteria.createAlias("asistencia.usuario","usuario");
-       return (List<Postulacion>)     criteria.add(Restrictions.eq("usuario.id", usuarioId)).list();
+       return (List<Postulacion>)     criteria.add(Restrictions.eq("usuario.id", usuarioId))
+    .add(Restrictions.eq("Aceptado", false)).list();
   }
 
   @Override

@@ -23,6 +23,12 @@ public class Postulacion {
         this.id = id;
     }
 
+    public Postulacion(Long id, Usuario profesional, Asistencia asistencia, Boolean aceptado){
+        this.id = id;
+        this.profesional = profesional;
+        this.Aceptado = aceptado;
+    }
+
     public Postulacion(){}
 
     public Boolean getAceptado() {
