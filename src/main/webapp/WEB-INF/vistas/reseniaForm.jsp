@@ -18,8 +18,6 @@
 
         <form:form action="registrarResenia" method="POST" modelAttribute="datosResenia">
 
-            <form:hidden path="idUsuarioCliente" id="id" />
-
             <h4 class="my-2">Ingrese una calificacion</h4>
             <form:input path="calificacion" type="number" id="text" class="form-control"/>
             <h4 class="my-2">Comentario</h4>
@@ -28,6 +26,8 @@
             <form:input path="idUsuarioProfesional" type="number" id="text" class="form-control"/>
             <button id="btn-registroProfesional" class="btn btn-lg btn-primary btn-block my-3" Type="Submit"/>Registrar Resenia</button>
         </form:form>
+
+       <h5 class="my-3">${msgError}</h5>
 
         <c:if test="${not empty msg}">
             <h4><span>${msg}</span></h4>

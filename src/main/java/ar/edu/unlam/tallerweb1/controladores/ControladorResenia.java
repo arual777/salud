@@ -44,12 +44,23 @@ public class ControladorResenia {
         ModelMap model = new ModelMap();
 
         long idUsuario = (Long) request.getSession().getAttribute("userID");
-
         datos.setIdUsuarioCliente(idUsuario);
+
+
+        if (datos.getCalificacion()<1 || datos.getCalificacion()>10){
+            String msgError = "Califique con un numero del 1 al 10";
+            model.put("msgError", msgError);
+            return new ModelAndView("reseniaForm", model);
+        }
+        if (datos.getComentario().length()<5){
+            String msgError = "Escriba un comentario de mas de 5 caracteres";
+            model.put("msgError", msgError);
+            return new ModelAndView("reseniaForm", model);
+        }
 
         servicioResenia.registrarResenia(datos);
 
-        return new ModelAndView("reseniaForm", model);
+        return new ModelAndView("redirect:/home");
 
     }
 
