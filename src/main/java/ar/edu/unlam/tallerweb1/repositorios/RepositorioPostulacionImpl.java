@@ -50,19 +50,9 @@ public class RepositorioPostulacionImpl implements RepositorioPostulacion {
             .add(Restrictions.eq("id", id)).list();
   }
 
-  /*@Override
-  public void actualizarPostulacionAContratada(Postulacion postulacionAContratar) {
-    sessionFactory.getCurrentSession().update(postulacionAContratar) ;
-  }
-*/
- /* @Override
-  public void actualizarPostulacionAContratada(Long idAsistencia) {
-    sessionFactory.getCurrentSession().update(idAsistencia);
-  }
-*/
   @Override
-  public void actualizarPostulacionAContratada(DatosPostulacion datosPostulacion) {
-    sessionFactory.getCurrentSession().update(datosPostulacion);
+  public void actualizarPostulacionAContratada(Postulacion postulacion) {
+    sessionFactory.getCurrentSession().update(postulacion);
   }
 
   @Override
@@ -79,6 +69,13 @@ public class RepositorioPostulacionImpl implements RepositorioPostulacion {
   public List<Postulacion> buscarPostulaciones() {
     final Session session = sessionFactory.getCurrentSession();
     return (List<Postulacion>) session.createCriteria(Postulacion.class).list();
+  }
+
+  @Override
+  public Postulacion buscarPostulacion(long idPostulacion) {
+    final Session session = sessionFactory.getCurrentSession();
+    return (Postulacion) session.createCriteria(Postulacion.class)
+            .add(Restrictions.eq("id", idPostulacion)).uniqueResult();
   }
 
   @Override

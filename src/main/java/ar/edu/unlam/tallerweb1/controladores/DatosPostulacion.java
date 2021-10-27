@@ -4,7 +4,7 @@ public class DatosPostulacion {
 
     private long idAsistencia;
     private long idUsuario;
-
+    private long idPostulacion;
     public DatosPostulacion(long idAsistencia) {
         this.idAsistencia = idAsistencia;
     }
@@ -26,4 +26,8 @@ public class DatosPostulacion {
     public void setIdUsuario(long idUsuario) {
         this.idUsuario = idUsuario;
     }
+
+    public long getIdPostulacion() { return idPostulacion; }
+
+    public void setIdPostulacion(long idPostulacion) { this.idPostulacion = idPostulacion; }
 }

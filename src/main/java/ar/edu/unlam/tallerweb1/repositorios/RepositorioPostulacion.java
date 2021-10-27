@@ -18,25 +18,12 @@ public interface RepositorioPostulacion {
     boolean verSiElUsuarioYaEstaPostulado(Long idAsistencia, Long idUsuario);
 
     List<Postulacion>  buscarPostulacionesPorId(Long id);
-
-   // void actualizarPostulacionAContratada(Postulacion postulacionAContratar);
-
-  //  void actualizarPostulacionAContratada(Long idAsistencia);
-
-    /*@Override
-    public void actualizarPostulacionAContratada(Postulacion postulacionAContratar) {
-      sessionFactory.getCurrentSession().update(postulacionAContratar) ;
-    }
-  */
-   /* @Override
-    public void actualizarPostulacionAContratada(Long idAsistencia) {
-      sessionFactory.getCurrentSession().update(idAsistencia);
-    }
-  */
-    void actualizarPostulacionAContratada(DatosPostulacion datosPostulacion);
+    void actualizarPostulacionAContratada(Postulacion postulacion);
 
     List<Postulacion> buscarPostulacionesPorCreador(Long usuarioId);
 
     List<Postulacion> buscarPostulaciones();
+
+    Postulacion buscarPostulacion(long idPostulacion);
 
 }

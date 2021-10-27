@@ -35,8 +35,6 @@ public interface ServicioAsistencia {
 
     Postulacion actualizarPostulacionContratada(DatosPostulacion datosPostulacion);
 
-    //Postulacion actualizarPostulacionContratada(Long idAsistencia);
-
     List<Postulacion> buscarPostulacionesPorCreador(Long usuarioId);
 
     List<Postulacion> buscarPostulaciones();

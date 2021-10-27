@@ -87,36 +87,13 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
         return nuevaAsistencia;
     }
 
-   /* @Override
-    public Postulacion actualizarPostulacionContratada(DatosPostulacion datosPostulacion) {
-        Postulacion postulacionAContratar = new Postulacion();
-        Usuario usuario = new Usuario();
-        Asistencia asistencia = new Asistencia();
-
-        postulacionAContratar.setId(datosPostulacion.getIdAsistencia());
-        postulacionAContratar.setAsistencia(asistencia);
-        postulacionAContratar.setProfesional(usuario);
-        postulacionAContratar.setAceptado(true);
-
-        repositorioPostulacion.actualizarPostulacionAContratada(postulacionAContratar);
-        return postulacionAContratar;
-    }*/
-
     @Override
     public Postulacion actualizarPostulacionContratada(DatosPostulacion datosPostulacion) {
-        Postulacion postulacionAContratar = new Postulacion();
-        Usuario usuario = new Usuario();
-        Asistencia asistencia = new Asistencia();
+        Postulacion postulacion = repositorioPostulacion.buscarPostulacion(datosPostulacion.getIdPostulacion());
+        postulacion.setAceptado(true);
 
-        postulacionAContratar.setId(datosPostulacion.getIdAsistencia());
-        postulacionAContratar.setAsistencia(asistencia);
-        postulacionAContratar.setProfesional(usuario);
-        postulacionAContratar.setAceptado(true);
-
-        datosPostulacion.setIdAsistencia(asistencia.getId());
-
-        repositorioPostulacion.actualizarPostulacionAContratada(datosPostulacion);
-        return postulacionAContratar;
+        repositorioPostulacion.actualizarPostulacionAContratada(postulacion);
+        return postulacion;
     }
 
     @Override

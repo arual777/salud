@@ -31,8 +31,8 @@
                         <c:when test="${idRol==1}">
                         <td>
                             <form action="contratado" method="POST" modelAttribute="datosPostulacion">
-                                <button class="btn btn-lg btn-primary btn-block" onclick="parentNode.submit();">Contratar</button>
-                                <input id="idAsistencia" name="idAsistencia" type="hidden" value= "${postulacion.profesional.id}" >
+                                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Contratar"/>
+                                <input id="idPostulacion" name="idPostulacion" type="hidden" value= "${postulacion.id}" >
                             </form>
                         </td>
                         </c:when>
