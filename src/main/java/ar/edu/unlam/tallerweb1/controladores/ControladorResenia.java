@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioResenia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class ControladorResenia {
@@ -27,12 +29,18 @@ public class ControladorResenia {
     public ModelAndView irAReseniar(HttpServletRequest request){
 
         ModelMap model = new ModelMap();
+        if (request.getSession().getAttribute("userID")==null){
+            String msg = "No ingresaste en el sistema";
+            model.put("msglogeado", msg);
+            return new ModelAndView("errorAcceso", model);
+        }
 
         long idUsuario = (Long) request.getSession().getAttribute("userID");
 
 
         DatosResenia datos = new DatosResenia();
         model.put("datosResenia", datos);
+
 
         return new ModelAndView("reseniaForm",model);
 
@@ -57,10 +65,9 @@ public class ControladorResenia {
             model.put("msgError", msgError);
             return new ModelAndView("reseniaForm", model);
         }
-
         servicioResenia.registrarResenia(datos);
-
         return new ModelAndView("redirect:/home");
+
 
     }
 

@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service("servicioResenia")
 @Transactional
 public class ServicioReseniaImpl implements ServicioResenia {
@@ -38,5 +40,10 @@ public class ServicioReseniaImpl implements ServicioResenia {
         reseniaNueva.setIdUsuarioProfesional(usuarioProfesional);
 
         repositorioResenia.guardarResenia(reseniaNueva);
+    }
+
+    @Override
+    public List<Usuario> traerListaProfesionales(long idRol){
+        return repositorioUsuario.buscarUsuarioPorRol(idRol);
     }
 }
