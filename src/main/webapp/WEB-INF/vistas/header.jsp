@@ -21,7 +21,10 @@
     </c:when>
     <c:otherwise>
         <ul>
+            <li><a href="#">Home</a></li>
             <li><a href="ir-a-asistencias">Empleos</a></li>
+            <li><a href="ir-a-registrar-perfil-profesional">Registrar perfil</a></li>
+            <li><a href="ir-a-registrar-perfil-profesional">Editar perfil</a></li>
             <li><a href="#">Mi perfil</a></li>
         </ul>
     </c:otherwise>

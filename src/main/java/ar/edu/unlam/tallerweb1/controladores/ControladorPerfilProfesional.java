@@ -39,7 +39,7 @@ public class ControladorPerfilProfesional {
         long idUsuarioSesion = (Long) request.getSession().getAttribute("userID");
         model.put("idUsuario", idUsuarioSesion);
 
-        return new ModelAndView("homeProfesional", model);
+        return new ModelAndView("home", model);
 
     }
 
@@ -97,7 +97,7 @@ public class ControladorPerfilProfesional {
             model.put("msg", "No se pudo registrar su perfil profesional, complete todos los campos");
         }
 
-       return new ModelAndView("homeProfesional", model);
+       return new ModelAndView("home", model);
     }
 
 
