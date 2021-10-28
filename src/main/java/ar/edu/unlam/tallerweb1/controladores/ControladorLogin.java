@@ -73,6 +73,7 @@ public class ControladorLogin {
 		model.put("idUsuario", idUsuario);
 		model.put("idRol", idRol);
 		return new ModelAndView("home", model);
+		//return new ModelAndView("home");
 	}
 
 	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.
