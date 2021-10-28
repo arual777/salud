@@ -1,9 +1,9 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
-import ar.edu.unlam.tallerweb1.modelo.Asistencia;
-import ar.edu.unlam.tallerweb1.modelo.PerfilProfesional;
+import ar.edu.unlam.tallerweb1.controladores.DatosPostulacion;
 import ar.edu.unlam.tallerweb1.modelo.Postulacion;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -48,5 +48,41 @@ public class RepositorioPostulacionImpl implements RepositorioPostulacion {
     final Session session = sessionFactory.getCurrentSession();
     return (List<Postulacion>) session.createCriteria(Postulacion.class)
             .add(Restrictions.eq("id", id)).list();
+  }
+
+  @Override
+  public void actualizarPostulacionAContratada(Postulacion postulacion) {
+    sessionFactory.getCurrentSession().update(postulacion);
+  }
+
+  @Override
+  public List<Postulacion> buscarPostulacionesPorCreador(Long usuarioId) {
+    final Session session = sessionFactory.getCurrentSession();
+
+    Criteria criteria = session.createCriteria(Postulacion.class, "a");
+    criteria.createAlias("a.asistencia","asistencia");
+    criteria.createAlias("asistencia.usuario","usuario");
+       return (List<Postulacion>)     criteria.add(Restrictions.eq("usuario.id", usuarioId))
+    .add(Restrictions.eq("Aceptado", false)).list();
+  }
+
+  @Override
+  public List<Postulacion> buscarPostulaciones() {
+    final Session session = sessionFactory.getCurrentSession();
+    return (List<Postulacion>) session.createCriteria(Postulacion.class).list();
+  }
+
+  @Override
+  public Postulacion buscarPostulacion(long idPostulacion) {
+    final Session session = sessionFactory.getCurrentSession();
+    return (Postulacion) session.createCriteria(Postulacion.class)
+            .add(Restrictions.eq("id", idPostulacion)).uniqueResult();
+  }
+
+  @Override
+  public Postulacion buscarPostulacionesPorId(long idProfesional) {
+    final Session session = sessionFactory.getCurrentSession();
+    return (Postulacion) session.createCriteria(Postulacion.class)
+            .add(Restrictions.eq("profesional.id", idProfesional)).uniqueResult();
   }
 }

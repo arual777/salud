@@ -67,10 +67,14 @@ public class ControladorAsistencias {
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/ir-a-crear-solicitud")
-    public ModelAndView irACrearSolicitud(){
+    public ModelAndView irACrearSolicitud(HttpServletRequest request){
+
+        Long idUsuario = obtenerIdUsuario(request);
+        Long idRol = obtenerIdRol(request);
+
         ModelMap model = new ModelMap();
         DatosAsistencia datos = new DatosAsistencia();
-
+        model.put("idRol", idRol);
         model.put("datos", datos);
         return new ModelAndView("solicitudNueva", model);
     }
@@ -151,6 +155,51 @@ public class ControladorAsistencias {
         return new ModelAndView("postulaciones",modelo);
     }
 
+    @RequestMapping(path="/ver-postulados", method=RequestMethod.GET)
+    public ModelAndView verPostulados(HttpServletRequest request, @ModelAttribute("datosPostulacion") DatosPostulacion datosPostulacion) throws Exception {
+
+        Long idUsuario = obtenerIdUsuario(request);
+        Long idRol = obtenerIdRol(request);
+
+        ModelMap modelo = new ModelMap();
+
+        try {
+            List <Postulacion> postulaciones = servicioAsistencia.buscarPostulacionesPorCreador(idUsuario);
+            if(postulaciones.isEmpty()){
+                modelo.put("msg", "Usted no tiene postulados para contratar");
+            }else{
+                modelo.put("msg", "Estos son los postulantes");
+            }
+            modelo.put("idRol", idRol);
+            modelo.put("titulo", "Postulados");
+            modelo.put("postulaciones", postulaciones);
+       } catch(Exception e){
+            modelo.put("msg", "No tiene postulados para ver");
+        }
+
+        return new ModelAndView("postulaciones",modelo);
+    }
+
+    @RequestMapping(path="/contratado", method=RequestMethod.POST)
+    public ModelAndView contratarPostulado(HttpServletRequest request, @ModelAttribute("datosPostulacion") DatosPostulacion datosPostulacion) throws Exception {
+
+        Long idUsuario = obtenerIdUsuario(request);
+        Long idRol = obtenerIdRol(request);
+
+        ModelMap modelo = new ModelMap();
+        try {
+            Postulacion postulacionElegida = servicioAsistencia.actualizarPostulacionContratada(datosPostulacion);
+            modelo.put("idRol", idRol);
+            modelo.put ("titulo", "Contratado");
+            //modelo.put("postulaciones", postulacionElegida);
+            modelo.put("msg", "Usted ha contratado a " + postulacionElegida.getProfesional().getEmail() + " para la asistencia " + postulacionElegida.getAsistencia().getDescripcion());
+        } catch (Exception e){
+            modelo.put("msg", "No puede contratarlo");
+        }
+
+        return new ModelAndView("contratado",modelo);
+    }
+
     private Long obtenerIdUsuario(HttpServletRequest request){
         return Long.parseLong(request.getSession().getAttribute("userID").toString());
     }
@@ -158,5 +207,4 @@ public class ControladorAsistencias {
     private Long obtenerIdRol(HttpServletRequest request){
         return Long.parseLong(request.getSession().getAttribute("rolID").toString());
     }
-
 }

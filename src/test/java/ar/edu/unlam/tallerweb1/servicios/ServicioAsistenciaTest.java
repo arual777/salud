@@ -4,6 +4,7 @@ import ar.edu.unlam.tallerweb1.controladores.DatosAsistencia;
 import ar.edu.unlam.tallerweb1.controladores.DatosPostulacion;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsistencia;
+import ar.edu.unlam.tallerweb1.repositorios.RepositorioPerfilProfesional;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPostulacion;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import org.assertj.core.api.Assertions;
@@ -16,10 +17,8 @@ public class ServicioAsistenciaTest {
     private RepositorioAsistencia repositorioAsistencia = mock(RepositorioAsistencia.class);
     private RepositorioUsuario repositorioUsuario = mock(RepositorioUsuario.class);
     private RepositorioPostulacion repositorioPostulacion = mock(RepositorioPostulacion.class);
-
-    private ServicioAsistencia servicioAsistencia = new ServicioAsistenciaImpl(repositorioAsistencia, repositorioUsuario, repositorioPostulacion);
-
-
+    private RepositorioPerfilProfesional repositorioPerfilProfesional = mock(RepositorioPerfilProfesional.class);
+    private ServicioAsistencia servicioAsistencia = new ServicioAsistenciaImpl(repositorioAsistencia, repositorioUsuario, repositorioPostulacion, repositorioPerfilProfesional);
 
     @Test(expected = Exception.class)
     public void SiBuscoUnServicioInexistenteDaError() throws Exception {

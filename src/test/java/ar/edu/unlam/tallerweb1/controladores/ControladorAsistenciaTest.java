@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
+import ar.edu.unlam.tallerweb1.modelo.Postulacion;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
 import org.junit.Test;
@@ -11,6 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
@@ -28,9 +32,10 @@ public class ControladorAsistenciaTest {
     private ControladorAsistencias controladorAsistenciasMock = new ControladorAsistencias(servicioAsistenciaMock);
     private final static Asistencia SOLICITUD_CON_ID = new Asistencia(33L);
     private final static Asistencia SOLICITUD_CON_NOMBRE = new Asistencia("Ana");
+    //private final static Postulacion POSTULACION = new Postulacion(1L);
     private DatosPostulacion datosPostulacion = new DatosPostulacion();
- 
-
+    private DatosPostulacion datosPostulacionContratado = new DatosPostulacion(2l, 2L, 2L);
+    private final static Usuario usuarioProfesiona = new Usuario(1L);
 
     @Test
     public void queUnProfesionalPuedaPostularseAUnEmpleo() throws Exception {
@@ -150,7 +155,6 @@ public class ControladorAsistenciaTest {
 
     @Test
     public void queSeBusqueUnaSolicitudDeAsistenciaPorId() throws Exception {
-
         existeUnaSolicitud(SOLICITUD_NUEVA);
         ModelAndView mav = cuandoBuscoUnaSolicitudDeAsistencia(SOLICITUD_NUEVA);
         entoncesEncuentroLaSolicitudDeAsistencia(mav);
@@ -165,6 +169,66 @@ public class ControladorAsistenciaTest {
    private ModelAndView cuandoBuscoUnaSolicitudDeAsistencia(DatosAsistencia solicitudDeAsistencia) throws Exception {
       return controladorAsistencias.buscarAsistenciaPorId(solicitudDeAsistencia.getId());
     }
+
+    @Test
+    public void verTodosLosProfesionalesPostuladosParaLasAsistenciasDeUnUsuario(){
+        givenProfesionalesPostulados();
+        ModelAndView mav = whenLosProfesionalesSePostularonAAsistenciaEspecificadaPorId(usuarioProfesiona);
+        thenVeoTodosLosPostulados(mav);
+    }
+
+    private void thenVeoTodosLosPostulados(ModelAndView mav) {
+        assertThat(mav.getViewName()).isEqualTo("postulaciones");
+    }
+
+    private ModelAndView whenLosProfesionalesSePostularonAAsistenciaEspecificadaPorId(Usuario usuarioProfesional) {
+        ModelMap model = new ModelMap();
+        List<Postulacion> postulaciones = servicioAsistenciaMock.buscarPostulacionesPorCreador(usuarioProfesional.getId());
+
+        model.put("postulaciones", postulaciones);
+        return new ModelAndView("postulaciones", model);
+    }
+
+    private void givenProfesionalesPostulados() {
+        List<Postulacion> postulacion = new ArrayList<Postulacion>();
+        Usuario profesional = new Usuario(1L);
+        Asistencia asistencia = new Asistencia(1L);
+        postulacion.add(new Postulacion(1L, profesional, asistencia, false));
+        Mockito.when(servicioAsistenciaMock.buscarPostulacionesPorCreador(postulacion.get(0).getId())).thenReturn(postulacion);
+    }
+
+    /*@Test
+    public void contratarUnProfesionalDeLaListaDePostulados() {
+        givenPostuladoId();
+        ModelAndView mav = whenContratoAUnProfesional(datosPostulacionContratado);
+        thenLoContratoYUpdateEnPostulacion(mav);
+    }
+
+    private ModelAndView whenContratoAUnProfesional(DatosPostulacion datosPostulacion) {
+        ModelMap model = new ModelMap();
+        Postulacion postulacionElegida = servicioAsistenciaMock.actualizarPostulacionContratada(datosPostulacion);
+        //model.put("idUsuario", datosPostulacion.getIdUsuario());
+        model.put("msg", "Usted ha contratado a " + postulacionElegida.getProfesional().getEmail() + " para la asistencia " + postulacionElegida.getAsistencia().getDescripcion());
+
+        return new ModelAndView("contratado", model);
+    }
+
+    private void givenPostuladoId() {
+        DatosPostulacion datosPostulacion = new DatosPostulacion(2L);
+        Usuario profesional = new Usuario(2L);
+        Asistencia asistencia = new Asistencia(2L);
+        Postulacion postulacion = new Postulacion(2L, profesional, asistencia, false);
+        profesional.setId(2L);
+        profesional.setEmail("hola@gmail.com");
+        asistencia.setId(2L);
+        asistencia.setDescripcion("Cuidador");
+        Mockito.when(servicioAsistenciaMock.actualizarPostulacionContratada(datosPostulacion)).thenReturn(postulacion);
+    }
+
+    private void thenLoContratoYUpdateEnPostulacion(ModelAndView mav) {
+        assertThat(mav.getViewName()).isEqualTo("contratado");
+        //assertThat(mav.getModel().get("idUsuario")).isEqualTo(POSTULACION);
+    }*/
 }
 
 
