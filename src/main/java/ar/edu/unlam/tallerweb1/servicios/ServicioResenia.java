@@ -9,4 +9,6 @@ public interface ServicioResenia {
     void registrarResenia(DatosResenia datos);
 
     List<Usuario> traerListaProfesionales(long idRol);
+
+    Usuario buscarUsuario(long id);
 }

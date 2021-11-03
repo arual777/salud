@@ -85,4 +85,13 @@ public class RepositorioPostulacionImpl implements RepositorioPostulacion {
     return (Postulacion) session.createCriteria(Postulacion.class)
             .add(Restrictions.eq("profesional.id", idProfesional)).uniqueResult();
   }
+
+  //Metodos creados para mostrar empleos coordinados (que hayan aceptado al postulante)
+  //Para asi, desde alli, ir a reseniar al profesional
+  @Override
+  public List<Postulacion> buscarEmpleosOfrecidosCoordinados(){
+    final Session session = sessionFactory.getCurrentSession();
+    return (List<Postulacion>) session.createCriteria(Postulacion.class)
+            .add(Restrictions.eq("Aceptado", true)).list();
+  }
 }

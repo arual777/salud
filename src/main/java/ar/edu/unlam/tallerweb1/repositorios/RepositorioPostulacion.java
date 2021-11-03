@@ -26,4 +26,5 @@ public interface RepositorioPostulacion {
 
     Postulacion buscarPostulacion(long idPostulacion);
 
+    List<Postulacion> buscarEmpleosOfrecidosCoordinados();
 }

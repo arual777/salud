@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -25,8 +26,8 @@ public class ControladorResenia {
     }
 
 
-    @RequestMapping(method = RequestMethod.GET, path = "/ir-a-reseniar")
-    public ModelAndView irAReseniar(HttpServletRequest request){
+    @RequestMapping(method = RequestMethod.GET, path = "/ir-a-reseniar", params={"idProf"})
+    public ModelAndView irAReseniar(@RequestParam Long idProf, HttpServletRequest request){
 
         ModelMap model = new ModelMap();
         if (request.getSession().getAttribute("userID")==null){
@@ -37,7 +38,8 @@ public class ControladorResenia {
 
         long idUsuario = (Long) request.getSession().getAttribute("userID");
 
-
+        Usuario usuario = servicioResenia.buscarUsuario(idProf);
+        model.put ("profesional", usuario);
         DatosResenia datos = new DatosResenia();
         model.put("datosResenia", datos);
 

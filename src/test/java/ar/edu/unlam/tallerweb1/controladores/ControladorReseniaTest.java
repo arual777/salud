@@ -39,7 +39,7 @@ public class ControladorReseniaTest {
     }
 
     private ModelAndView whenVoyAIrAReseniar(HttpServletRequest request){
-        return controladorResenia.irAReseniar(request);
+        return controladorResenia.irAReseniar(1L, request);
     }
 
     private void thenMuestraErrorSesion(ModelAndView mav){

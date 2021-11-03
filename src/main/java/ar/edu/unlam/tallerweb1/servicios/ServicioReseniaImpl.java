@@ -46,4 +46,9 @@ public class ServicioReseniaImpl implements ServicioResenia {
     public List<Usuario> traerListaProfesionales(long idRol){
         return repositorioUsuario.buscarUsuarioPorRol(idRol);
     }
+
+    @Override
+    public Usuario buscarUsuario(long id){
+        return repositorioUsuario.buscarUsuario(id);
+    }
 }
