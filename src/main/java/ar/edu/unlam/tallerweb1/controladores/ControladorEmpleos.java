@@ -38,7 +38,7 @@ public class ControladorEmpleos {
         }
         long idUsuario = (Long) request.getSession().getAttribute("userID");
 
-        List<Postulacion> empleosCoordinadosList = servicioAsistencia.buscarEmpleosOfrecidosCoordinados();
+        List<Postulacion> empleosCoordinadosList = servicioAsistencia.buscarEmpleosOfrecidosCoordinados(idUsuario);
 
         model.put("empleos", empleosCoordinadosList);
 

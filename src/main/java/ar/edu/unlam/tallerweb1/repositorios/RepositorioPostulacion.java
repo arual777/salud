@@ -26,5 +26,7 @@ public interface RepositorioPostulacion {
 
     Postulacion buscarPostulacion(long idPostulacion);
 
-    List<Postulacion> buscarEmpleosOfrecidosCoordinados();
+    //Metodos creados para mostrar empleos coordinados (que hayan aceptado al postulante)
+    //Para asi, desde alli, ir a reseniar al profesional
+    List<Postulacion> buscarEmpleosOfrecidosCoordinados(long id);
 }

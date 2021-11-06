@@ -39,7 +39,8 @@ public interface ServicioAsistencia {
 
     List<Postulacion> buscarPostulaciones();
 
+
     //Metodos creados para mostrar empleos coordinados (que hayan aceptado al postulante)
     //Para asi, desde alli, ir a reseniar al profesional
-    List<Postulacion> buscarEmpleosOfrecidosCoordinados();
+    List<Postulacion> buscarEmpleosOfrecidosCoordinados(long id);
 }

@@ -174,8 +174,8 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
     //Metodos creados para mostrar empleos coordinados (que hayan aceptado al postulante)
     //Para asi, desde alli, ir a reseniar al profesional
     @Override
-    public List<Postulacion> buscarEmpleosOfrecidosCoordinados(){
-        return repositorioPostulacion.buscarEmpleosOfrecidosCoordinados();
+    public List<Postulacion> buscarEmpleosOfrecidosCoordinados(long id){
+        return repositorioPostulacion.buscarEmpleosOfrecidosCoordinados(id);
     }
 }
 
