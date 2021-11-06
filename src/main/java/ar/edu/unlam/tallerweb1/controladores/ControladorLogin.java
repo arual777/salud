@@ -76,6 +76,12 @@ public class ControladorLogin {
 		//return new ModelAndView("home");
 	}
 
+	@RequestMapping(path = "/cerrar-sesion", method = RequestMethod.GET)
+	public ModelAndView cerrarSession(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return new ModelAndView("redirect:/");
+	}
+
 	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {
