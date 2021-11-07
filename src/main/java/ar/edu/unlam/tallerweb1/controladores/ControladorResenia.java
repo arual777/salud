@@ -1,7 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
 
-import ar.edu.unlam.tallerweb1.modelo.Resenia;
+import ar.edu.unlam.tallerweb1.modelo.ReseniaAProfesional;
 import ar.edu.unlam.tallerweb1.modelo.ReseniaACliente;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioResenia;
@@ -78,11 +78,11 @@ public class ControladorResenia {
 
         long idUsuario = (Long) request.getSession().getAttribute("userID");
 
-        List<Resenia> resenias = servicioResenia.buscarReseniasPorIdProfesional(idUsuario);
+        List<ReseniaAProfesional> reseniaAProfesionals = servicioResenia.buscarReseniasPorIdProfesional(idUsuario);
 
         Usuario usuario = servicioResenia.buscarUsuario(idUsuario);
 
-        model.put("resenias", resenias);
+        model.put("resenias", reseniaAProfesionals);
         model.put("usuario", usuario);
 
         return new ModelAndView("mis-resenias-profesional", model);

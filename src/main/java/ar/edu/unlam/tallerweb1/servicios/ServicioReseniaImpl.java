@@ -2,10 +2,9 @@ package ar.edu.unlam.tallerweb1.servicios;
 
 
 import ar.edu.unlam.tallerweb1.controladores.DatosResenia;
-import ar.edu.unlam.tallerweb1.modelo.Resenia;
+import ar.edu.unlam.tallerweb1.modelo.ReseniaAProfesional;
 import ar.edu.unlam.tallerweb1.modelo.ReseniaACliente;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
-import ar.edu.unlam.tallerweb1.repositorios.RepositorioPerfilProfesional;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioResenia;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,17 +29,17 @@ public class ServicioReseniaImpl implements ServicioResenia {
 
     @Override
     public void registrarResenia(DatosResenia datos) {
-        Resenia reseniaNueva = new Resenia();
+        ReseniaAProfesional reseniaAProfesionalNueva = new ReseniaAProfesional();
 
         Usuario usuarioCliente = repositorioUsuario.buscarUsuario(datos.getIdUsuarioCliente());
         Usuario usuarioProfesional = repositorioUsuario.buscarUsuario(datos.getIdUsuarioProfesional());
 
-        reseniaNueva.setCalificacion(datos.getCalificacion());
-        reseniaNueva.setComentario(datos.getComentario());
-        reseniaNueva.setIdUsuarioCliente(usuarioCliente);
-        reseniaNueva.setIdUsuarioProfesional(usuarioProfesional);
+        reseniaAProfesionalNueva.setCalificacion(datos.getCalificacion());
+        reseniaAProfesionalNueva.setComentario(datos.getComentario());
+        reseniaAProfesionalNueva.setIdUsuarioCliente(usuarioCliente);
+        reseniaAProfesionalNueva.setIdUsuarioProfesional(usuarioProfesional);
 
-        repositorioResenia.guardarResenia(reseniaNueva);
+        repositorioResenia.guardarResenia(reseniaAProfesionalNueva);
     }
 
     @Override
@@ -69,12 +68,12 @@ public class ServicioReseniaImpl implements ServicioResenia {
     }
 
     @Override
-    public List<Resenia> buscarResenias(long id){
+    public List<ReseniaAProfesional> buscarResenias(long id){
         return repositorioResenia.buscarReseniaPorId(id);
     }
 
     @Override
-    public List<Resenia> buscarReseniasPorIdProfesional(long id){
+    public List<ReseniaAProfesional> buscarReseniasPorIdProfesional(long id){
         return repositorioResenia.buscarReseniasPorIdProfesional(id);
     }
 
