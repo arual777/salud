@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 
 import ar.edu.unlam.tallerweb1.modelo.Postulacion;
 import ar.edu.unlam.tallerweb1.modelo.Resenia;
+import ar.edu.unlam.tallerweb1.modelo.ReseniaACliente;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -26,9 +27,28 @@ public class RepositorioReseniaImpl implements RepositorioResenia{
     }
 
     @Override
+    public void guardarReseniaACliente(ReseniaACliente reseniaACliente)  {
+        sessionFactory.getCurrentSession().save(reseniaACliente);
+    }
+
+    @Override
     public List<Resenia> buscarReseniaPorId(Long id) {
         final Session session = sessionFactory.getCurrentSession();
         return (List<Resenia>) session.createCriteria(Resenia.class)
                 .add(Restrictions.eq("id", id)).list();
+    }
+
+    @Override
+    public List<Resenia> buscarReseniasPorIdProfesional(Long id) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<Resenia>) session.createCriteria(Resenia.class)
+                .add(Restrictions.eq("idUsuarioProfesional.id", id)).list();
+    }
+
+    @Override
+    public List<ReseniaACliente> buscarReseniasAClientePorIdCliente(Long id) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<ReseniaACliente>) session.createCriteria(ReseniaACliente.class)
+                .add(Restrictions.eq("idUsuarioCliente.id", id)).list();
     }
 }

@@ -3,10 +3,10 @@
 
 <div class = "container">
 
-    <h2>Empleos Coordinados</h2>
+    <h2>Resenias - ${usuario.email}</h2>
 
 
-    <c:forEach  items="${empleos}" var="empleo">
+    <c:forEach  items="${resenias}" var="resenia">
         <div class="my-5">
             <div class = "d-flex justify-content-center">
                 <div class="col-sm-8 my-5">
@@ -14,12 +14,10 @@
                         <div class="row no-gutters">
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h3 class="card-title">Empleo ID ${empleo.id}</h3>
-                                    <p class="card-text"> Profesional Contratado: ${empleo.profesional.email}</p>
-                                    <p class="card-text"> Descripción: ${empleo.asistencia.descripcion}</p>
-                                    <a href="./ir-a-reseniar?idProf=${empleo.profesional.id}"><button class="btn-primary">Reseniar</button></a>
+                                    <h3 class="card-title">Calificacion: ${resenia.calificacion}</h3>
+                                    <p class="card-text"> Por: ${resenia.idUsuarioProfesional.email}</p>
+                                    <p class="card-text"> Comentario: ${resenia.comentario}</p>
                                     <hr>
-
                                 </div>
                             </div>
                         </div>
