@@ -28,14 +28,48 @@ public class ControladorAsistencias {
         Long idUsuario = obtenerIdUsuario(request);
         Long idRol = obtenerIdRol(request);
         ModelMap model = new ModelMap();
-
-        List <Asistencia> asistencias = servicioAsistencia.buscarTodasLasAsistencias();
-
+        Integer mensaje = null;
         model.put ("titulo", "Todos los servicios");
-        model.put("empleos", asistencias);
-        model.put("idRol", idRol);
-        return new ModelAndView("empleos-publicados", model);
 
+        try{
+            List <Asistencia> asistencias = servicioAsistencia.buscarTodasLasAsistencias();
+            mensaje = 1;
+            model.put("empleos", asistencias);
+            model.put("idRol", idRol);
+            model.put("msg", "Estos son los empleos");
+
+        }catch(Exception e){
+            mensaje = 0;
+            model.put("msg", "No tiene empleos para ver");
+        }
+        model.put("mensaje", mensaje);
+        return new ModelAndView("empleos-publicados", model);
+    }
+
+    @RequestMapping (method = RequestMethod.GET, path = "/ir-a-mis-asistencias")
+    public ModelAndView mostrarMisEMpleos(HttpServletRequest request){
+        Long idUsuario = obtenerIdUsuario(request);
+        Long idRol = obtenerIdRol(request);
+        ModelMap model = new ModelMap();
+        Integer mensaje = null;
+        try {
+            List <Asistencia> asistencias = servicioAsistencia.buscarAsistenciaPorIdDelCliente(idUsuario);
+            if(asistencias.isEmpty()){
+                mensaje = 0;
+                model.put("msg", "Usted no tiene empleos creados");
+            }else{
+                mensaje = 1;
+                model.put("msg", "Estos son sus empleos creados");
+            }
+            model.put ("titulo", "Todos mis servicios");
+            model.put("empleos", asistencias);
+            model.put("idRol", idRol);
+        } catch(Exception e){
+            mensaje = 0;
+            model.put("msg", "No tiene empleos para ver");
+        }
+        model.put("mensaje", mensaje);
+        return new ModelAndView("mis-empleos", model);
     }
 
     @RequestMapping (method = RequestMethod.GET, path = "/ir-a-asistencias-diarias")
@@ -93,11 +127,16 @@ public class ControladorAsistencias {
 
 
     @RequestMapping (method = RequestMethod.POST, path = "/editarSolicitud")
-    public ModelAndView editar(@ModelAttribute("asistencia") DatosAsistencia datos) throws Exception {
+    public ModelAndView editar(HttpServletRequest request, @ModelAttribute("asistencia") DatosAsistencia datos) throws Exception {
+        Long idUsuario = obtenerIdUsuario(request);
+        Long idRol = obtenerIdRol(request);
+
         servicioAsistencia.actualizarAsistencia(datos);
-        ModelAndView modelView = new ModelAndView();
-        modelView.setViewName("redirect:/ir-a-asistencias");
-        return modelView;
+        ModelMap model = new ModelMap();
+        model.put("idRol", idRol);
+
+        return new ModelAndView("ir-a-asistencias", model);
+
     }
 
     @RequestMapping (method = RequestMethod.GET, path = "/detalle-asistencia/{idAsistencia}")
@@ -126,7 +165,7 @@ public class ControladorAsistencias {
     public ModelAndView eliminarSolicitudDeEmpleo(@ModelAttribute("id") Long id) throws Exception {
         ModelMap modelo = new ModelMap();
         servicioAsistencia.eliminarSolicitudDeEmpleo(id);
-
+     //!!
         modelo.put("mensaje", "Solicitud de empleo eliminada con exito!");
 
         return new ModelAndView("redirect:/ir-a-asistencias", modelo);
@@ -137,20 +176,23 @@ public class ControladorAsistencias {
 
         Long idUsuario = obtenerIdUsuario(request);
         Long idRol = obtenerIdRol(request);
-
+        Integer mensaje = null;
         ModelMap modelo = new ModelMap();
         try {
-        datosPostulacion.setIdUsuario(idUsuario);
-        servicioAsistencia.crearPostulacion(datosPostulacion);
-        modelo.put("msg", "Usted se ha postulado exitosamente");
-        List <Postulacion> postulaciones = servicioAsistencia.buscarPostulacionesPorUsuario(idUsuario);
-        modelo.put("idRol", idRol);
-        modelo.put ("titulo", "Mis postulaciones");
-        modelo.put("postulaciones", postulaciones);
+            mensaje = 1;
+            datosPostulacion.setIdUsuario(idUsuario);
+            servicioAsistencia.crearPostulacion(datosPostulacion);
+            modelo.put("msg", "Usted se ha postulado exitosamente");
+            List <Postulacion> postulaciones = servicioAsistencia.buscarPostulacionesPorUsuario(idUsuario);
+            modelo.put("idRol", idRol);
+            modelo.put ("titulo", "Mis postulaciones");
+            modelo.put("postulaciones", postulaciones);
 
         } catch (Exception e){
+            mensaje = 0;
             modelo.put("msg", "No puede postularse por segunda vez");
         }
+        modelo.put("mensaje", mensaje);
 
         return new ModelAndView("postulaciones",modelo);
     }
@@ -162,20 +204,24 @@ public class ControladorAsistencias {
         Long idRol = obtenerIdRol(request);
 
         ModelMap modelo = new ModelMap();
-
+        Integer mensaje;
         try {
-            List <Postulacion> postulaciones = servicioAsistencia.buscarPostulacionesPorCreador(idUsuario);
+            List <Postulacion> postulaciones = servicioAsistencia.buscarPostulacionesPorCreadorNoAceptados(idUsuario);
             if(postulaciones.isEmpty()){
+                mensaje = 0;
                 modelo.put("msg", "Usted no tiene postulados para contratar");
             }else{
+                mensaje = 1;
                 modelo.put("msg", "Estos son los postulantes");
             }
             modelo.put("idRol", idRol);
             modelo.put("titulo", "Postulados");
             modelo.put("postulaciones", postulaciones);
        } catch(Exception e){
+            mensaje = 0;
             modelo.put("msg", "No tiene postulados para ver");
         }
+        modelo.put("mensaje", mensaje);
 
         return new ModelAndView("postulaciones",modelo);
     }
@@ -185,17 +231,20 @@ public class ControladorAsistencias {
 
         Long idUsuario = obtenerIdUsuario(request);
         Long idRol = obtenerIdRol(request);
-
+        Integer mensaje = null;
         ModelMap modelo = new ModelMap();
         try {
             Postulacion postulacionElegida = servicioAsistencia.actualizarPostulacionContratada(datosPostulacion);
             modelo.put("idRol", idRol);
             modelo.put ("titulo", "Contratado");
             //modelo.put("postulaciones", postulacionElegida);
+            mensaje = 1;
             modelo.put("msg", "Usted ha contratado a " + postulacionElegida.getProfesional().getEmail() + " para la asistencia " + postulacionElegida.getAsistencia().getDescripcion());
         } catch (Exception e){
+            mensaje = 0;
             modelo.put("msg", "No puede contratarlo");
         }
+        modelo.put("mensaje", mensaje);
 
         return new ModelAndView("contratado",modelo);
     }

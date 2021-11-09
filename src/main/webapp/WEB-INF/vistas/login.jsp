@@ -26,11 +26,25 @@
 				</form:form>
 				<a href="ir-a-registrarme">Registrarme</a>
 				<%--Bloque que es visible si el elemento error no esta vacio	--%>
-				<c:if test="${not empty error}">
-			        <h4><span>${error}</span></h4>
-			        <br>
-		        </c:if>
-				${msg}
+					<c:if test="${not empty msg}">
+							<div class="row mb-3">
+								<div class="col-md-8">
+									<c:choose>
+										<c:when test="${mensaje==1}">
+											<div class="alert alert-info">
+												<span>${msg}</span>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div class="alert alert-danger">
+												<span>${msg}</span>
+											</div>
+										</c:otherwise>
+									</c:choose>
+								</div>
+						</div>
+						<br>
+					</c:if>
 			</div>
 		</div>
 		

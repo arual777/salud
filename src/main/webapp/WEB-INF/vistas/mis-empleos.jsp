@@ -1,5 +1,6 @@
 <%@include file="header.jsp" %>
 
+<title>Postulaciones</title>
 <div class="container">
     <h1>${titulo}</h1>
     <div class="row" >
@@ -7,34 +8,29 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Frecuencia</th>
-                    <th scope="col">Cama</th>
                     <th scope="col">Descripcion</th>
-                    <th scope="col">Tarifa</th>
+                    <th scope="col">Franja Horaria</th>
                     <th scope="col">Zona</th>
+                    <th scope="col">Editar</th>
+                    <th scope="col">Eliminar</th>
                 </tr>
                 </thead>
                 <tbody>
                 <c:forEach  items="${empleos}" var="empleo">
                     <tr>
-                        <td>  ${empleo.nombre}</td>
-                        <td>  ${empleo.idFrecuencia.nombre}</td>
-                        <td>  ${empleo.camaAdentro}</td>
                         <td>  ${empleo.descripcion}</td>
-                        <td>  ${empleo.tarifa}</td>
+                        <td>  ${empleo.idTurno.franja}</td>
                         <td>  ${empleo.zona.nombre}</td>
-
-                        <c:choose>
-                       <c:when test="${idRol==2}">
-                           <td>
-                               <form action="postularme" method="POST" modelAttribute="datosPostulacion">
-                                   <button type="submit" class="btn btn-lg btn-primary btn-block">Postularme</button>
-                                   <input id="idAsistencia" name="idAsistencia" type="hidden" value= "${empleo.id}" >
-                               </form>
-                           </td>
-                          </c:when>
-                     </c:choose>
+                        <td>
+                            <a href="detalle-asistencia/${empleo.id}">
+                                <button class="btn btn-lg btn-primary btn-block">Editar</button>
+                            </a>
+                        </td>
+                        <td>
+                            <a href="eliminar/${empleo.id}">
+                                <button class="btn btn-lg btn-primary btn-block">Eliminar</button>
+                            </a>
+                        </td>
                     </tr>
                 </c:forEach>
                 </tbody>
@@ -42,6 +38,7 @@
         </div>
     </div>
 </div>
+
 <c:if test="${not empty msg}">
     <div class="container">
         <div class="row mb-3">
@@ -63,7 +60,6 @@
     </div>
     <br>
 </c:if>
-
 
 </body>
 </html>

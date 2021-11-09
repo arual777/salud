@@ -19,7 +19,7 @@ public interface ServicioAsistencia {
 
     List<Asistencia> buscarAsistenciasPorDia();
 
-    List<Asistencia> buscarTodosLosEmpleos();
+    List<Asistencia> buscarAsistenciaPorIdDelCliente(Long idUsuario);
 
     Asistencia actualizarAsistencia(DatosAsistencia datos);
 
@@ -39,4 +39,5 @@ public interface ServicioAsistencia {
 
     List<Postulacion> buscarPostulaciones();
 
+    List<Postulacion> buscarPostulacionesPorCreadorNoAceptados(Long idUsuario);
 }

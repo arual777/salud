@@ -72,6 +72,13 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
     }
 
     @Override
+    public List<Asistencia> buscarAsistenciaPorIdDelCliente(long idUsuario) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<Asistencia>) session.createCriteria(Asistencia.class)
+                .add(Restrictions.eq("usuario.id", idUsuario)).list();
+    }
+
+    @Override
     public void guardar(Asistencia asistencia) {
         sessionFactory.getCurrentSession().save(asistencia) ;
     }

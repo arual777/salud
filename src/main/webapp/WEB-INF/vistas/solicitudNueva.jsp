@@ -1,3 +1,5 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="header.jsp" %>
 
 <div class = "container">
@@ -60,7 +62,24 @@
             <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Publicar</button>
             </form:form>
             <c:if test="${not empty msg}">
-            <h4><span>${msg}</span></h4>
+            <div class="container">
+                <div class="row mb-3">
+                    <div class="col-md-8">
+                        <c:choose>
+                            <c:when test="${mensaje==1}">
+                                <div class="alert alert-info">
+                                    <span>${msg}</span>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <div class="alert alert-danger">
+                                    <span>${msg}</span>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </div>
+            </div>
             <br>
             </c:if>
     </div>

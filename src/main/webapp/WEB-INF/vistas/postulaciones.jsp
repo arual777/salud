@@ -3,8 +3,6 @@
 <title>Postulaciones</title>
 <div class="container">
     <h1>${titulo}</h1>
-
-
     <div class="row" >
         <div class="col-md-10">
             <table class="table table-striped">
@@ -12,7 +10,6 @@
                 <tr>
                     <th scope="col">Mail Profesional</th>
                     <th scope="col">Descripcion Asistencia</th>
-                    <th scope="col">Cliente</th>
 
                     <c:choose>
                     <c:when test="${idRol==1}">
@@ -26,7 +23,6 @@
                     <tr>
                         <td>  ${postulacion.profesional.email}</td>
                         <td>  ${postulacion.asistencia.descripcion}</td>
-                        <td>  ${postulacion.asistencia.usuario.id}</td>
                         <c:choose>
                         <c:when test="${idRol==1}">
                         <td>
@@ -46,9 +42,25 @@
 </div>
 
       <c:if test="${not empty msg}">
-            <h4><span>${msg}</span></h4>
+          <div class="container">
+            <div class="row mb-3">
+              <div class="col-md-8">
+                  <c:choose>
+                        <c:when test="${mensaje==1}">
+                        <div class="alert alert-info">
+                            <span>${msg}</span>
+                        </div>
+                        </c:when>
+                        <c:otherwise>
+                          <div class="alert alert-danger">
+                              <span>${msg}</span>
+                          </div>
+                        </c:otherwise>
+                  </c:choose>
+              </div>
+            </div>
+          </div>
             <br>
         </c:if>
-
 </body>
 </html>

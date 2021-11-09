@@ -30,26 +30,33 @@ public class ControladorRegistrarme {
     public ModelAndView registrarUsuario(@ModelAttribute("datos") DatosRegistro datos) {
 
         ModelMap model = new ModelMap();
-
+        Integer mensaje = null;
         if (esValido(datos.getEmail())) {
 
             try {
                 servicioLogin.registrar(datos.getEmail(), datos.getClave(), datos.getRolId());
             } catch (Exception e) {
+                mensaje = 0;
                 model.put("msg", "El usuario ya existe");
+                model.put("mensaje", mensaje);
+
                 return new ModelAndView("registro-usuario", model);
             }
-
+            mensaje = 1;
             model.put("email", datos.getEmail());
             model.put("msg", "Registro Exitoso");
 
             DatosLogin datosLogin = new DatosLogin();
             datosLogin.setEmail(datos.getEmail());
             model.put("datosLogin", datosLogin);
+            model.put("mensaje", mensaje);
+
             return new ModelAndView("redirect:/login", model);
         }
-
+        mensaje = 0;
         model.put("msg", "Registro Fallido por mail incorrecto");
+        model.put("mensaje", mensaje);
+
         return new ModelAndView("registro-usuario", model);
     }
 
