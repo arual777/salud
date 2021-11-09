@@ -17,6 +17,7 @@
             <li><a href="ir-a-crear-solicitud">Nueva Solicitud</a></li>
             <li><a href="ver-postulados">Postulantes</a></li>
             <li><a href="ir-a-asistencias">Empleos</a></li>
+            <li><a href="ver-mis-empleos-coordinados">Empleos Coordinados</a></li>
         </ul>
     </c:when>
     <c:otherwise>
@@ -26,6 +27,7 @@
             <li><a href="ir-a-registrar-perfil-profesional">Registrar perfil</a></li>
             <li><a href="ir-a-registrar-perfil-profesional">Editar perfil</a></li>
             <li><a href="#">Mi perfil</a></li>
+            <li><a href="ver-resenias-profesional">Ver mis resenias</a></li>
         </ul>
     </c:otherwise>
 </c:choose>

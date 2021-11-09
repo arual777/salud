@@ -50,4 +50,20 @@ public class RepositorioReseniaImpl implements RepositorioResenia{
         return (List<ReseniaACliente>) session.createCriteria(ReseniaACliente.class)
                 .add(Restrictions.eq("idUsuarioCliente.id", id)).list();
     }
+
+    @Override
+    public List<ReseniaAProfesional> buscarReseniaPorClienteYProfesional(long idCliente, long idProfesional){
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<ReseniaAProfesional>) session.createCriteria(ReseniaAProfesional.class)
+                .add(Restrictions.eq("idUsuarioCliente.id", idCliente))
+                .add(Restrictions.eq("idUsuarioProfesional.id", idProfesional)).list();
+    }
+
+    @Override
+    public List<ReseniaACliente> buscarReseniaAClientePorClienteYProfesional(long idCliente, long idProfesional){
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<ReseniaACliente>) session.createCriteria(ReseniaACliente.class)
+                .add(Restrictions.eq("idUsuarioCliente.id", idCliente))
+                .add(Restrictions.eq("idUsuarioProfesional.id", idProfesional)).list();
+    }
 }

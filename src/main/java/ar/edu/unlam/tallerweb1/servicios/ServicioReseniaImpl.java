@@ -81,4 +81,15 @@ public class ServicioReseniaImpl implements ServicioResenia {
     public List<ReseniaACliente> buscarReseniasAClientePorIdCliente(long id){
         return repositorioResenia.buscarReseniasAClientePorIdCliente(id);
     }
+
+    @Override
+    public List<ReseniaAProfesional> buscarReseniaPorClienteYProfesional(long idCliente, long idProfesional){
+        return repositorioResenia.buscarReseniaPorClienteYProfesional(idCliente,idProfesional);
+    }
+
+    @Override
+    public List<ReseniaACliente> buscarReseniaAClientePorClienteYProfesional(long idCliente, long idProfesional){
+        return repositorioResenia.buscarReseniaAClientePorClienteYProfesional(idCliente,idProfesional);
+    }
+
 }

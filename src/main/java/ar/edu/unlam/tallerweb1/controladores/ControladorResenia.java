@@ -31,17 +31,33 @@ public class ControladorResenia {
     @RequestMapping(method = RequestMethod.GET, path = "/ir-a-reseniar", params={"idProf"})
     public ModelAndView irAReseniar(@RequestParam Long idProf, HttpServletRequest request){
 
+        long idRol = (Long) request.getSession().getAttribute("rolID");
+        long idUsuario = (Long) request.getSession().getAttribute("userID");
         ModelMap model = new ModelMap();
         if (request.getSession().getAttribute("userID")==null){
             String msg = "No ingresaste en el sistema";
             model.put("msglogeado", msg);
             return new ModelAndView("errorAcceso", model);
         }
+        if (idRol!=1L){
+            String msg = "No tenes permitido ver esta sección";
+            model.put("msglogeado", msg);
+            return new ModelAndView("errorAcceso", model);
+        }
 
-        long idUsuario = (Long) request.getSession().getAttribute("userID");
+        Usuario usuarioProfesional = servicioResenia.buscarUsuario(idProf);
+        long idUsuarioProfesional = usuarioProfesional.getId();
 
-        Usuario usuario = servicioResenia.buscarUsuario(idProf);
-        model.put ("profesional", usuario);
+        List <ReseniaAProfesional> resenias = servicioResenia.buscarReseniaPorClienteYProfesional(idUsuario, idUsuarioProfesional);
+
+        if(!resenias.isEmpty()){
+            String msg = "No Podes Reseniar Dos veces a un mismo profesional";
+            model.put("msglogeado", msg);
+            return new ModelAndView("errorAcceso", model);
+        }
+
+
+        model.put ("profesional", usuarioProfesional);
         DatosResenia datos = new DatosResenia();
         model.put("datosResenia", datos);
 
@@ -53,6 +69,12 @@ public class ControladorResenia {
     public ModelAndView registrarResenia(@ModelAttribute("datosResenia") DatosResenia datos, HttpServletRequest request){
 
         ModelMap model = new ModelMap();
+
+        if (request.getSession().getAttribute("userID")==null){
+            String msg = "No ingresaste en el sistema";
+            model.put("msglogeado", msg);
+            return new ModelAndView("errorAcceso", model);
+        }
 
         long idUsuario = (Long) request.getSession().getAttribute("userID");
         datos.setIdUsuarioCliente(idUsuario);
@@ -76,6 +98,12 @@ public class ControladorResenia {
     public ModelAndView verReseniasProfesional(HttpServletRequest request){
         ModelMap model = new ModelMap();
 
+        if (request.getSession().getAttribute("userID")==null){
+            String msg = "No ingresaste en el sistema";
+            model.put("msglogeado", msg);
+            return new ModelAndView("errorAcceso", model);
+        }
+
         long idUsuario = (Long) request.getSession().getAttribute("userID");
 
         List<ReseniaAProfesional> reseniaAProfesionals = servicioResenia.buscarReseniasPorIdProfesional(idUsuario);
@@ -89,20 +117,61 @@ public class ControladorResenia {
 
     }
 
+    @RequestMapping(method = RequestMethod.GET, path = "/ver-resenias-cliente")
+    public ModelAndView verReseniasCliente(HttpServletRequest request){
+        ModelMap model = new ModelMap();
+
+        long idUsuario = (Long) request.getSession().getAttribute("userID");
+        long idRol = (Long) request.getSession().getAttribute("rolID");
+
+        if (idRol!=1L){
+            String msg = "No tenes permitido ver esta sección";
+            model.put("msglogeado", msg);
+            return new ModelAndView("errorAcceso", model);
+        }
+
+        List<ReseniaACliente> resenias = servicioResenia.buscarReseniasAClientePorIdCliente(idUsuario);
+
+        Usuario usuario = servicioResenia.buscarUsuario(idUsuario);
+
+        model.put("resenias", resenias);
+        model.put("usuario", usuario);
+
+        return new ModelAndView("mis-resenias-cliente", model);
+
+    }
+
     @RequestMapping(method = RequestMethod.GET, path = "/ir-a-reseniar-cliente", params={"idCli"})
     public ModelAndView irAReseniarCliente(@RequestParam Long idCli, HttpServletRequest request){
 
+        long idRol = (Long) request.getSession().getAttribute("rolID");
         ModelMap model = new ModelMap();
         if (request.getSession().getAttribute("userID")==null){
             String msg = "No ingresaste en el sistema";
             model.put("msglogeado", msg);
             return new ModelAndView("errorAcceso", model);
         }
+        if (idRol==1L){
+            String msg = "No tenes permitido ver esta sección";
+            model.put("msglogeado", msg);
+            return new ModelAndView("errorAcceso", model);
+        }
 
         long idUsuario = (Long) request.getSession().getAttribute("userID");
 
-        Usuario usuario = servicioResenia.buscarUsuario(idCli);
-        model.put ("cliente", usuario);
+        Usuario usuarioCliente = servicioResenia.buscarUsuario(idCli);
+        long idUsuarioCliente = usuarioCliente.getId();
+
+
+        List <ReseniaACliente> resenias = servicioResenia.buscarReseniaAClientePorClienteYProfesional(idUsuarioCliente, idUsuario);
+
+        if(!resenias.isEmpty()){
+            String msg = "No Podes Reseniar Dos veces a un mismo profesional";
+            model.put("msglogeado", msg);
+            return new ModelAndView("errorAcceso", model);
+        }
+
+        model.put ("cliente", usuarioCliente);
         DatosResenia datos = new DatosResenia();
         model.put("datosResenia", datos);
 
@@ -133,21 +202,6 @@ public class ControladorResenia {
         return new ModelAndView("redirect:/home");
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/ver-resenias-cliente")
-    public ModelAndView verReseniasCliente(HttpServletRequest request){
-        ModelMap model = new ModelMap();
 
-        long idUsuario = (Long) request.getSession().getAttribute("userID");
-
-        List<ReseniaACliente> resenias = servicioResenia.buscarReseniasAClientePorIdCliente(idUsuario);
-
-        Usuario usuario = servicioResenia.buscarUsuario(idUsuario);
-
-        model.put("resenias", resenias);
-        model.put("usuario", usuario);
-
-        return new ModelAndView("mis-resenias-cliente", model);
-
-    }
 
 }

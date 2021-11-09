@@ -21,4 +21,8 @@ public interface ServicioResenia {
     List<ReseniaAProfesional> buscarReseniasPorIdProfesional(long id);
 
     List<ReseniaACliente> buscarReseniasAClientePorIdCliente(long id);
+
+    List<ReseniaAProfesional> buscarReseniaPorClienteYProfesional(long idCliente, long idProfesional);
+
+    List<ReseniaACliente> buscarReseniaAClientePorClienteYProfesional(long idCliente, long idProfesional);
 }

@@ -29,6 +29,8 @@ public class ControladorEmpleos {
     @RequestMapping(method = RequestMethod.GET, path = "/ver-mis-empleos-coordinados")
     public ModelAndView MostrarEmpleosCoordinadosCliente(HttpServletRequest request){
 
+        long idUsuario = (Long) request.getSession().getAttribute("userID");
+        long idRol = (Long) request.getSession().getAttribute("rolID");
 
         ModelMap model = new ModelMap();
         if (request.getSession().getAttribute("userID")==null){
@@ -36,12 +38,17 @@ public class ControladorEmpleos {
             model.put("msglogeado", msg);
             return new ModelAndView("errorAcceso", model);
         }
-        long idUsuario = (Long) request.getSession().getAttribute("userID");
+        if (idRol!=1L){
+            String msg = "No tenes permitido ver esta sección";
+            model.put("msglogeado", msg);
+            return new ModelAndView("errorAcceso", model);
+        }
+
 
         List<Postulacion> empleosCoordinadosList = servicioAsistencia.buscarEmpleosOfrecidosCoordinados(idUsuario);
 
         model.put("empleos", empleosCoordinadosList);
-
+        model.put("idRol", idRol);
 
         return new ModelAndView("empleos-coordinados",model);
 
