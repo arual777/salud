@@ -66,10 +66,10 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
     }
 
     @Override
-    public List<Asistencia> buscarAsistenciasPorZona(String zona) {
+    public List<Asistencia> buscarAsistenciasPorZona(Long idZona) {
         final Session session = sessionFactory.getCurrentSession();
-        return (List<Asistencia>) session.createCriteria(Zona.class)
-                .add(Restrictions.eq("id", zona))
+        return (List<Asistencia>) session.createCriteria(Asistencia.class)
+                .add(Restrictions.eq("zona.id", idZona))
                 .list();
     }
 

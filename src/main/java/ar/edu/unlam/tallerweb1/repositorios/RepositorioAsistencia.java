@@ -18,7 +18,7 @@ public interface RepositorioAsistencia {
 
     List<Asistencia> buscarAsistenciaPorNombre(String nombre);
 
-    List<Asistencia> buscarAsistenciasPorZona( String zona );
+    List<Asistencia> buscarAsistenciasPorZona(Long idZona);
 
     List<Asistencia> buscarAsistenciasPorNombre( String nombre );
 

@@ -136,8 +136,8 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
     public List<Asistencia> buscarTodosLosEmpleos() { return repositorioAsistencia.buscarTodosLosEmpleos(); }
 
     @Override
-    public List<Asistencia> buscarAsistenciasPorZona(String zona) {
-        return repositorioAsistencia.buscarAsistenciasPorZona(zona);
+    public List<Asistencia> buscarAsistenciasPorZona(Long idZona) {
+        return repositorioAsistencia.buscarAsistenciasPorZona(idZona);
     }
 
     @Override

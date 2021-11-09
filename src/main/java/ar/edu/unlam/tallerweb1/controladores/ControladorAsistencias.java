@@ -66,15 +66,15 @@ public class ControladorAsistencias {
         return new ModelAndView("asistencias", model);
     }
 
-    @RequestMapping (method = RequestMethod.GET, path = "/ir-a-asistencias-por-zona/{zona}")
-    public ModelAndView MostrarServiciosPorZona(@PathVariable("zona") String zona){
+    @RequestMapping (method = RequestMethod.GET, path = "/ir-a-asistencias-por-zona-oeste")
+    public ModelAndView MostrarServiciosPorZona(){
 
         ModelMap model = new ModelMap();
-
-        List <Asistencia> asistencias = servicioAsistencia.buscarAsistenciasPorZona(zona);
+        Long idZona = 5L;
+        List <Asistencia> asistencias = servicioAsistencia.buscarAsistenciasPorZona(idZona);
 
         model.put ("titulo", "Servicios por Zona");
-        model.put("servicio", asistencias);
+        model.put("empleos", asistencias);
 
 
         return new ModelAndView("asistencias", model);

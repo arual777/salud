@@ -22,7 +22,7 @@ public interface ServicioAsistencia {
 
     List<Asistencia> buscarTodosLosEmpleos();
 
-    List<Asistencia> buscarAsistenciasPorZona( String zona );
+    List<Asistencia> buscarAsistenciasPorZona(Long idZona );
 
     List<Asistencia> buscarAsistenciasPorNombre( String nombre );
 

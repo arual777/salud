@@ -18,6 +18,8 @@
     <div>
         <a href="#"><button class="btn btn-primary">Empleos</button></a>
         <a href="./ir-a-crear-solicitud"><button class="btn btn-primary">Crear nueva solicitud</button></a>
+        <a href="./ir-a-asistencias-por-zona-oeste"><button class="btn btn-primary">Zona oeste</button></a>
+
     </div>
 
     <div class="row" >
