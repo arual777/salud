@@ -1,5 +1,6 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
+import ar.edu.unlam.tallerweb1.controladores.ControladorAsistencias;
 import ar.edu.unlam.tallerweb1.controladores.DatosAsistencia;
 import ar.edu.unlam.tallerweb1.controladores.DatosPostulacion;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
@@ -8,8 +9,11 @@ import ar.edu.unlam.tallerweb1.repositorios.RepositorioPostulacion;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.ModelAndView;
+
 import static org.mockito.Mockito.*;
 
 public class ServicioAsistenciaTest {
@@ -18,7 +22,6 @@ public class ServicioAsistenciaTest {
     private RepositorioPostulacion repositorioPostulacion = mock(RepositorioPostulacion.class);
 
     private ServicioAsistencia servicioAsistencia = new ServicioAsistenciaImpl(repositorioAsistencia, repositorioUsuario, repositorioPostulacion);
-
 
 
     @Test(expected = Exception.class)
@@ -96,4 +99,6 @@ public class ServicioAsistenciaTest {
 
         return datosAsistencia;
     }
+
+
 }

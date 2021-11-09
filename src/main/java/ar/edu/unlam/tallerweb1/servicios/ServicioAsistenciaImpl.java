@@ -136,6 +136,16 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
     public List<Asistencia> buscarTodosLosEmpleos() { return repositorioAsistencia.buscarTodosLosEmpleos(); }
 
     @Override
+    public List<Asistencia> buscarAsistenciasPorZona(String zona) {
+        return repositorioAsistencia.buscarAsistenciasPorZona(zona);
+    }
+
+    @Override
+    public List<Asistencia> buscarAsistenciasPorNombre(String nombre) {
+        return null;
+    }
+
+    @Override
     public void eliminarSolicitudDeEmpleo(Long id) { repositorioAsistencia.eliminarSolicitudDeEmpleo(id);}
 
     @Override

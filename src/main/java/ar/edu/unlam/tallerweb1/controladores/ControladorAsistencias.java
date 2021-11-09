@@ -66,6 +66,21 @@ public class ControladorAsistencias {
         return new ModelAndView("asistencias", model);
     }
 
+    @RequestMapping (method = RequestMethod.GET, path = "/ir-a-asistencias-por-zona/{zona}")
+    public ModelAndView MostrarServiciosPorZona(@PathVariable("zona") String zona){
+
+        ModelMap model = new ModelMap();
+
+        List <Asistencia> asistencias = servicioAsistencia.buscarAsistenciasPorZona(zona);
+
+        model.put ("titulo", "Servicios por Zona");
+        model.put("servicio", asistencias);
+
+
+        return new ModelAndView("asistencias", model);
+
+    }
+
     @RequestMapping(method = RequestMethod.GET, path = "/ir-a-crear-solicitud")
     public ModelAndView irACrearSolicitud(){
         ModelMap model = new ModelMap();
@@ -87,7 +102,6 @@ public class ControladorAsistencias {
         return modelView;
     }
 
-
     @RequestMapping (method = RequestMethod.POST, path = "/editarSolicitud")
     public ModelAndView editar(@ModelAttribute("asistencia") DatosAsistencia datos) throws Exception {
         servicioAsistencia.actualizarAsistencia(datos);
@@ -105,9 +119,7 @@ public class ControladorAsistencias {
 
         return new ModelAndView("detalle-solicitud", model);
     }
-/*
-    al tener el mismo path que detalle-asistencia/{idAsistencia} , cuando se edita la asistencia se rompe.
-    hay que cambiar el path de este metodo
+
     @RequestMapping (method = RequestMethod.GET, path = "/detalle-asistencia/{nombre}")
     public ModelAndView buscarAsistenciaPorNombreEspecifico(@PathVariable("nombre") String nombre) throws Exception {
 
@@ -117,7 +129,7 @@ public class ControladorAsistencias {
 
         return new ModelAndView("detalle-solicitud", model);
     }
-*/
+
     @RequestMapping(path = "/eliminar/{id}", method = RequestMethod.GET)
     public ModelAndView eliminarSolicitudDeEmpleo(@ModelAttribute("id") Long id) throws Exception {
         ModelMap modelo = new ModelMap();

@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.repositorios;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import ar.edu.unlam.tallerweb1.modelo.Tipo_Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import ar.edu.unlam.tallerweb1.modelo.Zona;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
@@ -63,6 +64,21 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
                 .add(Restrictions.like("nombre", nombre, MatchMode.ANYWHERE))
                 .list();
     }
+
+    @Override
+    public List<Asistencia> buscarAsistenciasPorZona(String zona) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<Asistencia>) session.createCriteria(Zona.class)
+                .add(Restrictions.eq("id", zona))
+                .list();
+    }
+
+    @Override
+    public List<Asistencia> buscarAsistenciasPorNombre(String nombre) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<Asistencia>) session.createCriteria(Asistencia.class)
+                .add(Restrictions.eq("nombre", nombre))
+                .list();    }
 
     @Override
     public Asistencia buscarAsistenciaPorId(long id) {

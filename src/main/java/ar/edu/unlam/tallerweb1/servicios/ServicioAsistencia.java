@@ -22,6 +22,10 @@ public interface ServicioAsistencia {
 
     List<Asistencia> buscarTodosLosEmpleos();
 
+    List<Asistencia> buscarAsistenciasPorZona( String zona );
+
+    List<Asistencia> buscarAsistenciasPorNombre( String nombre );
+
     Asistencia actualizarAsistencia(DatosAsistencia datos);
 
     void eliminarSolicitudDeEmpleo(Long id);

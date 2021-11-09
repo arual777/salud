@@ -18,6 +18,10 @@ public interface RepositorioAsistencia {
 
     List<Asistencia> buscarAsistenciaPorNombre(String nombre);
 
+    List<Asistencia> buscarAsistenciasPorZona( String zona );
+
+    List<Asistencia> buscarAsistenciasPorNombre( String nombre );
+
     Asistencia buscarAsistenciaPorId(long id);
 
     void guardar(Asistencia asistencia);
