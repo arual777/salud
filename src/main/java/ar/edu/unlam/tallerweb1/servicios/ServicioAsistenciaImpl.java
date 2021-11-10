@@ -107,6 +107,11 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
     }
 
     @Override
+    public List<Postulacion> buscarPostulacionesPorCreadorNoAceptados(Long idUsuario) {
+        return repositorioPostulacion.buscarPostulacionesPorCreadorNoAceptados(idUsuario);
+    }
+
+    @Override
     public Asistencia actualizarAsistencia(DatosAsistencia datos) {
 
         Asistencia asistenciaAEditar = new Asistencia();
@@ -161,7 +166,7 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
     }
 
     @Override
-    public List<Asistencia> buscarTodosLosEmpleos() { return repositorioAsistencia.buscarTodosLosEmpleos(); }
+    public List<Asistencia> buscarAsistenciaPorIdDelCliente(Long idUsuario) { return repositorioAsistencia.buscarAsistenciaPorIdDelCliente(idUsuario); }
 
     @Override
     public void eliminarSolicitudDeEmpleo(Long id) { repositorioAsistencia.eliminarSolicitudDeEmpleo(id);}

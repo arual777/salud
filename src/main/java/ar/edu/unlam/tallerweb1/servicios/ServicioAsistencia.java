@@ -19,7 +19,7 @@ public interface ServicioAsistencia {
 
     List<Asistencia> buscarAsistenciasPorDia();
 
-    List<Asistencia> buscarTodosLosEmpleos();
+    List<Asistencia> buscarAsistenciaPorIdDelCliente(Long idUsuario);
 
     Asistencia actualizarAsistencia(DatosAsistencia datos);
 
@@ -39,8 +39,10 @@ public interface ServicioAsistencia {
 
     List<Postulacion> buscarPostulaciones();
 
+    List<Postulacion> buscarPostulacionesPorCreadorNoAceptados(Long idUsuario);
 
     //Metodos creados para mostrar empleos coordinados (que hayan aceptado al postulante)
     //Para asi, desde alli, ir a reseniar al profesional
     List<Postulacion> buscarEmpleosOfrecidosCoordinados(long id);
+
 }

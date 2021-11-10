@@ -56,7 +56,7 @@ public class RepositorioPostulacionImpl implements RepositorioPostulacion {
   }
 
   @Override
-  public List<Postulacion> buscarPostulacionesPorCreador(Long usuarioId) {
+  public List<Postulacion> buscarPostulacionesPorCreadorNoAceptados(Long usuarioId) {
     final Session session = sessionFactory.getCurrentSession();
 
     Criteria criteria = session.createCriteria(Postulacion.class, "a");
@@ -64,6 +64,17 @@ public class RepositorioPostulacionImpl implements RepositorioPostulacion {
     criteria.createAlias("asistencia.usuario","usuario");
        return (List<Postulacion>)     criteria.add(Restrictions.eq("usuario.id", usuarioId))
     .add(Restrictions.eq("Aceptado", false)).list();
+  }
+
+  @Override
+  public List<Postulacion> buscarPostulacionesPorCreador(Long usuarioId) {
+    final Session session = sessionFactory.getCurrentSession();
+
+    Criteria criteria = session.createCriteria(Postulacion.class, "a");
+    criteria.createAlias("a.asistencia","asistencia");
+    criteria.createAlias("asistencia.usuario","usuario");
+    return (List<Postulacion>)     criteria.add(Restrictions.eq("usuario.id", usuarioId))
+            .list();
   }
 
   @Override

@@ -124,6 +124,8 @@ public class ControladorAsistenciaTest {
 
         when(this.httpSessionMock.getAttribute("userID")).thenReturn("1");
                             //httpSessionMock.getAttribute("userID").
+        when(this.httpSessionMock.getAttribute("rolID")).thenReturn("1");
+
         return controladorAsistencias.crearNuevaSolicitudDeAsistencia(httpServletRequestMock, datos);
     }
 
@@ -143,11 +145,15 @@ public class ControladorAsistenciaTest {
 
     private void entoncesSeEdita(ModelAndView mav) {
         assertThat(mav.getModel().get("nombre")).isEqualTo(SOLICITUD_NUEVA.getNombre());
-        assertThat(mav.getViewName()).isEqualTo("redirect:/ir-a-asistencias");
+        assertThat(mav.getViewName()).isEqualTo("ir-a-asistencias");
     }
 
     private ModelAndView cuandoEditoUnaSolicitud(DatosAsistencia datos) throws Exception {
-       return controladorAsistencias.editar(datos);
+        when(this.httpServletRequestMock.getSession()).thenReturn(httpSessionMock);
+        when(this.httpSessionMock.getAttribute("userID")).thenReturn("1");
+        when(this.httpSessionMock.getAttribute("rolID")).thenReturn("1");
+
+        return controladorAsistencias.editar(httpServletRequestMock, datos);
     }
 
     private void dadoQueExisteUnaSolicitud(DatosAsistencia datos) {
