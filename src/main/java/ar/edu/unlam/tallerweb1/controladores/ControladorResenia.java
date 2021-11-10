@@ -31,14 +31,15 @@ public class ControladorResenia {
     @RequestMapping(method = RequestMethod.GET, path = "/ir-a-reseniar", params={"idProf"})
     public ModelAndView irAReseniar(@RequestParam Long idProf, HttpServletRequest request){
 
-        long idRol = (Long) request.getSession().getAttribute("rolID");
-        long idUsuario = (Long) request.getSession().getAttribute("userID");
+
         ModelMap model = new ModelMap();
         if (request.getSession().getAttribute("userID")==null){
             String msg = "No ingresaste en el sistema";
             model.put("msglogeado", msg);
             return new ModelAndView("errorAcceso", model);
         }
+        long idRol = (Long) request.getSession().getAttribute("rolID");
+        long idUsuario = (Long) request.getSession().getAttribute("userID");
         if (idRol!=1L){
             String msg = "No tenes permitido ver esta sección";
             model.put("msglogeado", msg);
@@ -90,7 +91,12 @@ public class ControladorResenia {
             model.put("msgError", msgError);
             return new ModelAndView("reseniaForm", model);
         }
+
+        try {
         servicioResenia.registrarResenia(datos);
+        } catch (Exception e) {
+            return new ModelAndView("redirect:/errorAcceso");
+        }
         return new ModelAndView("redirect:/home");
     }
 
@@ -144,13 +150,14 @@ public class ControladorResenia {
     @RequestMapping(method = RequestMethod.GET, path = "/ir-a-reseniar-cliente", params={"idCli"})
     public ModelAndView irAReseniarCliente(@RequestParam Long idCli, HttpServletRequest request){
 
-        long idRol = (Long) request.getSession().getAttribute("rolID");
+
         ModelMap model = new ModelMap();
         if (request.getSession().getAttribute("userID")==null){
             String msg = "No ingresaste en el sistema";
             model.put("msglogeado", msg);
             return new ModelAndView("errorAcceso", model);
         }
+        long idRol = (Long) request.getSession().getAttribute("rolID");
         if (idRol==1L){
             String msg = "No tenes permitido ver esta sección";
             model.put("msglogeado", msg);
@@ -198,7 +205,12 @@ public class ControladorResenia {
             model.put("msgError", msgError);
             return new ModelAndView("reseniaForm", model);
         }
+
+        try {
         servicioResenia.registrarReseniaACliente(datos);
+        } catch (Exception e) {
+            return new ModelAndView("redirect:/errorAcceso");
+        }
         return new ModelAndView("redirect:/home");
     }
 
