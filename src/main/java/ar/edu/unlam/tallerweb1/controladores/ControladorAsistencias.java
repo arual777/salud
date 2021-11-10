@@ -142,7 +142,7 @@ public class ControladorAsistencias {
     @RequestMapping (method = RequestMethod.GET, path = "/detalle-asistencia/{idAsistencia}")
     public ModelAndView buscarAsistenciaPorId(@PathVariable("idAsistencia") long idAsistencia) throws Exception {
 
-        ModelMap model = new ModelMap();
+         ModelMap model = new ModelMap();
         Asistencia asistenciaBuscada  =servicioAsistencia.buscarAsistenciaPorId(idAsistencia);
         model.put("asistencia", asistenciaBuscada);
 

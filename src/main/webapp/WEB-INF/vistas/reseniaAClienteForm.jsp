@@ -12,12 +12,12 @@
         <h1>Registro de Resenia</h1>
     </div>
 
-    <h4 class="my-2"> Resenia Para Profesional: ${profesional.email}</h4>
+    <h4 class="my-2"> Resenia Para Cliente: ${cliente.email}</h4>
 
     <div id="loginbox" style="margin-top:50px;" class="mt-3 mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 
 
-        <form:form action="registrarResenia" method="POST" modelAttribute="datosResenia">
+        <form:form action="registrarReseniaACliente" method="POST" modelAttribute="datosResenia">
 
 
 
@@ -26,11 +26,11 @@
             <h4 class="my-2">Comentario</h4>
             <form:textarea path="comentario" type="text-area" id="text" class="form-control"/>
 
-            <form:hidden path="idUsuarioProfesional" id="text" value="${profesional.id}"/>
+            <form:hidden path="idUsuarioCliente" id="text" value="${cliente.id}"/>
             <button id="btn-registroProfesional" class="btn btn-lg btn-primary btn-block my-3" Type="Submit"/>Registrar Resenia</button>
         </form:form>
 
-       <h5 class="my-3">${msgError}</h5>
+        <h5 class="my-3">${msgError}</h5>
 
         <c:if test="${not empty msg}">
             <h4><span>${msg}</span></h4>
