@@ -1,5 +1,10 @@
 <%@include file="header.jsp" %>
 
+    <c:if test="${not empty msg}">
+            <h4><span>${msg}</span></h4>
+            <br>
+        </c:if>
+
 <div class="container">
     <h1>${titulo}</h1>
     <div class="row" >
@@ -47,6 +52,13 @@
                              <input id="idAsistencia" name="idAsistencia" type="hidden" value= "${empleo.id}" >
                           </form>
                         </td>
+
+                          <td>
+                                <form action= "ir-a-crear-pregunta" method="GET" modelAttribute="datosMensajeria">
+                                       <button type="submit" class="btn btn-lg btn-primary btn-block">Preguntar</button>
+                                        <input id="idAsistencia" name="idAsistencia" type="hidden" value= "${empleo.id}" >
+                                 </form>
+                            </td>
                          </c:otherwise>
                      </c:choose>
                     </tr>
