@@ -3,7 +3,7 @@ package ar.edu.unlam.tallerweb1.modelo;
 import javax.persistence.*;
 
 @Entity
-public class Resenia {
+public class ReseniaACliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

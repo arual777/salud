@@ -170,5 +170,12 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
     public Asistencia buscarAsistenciaPorNombreEspecifico(String nombre) {
         return repositorioAsistencia.buscarAsistenciaPorNombreEspecifico(nombre);
     }
+
+    //Metodos creados para mostrar empleos coordinados (que hayan aceptado al postulante)
+    //Para asi, desde alli, ir a reseniar al profesional
+    @Override
+    public List<Postulacion> buscarEmpleosOfrecidosCoordinados(long id){
+        return repositorioPostulacion.buscarEmpleosOfrecidosCoordinados(id);
+    }
 }
 

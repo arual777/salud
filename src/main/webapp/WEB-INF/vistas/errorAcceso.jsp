@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class = "container">
-    <h2 class="my-5">Error, debes loguearte para acceder a esta seccion</h2>
+    <h2 class="my-5">Error</h2>
 
     <h5>${msglogeado}</h5>
 
