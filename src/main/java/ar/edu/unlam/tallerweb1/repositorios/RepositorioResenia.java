@@ -13,6 +13,8 @@ public interface RepositorioResenia {
 
     List<ReseniaAProfesional> buscarReseniaPorId(Long id);
 
+    List<ReseniaACliente> buscarReseniaAClientePorId(Long id);
+
     List<ReseniaAProfesional> buscarReseniasPorIdProfesional(Long id);
 
     List<ReseniaACliente> buscarReseniasAClientePorIdCliente(Long id);

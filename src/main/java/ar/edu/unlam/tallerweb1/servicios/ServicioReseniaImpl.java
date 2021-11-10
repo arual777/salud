@@ -28,8 +28,15 @@ public class ServicioReseniaImpl implements ServicioResenia {
 
 
     @Override
-    public void registrarResenia(DatosResenia datos) {
+    public void registrarResenia(DatosResenia datos) throws Exception {
         ReseniaAProfesional reseniaAProfesionalNueva = new ReseniaAProfesional();
+
+        List <ReseniaAProfesional> reseniasAProfesional = repositorioResenia.buscarReseniaPorClienteYProfesional
+                                                        (datos.getIdUsuarioCliente(), datos.getIdUsuarioProfesional());
+
+        if (!reseniasAProfesional.isEmpty()){
+            throw new Exception();
+        }
 
         Usuario usuarioCliente = repositorioUsuario.buscarUsuario(datos.getIdUsuarioCliente());
         Usuario usuarioProfesional = repositorioUsuario.buscarUsuario(datos.getIdUsuarioProfesional());
@@ -43,8 +50,15 @@ public class ServicioReseniaImpl implements ServicioResenia {
     }
 
     @Override
-    public void registrarReseniaACliente(DatosResenia datos) {
+    public void registrarReseniaACliente(DatosResenia datos)  throws Exception {
         ReseniaACliente reseniaNueva = new ReseniaACliente();
+
+        List <ReseniaACliente> reseniasACliente = repositorioResenia.buscarReseniaAClientePorClienteYProfesional
+                (datos.getIdUsuarioCliente(), datos.getIdUsuarioProfesional());
+
+        if (!reseniasACliente.isEmpty()){
+            throw new Exception();
+        }
 
         Usuario usuarioCliente = repositorioUsuario.buscarUsuario(datos.getIdUsuarioCliente());
         Usuario usuarioProfesional = repositorioUsuario.buscarUsuario(datos.getIdUsuarioProfesional());

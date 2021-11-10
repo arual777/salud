@@ -38,6 +38,13 @@ public class RepositorioReseniaImpl implements RepositorioResenia{
     }
 
     @Override
+    public List<ReseniaACliente> buscarReseniaAClientePorId(Long id) {
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<ReseniaACliente>) session.createCriteria(ReseniaACliente.class)
+                .add(Restrictions.eq("id", id)).list();
+    }
+
+    @Override
     public List<ReseniaAProfesional> buscarReseniasPorIdProfesional(Long id) {
         final Session session = sessionFactory.getCurrentSession();
         return (List<ReseniaAProfesional>) session.createCriteria(ReseniaAProfesional.class)
