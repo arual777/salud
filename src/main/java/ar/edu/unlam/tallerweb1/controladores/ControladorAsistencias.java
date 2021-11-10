@@ -103,7 +103,7 @@ public class ControladorAsistencias {
     @RequestMapping (method = RequestMethod.GET, path = "/detalle-asistencia/{idAsistencia}")
     public ModelAndView buscarAsistenciaPorId(@PathVariable("idAsistencia") long idAsistencia) throws Exception {
 
-        ModelMap model = new ModelMap();
+         ModelMap model = new ModelMap();
         Asistencia asistenciaBuscada  =servicioAsistencia.buscarAsistenciaPorId(idAsistencia);
         model.put("asistencia", asistenciaBuscada);
 
@@ -191,7 +191,6 @@ public class ControladorAsistencias {
             Postulacion postulacionElegida = servicioAsistencia.actualizarPostulacionContratada(datosPostulacion);
             modelo.put("idRol", idRol);
             modelo.put ("titulo", "Contratado");
-            //modelo.put("postulaciones", postulacionElegida);
             modelo.put("msg", "Usted ha contratado a " + postulacionElegida.getProfesional().getEmail() + " para la asistencia " + postulacionElegida.getAsistencia().getDescripcion());
         } catch (Exception e){
             modelo.put("msg", "No puede contratarlo");

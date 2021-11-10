@@ -1,10 +1,13 @@
 <%@include file="header.jsp" %>
 
 <title>Postulaciones</title>
+
 <div class="container">
     <h1>${titulo}</h1>
 
-
+    <a href="./buzon">
+        <button class="btn btn-lg btn-primary btn-block">Buzon</button>
+    </a>
     <div class="row" >
         <div class="col-md-10">
             <table class="table table-striped">
