@@ -142,7 +142,7 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
 
     @Override
     public List<Asistencia> buscarAsistenciasPorNombre(String nombre) {
-        return null;
+        return repositorioAsistencia.buscarAsistenciasPorNombre(nombre);
     }
 
     @Override

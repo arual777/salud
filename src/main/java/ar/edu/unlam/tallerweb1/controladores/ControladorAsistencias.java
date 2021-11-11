@@ -68,20 +68,52 @@ public class ControladorAsistencias {
 
     @RequestMapping (method = RequestMethod.GET, path = "/ir-a-asistencias-por-zona-oeste")
     public ModelAndView MostrarServiciosPorZona(){
-
         ModelMap model = new ModelMap();
         Long idZona = 5L;
         List <Asistencia> asistencias = servicioAsistencia.buscarAsistenciasPorZona(idZona);
-
         model.put ("titulo", "Servicios por Zona");
         model.put("empleos", asistencias);
-
-
         return new ModelAndView("asistencias", model);
 
     }
+    @RequestMapping (method = RequestMethod.GET, path = "/ir-a-asistencias-por-caba")
+    public ModelAndView MostrarServiciosPorZonaCaba(){
+        ModelMap model = new ModelMap();
+        Long idZona = 1L;
+        List <Asistencia> asistencias = servicioAsistencia.buscarAsistenciasPorZona(idZona);
+        model.put ("titulo", "Servicios por Zona");
+        model.put("empleos", asistencias);
+        return new ModelAndView("asistencias", model);
+    }
+    @RequestMapping (method = RequestMethod.GET, path = "/ir-a-asistencias-por-zona-este")
+    public ModelAndView MostrarServiciosPorZonaEste(){
+        ModelMap model = new ModelMap();
+        Long idZona = 4L;
+        List <Asistencia> asistencias = servicioAsistencia.buscarAsistenciasPorZona(idZona);
+        model.put ("titulo", "Servicios por Zona");
+        model.put("empleos", asistencias);
+        return new ModelAndView("asistencias", model);
+    }
+    @RequestMapping (method = RequestMethod.GET, path = "/ir-a-asistencias-por-zona-norte")
+    public ModelAndView MostrarServiciosPorZonaNorte(){
+        ModelMap model = new ModelMap();
+        Long idZona = 2L;
+        List <Asistencia> asistencias = servicioAsistencia.buscarAsistenciasPorZona(idZona);
+        model.put ("titulo", "Servicios por Zona");
+        model.put("empleos", asistencias);
+        return new ModelAndView("asistencias", model);
+    }
+    @RequestMapping (method = RequestMethod.GET, path = "/ir-a-asistencias-por-zona-sur")
+    public ModelAndView MostrarServiciosPorZonaSur() {
+        ModelMap model = new ModelMap();
+        Long idZona = 3L;
+        List<Asistencia> asistencias = servicioAsistencia.buscarAsistenciasPorZona(idZona);
+        model.put("titulo", "Servicios por Zona");
+        model.put("empleos", asistencias);
+        return new ModelAndView("asistencias", model);
+    }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/ir-a-crear-solicitud")
+        @RequestMapping(method = RequestMethod.GET, path = "/ir-a-crear-solicitud")
     public ModelAndView irACrearSolicitud(){
         ModelMap model = new ModelMap();
         DatosAsistencia datos = new DatosAsistencia();

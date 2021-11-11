@@ -4,6 +4,7 @@ import ar.edu.unlam.tallerweb1.controladores.ControladorAsistencias;
 import ar.edu.unlam.tallerweb1.controladores.DatosAsistencia;
 import ar.edu.unlam.tallerweb1.controladores.DatosPostulacion;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
+import ar.edu.unlam.tallerweb1.modelo.Zona;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsistencia;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioPostulacion;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
@@ -13,6 +14,9 @@ import org.mockito.Mockito;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Collections;
+import java.util.List;
 
 import static org.mockito.Mockito.*;
 
@@ -98,6 +102,29 @@ public class ServicioAsistenciaTest {
         datosAsistencia.setZona(1);
 
         return datosAsistencia;
+    }
+
+    @Test
+    public void buscarAsistenciaPorNombreTest() {
+        Asistencia asistenciaExpected = new Asistencia("Julieta"
+        );
+        when(repositorioAsistencia.buscarAsistenciasPorNombre("Julieta")).thenReturn(Collections.singletonList(asistenciaExpected));
+        List<Asistencia> asistenciaActuales = servicioAsistencia.buscarAsistenciasPorNombre("Julieta");
+        Assertions.assertThat(asistenciaActuales).isNotNull();
+        Assertions.assertThat(asistenciaActuales.get(0)).hasFieldOrPropertyWithValue("nombre", "Julieta");
+    }
+
+    @Test
+    public void buscarAsistenciaPorZonaTest() {
+        Asistencia asistenciaExpected = new Asistencia ();
+        Zona zona = new Zona();
+        zona.setId(1L);
+        zona.setNombre("Zona Oeste");
+        asistenciaExpected.setZona(zona);
+        when(repositorioAsistencia.buscarAsistenciasPorZona(1L)).thenReturn(Collections.singletonList(asistenciaExpected));
+        List<Asistencia> asistenciaActuales = servicioAsistencia.buscarAsistenciasPorZona(1L);
+        Assertions.assertThat(asistenciaActuales).isNotNull();
+        Assertions.assertThat(asistenciaActuales.get(0)).hasFieldOrPropertyWithValue("zona.id",1L);
     }
 
 
