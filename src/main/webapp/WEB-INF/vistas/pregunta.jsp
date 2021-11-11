@@ -3,7 +3,7 @@
 <title>Mensajería</title>
 
    <tbody>
-  <form:form action="ir-a-preguntar" method="POST" modelAttribute="datosMensajeria">
+  <form:form action="preguntar" method="POST" modelAttribute="datosMensajeria">
 
                  <label for="mensaje"> Formule su pregunta: </label>
                        <br/>
