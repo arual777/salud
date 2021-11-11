@@ -42,13 +42,11 @@ public class ControladorMensajeria {
         return new ModelAndView("pregunta", model);
     }
 
-    @RequestMapping(method = RequestMethod.POST, path = "/ir-a-preguntar")
+    @RequestMapping(method = RequestMethod.POST, path = "/preguntar")
     public ModelAndView preguntar(HttpServletRequest request,  @ModelAttribute("datosMensajeria") DatosMensajeria datosMensajeria) throws Exception{
-
-   Long idUsuario = Long.parseLong(request.getSession().getAttribute("userID").toString());
+        Long idUsuario = Long.parseLong(request.getSession().getAttribute("userID").toString());
         datosMensajeria.setIdUsuario(idUsuario);
         servicioMensajeria.crearPregunta(datosMensajeria);
-
 
         ModelMap model = new ModelMap();
         model.put("msg", "Usted ha enviado un mensaje exitosamente");

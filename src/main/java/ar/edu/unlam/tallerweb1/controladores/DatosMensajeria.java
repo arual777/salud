@@ -37,8 +37,8 @@ public class DatosMensajeria {
         return idAsistencia;
     }
 
-    public void setIdAsistencia(long idMensaje) {
-        this.idMensaje = idMensaje;
+    public void setIdAsistencia(long idAsistencia) {
+        this.idAsistencia = idAsistencia;
     }
 
     public long getIdMensaje() { return this.idMensaje; }
