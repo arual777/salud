@@ -1,9 +1,13 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import ar.edu.unlam.tallerweb1.modelo.Mensaje;
+import ar.edu.unlam.tallerweb1.modelo.Postulacion;
+import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMensajeria;
 import org.junit.Test;
 import org.mockito.stubbing.OngoingStubbing;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +27,8 @@ public class ControladorMensajeriaTest {
     private HttpServletRequest httpServletRequestMock =  mock(HttpServletRequest.class);
     private HttpSession httpSessionMock = mock(HttpSession.class);
     private DatosMensajeria datosMensajeria = new DatosMensajeria();
-
+    private final static DatosMensajeria DATOS_MENSAJERIA = new DatosMensajeria("hola", 1l, 1l);
+    private final static Usuario usuarioCliente = new Usuario(1L);
     @Test
     public void queUnProfesionalLogueadoPuedaEnviarUnaPreguntaAlCliente () throws Exception{
 
@@ -48,30 +53,52 @@ public class ControladorMensajeriaTest {
 
     }
 
-   /** @Test
+    @Test
     public void queUnClientePuedaVerLasPreguntas() throws Exception {
-        dadoQueExisteUnaPregunta();
-        ModelAndView mav = cuandoUnClienteConsultaElBuzon();
+
+        dadoQueExisteUnaPregunta(DATOS_MENSAJERIA);
+        ModelAndView mav = cuandoUnClienteConsultaElBuzon(usuarioCliente);
         entoncesLasVe(mav);
+    }
+    private void dadoQueExisteUnaPregunta(DatosMensajeria datos) throws Exception {
+        when(this.httpServletRequestMock.getSession()).thenReturn(httpSessionMock);
+
+        when(this.httpSessionMock.getAttribute("userID")).thenReturn("2");
+
+        controladorMensajeria.preguntar(httpServletRequestMock, datos);
+    }
+
+    private ModelAndView cuandoUnClienteConsultaElBuzon(Usuario usuarioCliente) {
+
+        ModelMap model = new ModelMap();
+        List<Mensaje> preguntas = servicioMensajeria.buscarPreguntasPorUsuario(usuarioCliente.getId());
+
+        model.put("preguntas", preguntas);
+        return new ModelAndView("buzon", model);
     }
 
     private void entoncesLasVe(ModelAndView mav) {
         assertThat(mav.getViewName()).isEqualTo("buzon");
     }
 
-    private ModelAndView cuandoUnClienteConsultaElBuzon() {
-        when(this.httpServletRequestMock.getSession()).thenReturn(httpSessionMock);
-        when(this.httpSessionMock.getAttribute("userID")).thenReturn("2");
-        return controladorMensajeria.verPreguntas(httpServletRequestMock);
+    @Test
+    public void queUnCLientePuedaResponderUnaPregunta() throws Exception {
+        dadoQueExisteUnaPregunta(DATOS_MENSAJERIA);
+        ModelAndView mav = cuandoUnClienteResponde(DATOS_MENSAJERIA);
+        entoncesMeRedirigeALaVista(mav);
     }
 
-    private void dadoQueExisteUnaPregunta() throws Exception {
+    private void entoncesMeRedirigeALaVista(ModelAndView mav) {
+        assertThat(mav.getViewName()).isEqualTo("redirect:/buzon");
+    }
+
+    private ModelAndView cuandoUnClienteResponde(DatosMensajeria datos) {
         when(this.httpServletRequestMock.getSession()).thenReturn(httpSessionMock);
 
         when(this.httpSessionMock.getAttribute("userID")).thenReturn("2");
 
-       controladorMensajeria.preguntar(httpServletRequestMock, datosMensajeria);
+        return controladorMensajeria.responder(httpServletRequestMock, datos);
+
     }
-**/
 
 }

@@ -12,6 +12,8 @@ public interface ServicioMensajeria {
     List<Mensaje> buscarPreguntasPorUsuario(Long idUsuario);
 
     void responder(DatosMensajeria datosMensajeria);
+
+
 }
 
 
