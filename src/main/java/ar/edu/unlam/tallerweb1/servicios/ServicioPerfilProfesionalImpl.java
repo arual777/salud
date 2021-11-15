@@ -20,7 +20,7 @@ public class ServicioPerfilProfesionalImpl implements ServicioPerfilProfesional 
 
     @Override
     public PerfilProfesional registrarPerfil(String nombreCompleto, String email, String experiencia,
-                                             String numTelefono, String fechaNacimiento, long idUsuario) throws Exception{
+                                             String numTelefono, String fechaNacimiento, long idUsuario, String foto) throws Exception{
 
         if (nombreCompleto.length() > 5 && email.length() > 5 && experiencia.length() > 10
                 && numTelefono.length()>5) {
@@ -33,6 +33,7 @@ public class ServicioPerfilProfesionalImpl implements ServicioPerfilProfesional 
             nuevo.setFechaNacimiento(fechaNacimiento);
             Usuario usuario = repositorioPerfilProfesional.obtenerIdUsuario(idUsuario);
             nuevo.setIdUsuario(usuario);
+            nuevo.setFoto(foto);
 
             repositorioPerfilProfesional.guardar(nuevo);
 

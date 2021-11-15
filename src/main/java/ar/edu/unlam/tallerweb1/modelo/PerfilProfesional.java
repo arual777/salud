@@ -28,6 +28,9 @@ public class PerfilProfesional {
     @OneToOne
     public Usuario idUsuario;
 
+    @Column
+    private String foto;
+
     public Long getId() {
         return id;
     }
@@ -82,5 +85,13 @@ public class PerfilProfesional {
 
     public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 }

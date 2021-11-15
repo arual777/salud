@@ -9,7 +9,7 @@ import java.util.List;
 public interface ServicioPerfilProfesional {
 
 
-    PerfilProfesional registrarPerfil(String nombreCompleto, String email, String experiencia, String numTelefono, String fechaNacimiento, long idUsuario) throws Exception;
+    PerfilProfesional registrarPerfil(String nombreCompleto, String email, String experiencia, String numTelefono, String fechaNacimiento, long idUsuario, String foto) throws Exception;
 
     PerfilProfesional editarPerfil(DatosRegistroProfesional datos);
 

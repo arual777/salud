@@ -24,12 +24,12 @@ public class ServicioPerfilProfesionalTest {
     }
 
     private void whenNoCompletoForm() throws Exception{
-        servicioPerfilProfesional.registrarPerfil("s", "s", "s", "s","s", 1);
+        servicioPerfilProfesional.registrarPerfil("s", "s", "s", "s","s", 1, "foto");
     }
 
     private PerfilProfesional whenCompletoForm() throws Exception{
         return servicioPerfilProfesional.registrarPerfil("Rodrigo", "rodri@gmail.com",
-                "Tengo experiencia, creeme xd", "1136008787","2020-10-06", 1);
+                "Tengo experiencia, creeme xd", "1136008787","2020-10-06", 1, "foto");
     }
 
 }

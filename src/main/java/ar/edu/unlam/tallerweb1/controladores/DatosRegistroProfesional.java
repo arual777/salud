@@ -10,16 +10,19 @@ public class DatosRegistroProfesional {
     private String numeroTelefono;
     private String fechaNacimiento;
     private long idUsuario;
+    private String foto;
 
     public DatosRegistroProfesional(){}
 
-    public DatosRegistroProfesional(String nombreCompleto,String email, String experiencia, String numeroTelefono, String fechaNacimiento, long idUsuario) {
+    public DatosRegistroProfesional(String nombreCompleto,String email, String experiencia, String numeroTelefono, String fechaNacimiento,
+                                    long idUsuario, String foto) {
         this.nombreCompleto = nombreCompleto;
         this.email = email;
         this.experiencia = experiencia;
         this.numeroTelefono = numeroTelefono;
         this.fechaNacimiento = fechaNacimiento;
         this.idUsuario = idUsuario;
+        this.foto = foto;
     }
 
     public long getId() {
@@ -73,4 +76,12 @@ public class DatosRegistroProfesional {
     public long getIdUsuario() { return idUsuario;}
 
     public void setIdUsuario(long idUsuario) {this.idUsuario = idUsuario;}
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
 }

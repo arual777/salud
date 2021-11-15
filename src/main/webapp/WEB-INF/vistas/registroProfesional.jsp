@@ -8,7 +8,10 @@
     <h3>Ingrese sus datos en el formulario para que los demas usuarios puedan saber su experiencia</h3>
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 
-        <form:form action="registroProfesional" method="POST" modelAttribute="datosRegistroProfesional">
+        <form:form action="registroProfesional" method="POST" modelAttribute="datosRegistroProfesional" enctype="multipart/form-data">
+
+            <h4 class="my-2">Suba una imagen</h4>
+            <form:input path="foto" type="file" id="file" name="file" class="form-control"></form:input>
 
             <h4 class="my-2">Ingrese Su Nombre Completo</h4>
             <form:input path="nombreCompleto" id="text" class="form-control"/>

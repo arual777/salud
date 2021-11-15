@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 
@@ -77,7 +81,8 @@ public class ControladorPerfilProfesional {
 
 
     @RequestMapping(method = RequestMethod.POST, path = "/registroProfesional")
-    public ModelAndView registroPerfilProfesional(@ModelAttribute("datosRegistroProfesional") DatosRegistroProfesional datos, HttpServletRequest request) {
+    public ModelAndView registroPerfilProfesional(@ModelAttribute("datosRegistroProfesional") DatosRegistroProfesional datos,
+                                                  @RequestParam("file") MultipartFile foto, HttpServletRequest request) {
 
         ModelMap model = new ModelMap();
         if (request.getSession().getAttribute("userID")==null){
@@ -87,10 +92,24 @@ public class ControladorPerfilProfesional {
         }
         long idUsuario = (Long) request.getSession().getAttribute("userID");
 
+        /*
+        if(!foto.isEmpty()){
+            Path directorioImagen = Paths.get("src//main//webapp/images");
+            String rutaAbsoluta = directorioImagen.toFile().getAbsolutePath();
+            try{
+                byte[] bytesImg = foto.getBytes();
+                Path rutaCompleta = Paths.get(rutaAbsoluta + "//" + foto.getOriginalFilename());
+                Files.write(rutaCompleta, bytesImg);
+                datos.setFoto(foto.getOriginalFilename());
+            }
+            catch (Exception e){
+            }
+        }
+         */
 
         try {
             servicioPerfilProfesional.registrarPerfil(datos.getNombreCompleto(), datos.getEmail(),
-                    datos.getExperiencia(), datos.getNumeroTelefono(), datos.getFechaNacimiento(), idUsuario);
+                    datos.getExperiencia(), datos.getNumeroTelefono(), datos.getFechaNacimiento(), idUsuario, datos.getFoto());
 
             model.put("msg", "Su perfil profesional ha sido cargado");
         } catch (Exception e){
