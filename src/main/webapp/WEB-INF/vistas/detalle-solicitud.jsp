@@ -2,8 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="header.jsp" %>
 
-<title>Editar</title>
 <div class = "container">
+    <h1>${titulo}</h1>
     <div id="solicitudBox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <form:form action="../editarSolicitud" method="POST" modelAttribute="asistencia">
 

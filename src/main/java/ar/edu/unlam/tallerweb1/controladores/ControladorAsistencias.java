@@ -135,16 +135,19 @@ public class ControladorAsistencias {
         ModelMap model = new ModelMap();
         model.put("idRol", idRol);
 
-        return new ModelAndView("ir-a-asistencias", model);
+        return new ModelAndView("redirect:/ir-a-mis-asistencias", model);
 
     }
 
     @RequestMapping (method = RequestMethod.GET, path = "/detalle-asistencia/{idAsistencia}")
-    public ModelAndView buscarAsistenciaPorId(@PathVariable("idAsistencia") long idAsistencia) throws Exception {
+    public ModelAndView buscarAsistenciaPorId(HttpServletRequest request, @PathVariable("idAsistencia") long idAsistencia) throws Exception {
+        Long idUsuario = obtenerIdUsuario(request);
+        Long idRol = obtenerIdRol(request);
 
          ModelMap model = new ModelMap();
         Asistencia asistenciaBuscada  =servicioAsistencia.buscarAsistenciaPorId(idAsistencia);
         model.put("asistencia", asistenciaBuscada);
+        model.put("idRol", idRol);
 
         return new ModelAndView("detalle-solicitud", model);
     }

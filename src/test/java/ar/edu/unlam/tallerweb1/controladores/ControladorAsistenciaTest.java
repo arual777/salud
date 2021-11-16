@@ -145,7 +145,7 @@ public class ControladorAsistenciaTest {
 
     private void entoncesSeEdita(ModelAndView mav) {
         assertThat(mav.getModel().get("nombre")).isEqualTo(SOLICITUD_NUEVA.getNombre());
-        assertThat(mav.getViewName()).isEqualTo("ir-a-asistencias");
+        assertThat(mav.getViewName()).isEqualTo("redirect:/ir-a-mis-asistencias");
     }
 
     private ModelAndView cuandoEditoUnaSolicitud(DatosAsistencia datos) throws Exception {
@@ -173,7 +173,11 @@ public class ControladorAsistenciaTest {
     }
 
    private ModelAndView cuandoBuscoUnaSolicitudDeAsistencia(DatosAsistencia solicitudDeAsistencia) throws Exception {
-      return controladorAsistencias.buscarAsistenciaPorId(solicitudDeAsistencia.getId());
+       when(this.httpServletRequestMock.getSession()).thenReturn(httpSessionMock);
+       when(this.httpSessionMock.getAttribute("userID")).thenReturn("1");
+       when(this.httpSessionMock.getAttribute("rolID")).thenReturn("1");
+
+      return controladorAsistencias.buscarAsistenciaPorId(httpServletRequestMock, solicitudDeAsistencia.getId());
     }
 
     @Test

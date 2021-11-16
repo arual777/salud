@@ -23,7 +23,7 @@
             <li><a href="ver-mis-empleos-coordinados">Empleos Coordinados</a></li>
             <li><a href="cerrar-sesion" class="link-light">Salir <i class="fas fa-sign-out-alt"></i></a></li>
 
-          
+
         </ul>
     </c:when>
     <c:otherwise>
