@@ -28,7 +28,7 @@ public class ServicioReseniaImpl implements ServicioResenia {
 
 
     @Override
-    public void registrarResenia(DatosResenia datos) throws Exception {
+    public ReseniaAProfesional registrarResenia(DatosResenia datos) throws Exception {
         ReseniaAProfesional reseniaAProfesionalNueva = new ReseniaAProfesional();
 
         List <ReseniaAProfesional> reseniasAProfesional = repositorioResenia.buscarReseniaPorClienteYProfesional
@@ -47,6 +47,7 @@ public class ServicioReseniaImpl implements ServicioResenia {
         reseniaAProfesionalNueva.setIdUsuarioProfesional(usuarioProfesional);
 
         repositorioResenia.guardarResenia(reseniaAProfesionalNueva);
+        return reseniaAProfesionalNueva;
     }
 
     @Override

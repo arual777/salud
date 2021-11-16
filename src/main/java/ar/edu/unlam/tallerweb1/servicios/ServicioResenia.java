@@ -8,7 +8,7 @@ import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import java.util.List;
 
 public interface ServicioResenia {
-    void registrarResenia(DatosResenia datos) throws Exception;
+    ReseniaAProfesional registrarResenia(DatosResenia datos) throws Exception;
 
     void registrarReseniaACliente(DatosResenia datos) throws Exception;
 
