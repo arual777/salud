@@ -114,10 +114,21 @@ public class ControladorResenia {
 
         List<ReseniaAProfesional> reseniaAProfesionals = servicioResenia.buscarReseniasPorIdProfesional(idUsuario);
 
+
+        int calificacion=0;
+        int suma=0;
+        for (int i=0; i < reseniaAProfesionals.size(); i++){
+            ReseniaAProfesional resenia = reseniaAProfesionals.get(i);
+            resenia.getCalificacion();
+            calificacion = calificacion + resenia.getCalificacion();
+        }
+        calificacion = calificacion / reseniaAProfesionals.size();
+
         Usuario usuario = servicioResenia.buscarUsuario(idUsuario);
 
         model.put("resenias", reseniaAProfesionals);
         model.put("usuario", usuario);
+        model.put("calificacion", calificacion);
 
         return new ModelAndView("mis-resenias-profesional", model);
 
