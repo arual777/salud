@@ -13,4 +13,6 @@ public interface RepositorioMensaje {
     List<Mensaje> buscarLosMensajesPorIdUsuario(Long idUsuario);
 
     void actualizar(Mensaje mensaje);
+
+    List<Mensaje> buscarLosMensajesRespondidosPorIdUsuario(Long idUsuario);
 }

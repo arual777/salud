@@ -6,7 +6,6 @@ import ar.edu.unlam.tallerweb1.modelo.Mensaje;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsistencia;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioMensaje;
-import ar.edu.unlam.tallerweb1.repositorios.RepositorioMensajeImpl;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,21 +16,21 @@ import java.util.List;
 
 @Service("servicioMensajeria")
 @Transactional
-public class ServicioMensajeriaImpl implements ServicioMensajeria{
+public class ServicioMensajeriaImpl implements ServicioMensajeria {
 
     private RepositorioMensaje repositorioMensaje;
     private RepositorioAsistencia repositorioAsistencia;
     private RepositorioUsuario repositorioUsuario;
 
     @Autowired
-    public ServicioMensajeriaImpl(RepositorioMensaje repositorioMensaje, RepositorioAsistencia repositorioAsistencia, RepositorioUsuario repositorioUsuario){
-    this.repositorioMensaje = repositorioMensaje;
-    this.repositorioAsistencia = repositorioAsistencia;
-    this.repositorioUsuario = repositorioUsuario;
+    public ServicioMensajeriaImpl(RepositorioMensaje repositorioMensaje, RepositorioAsistencia repositorioAsistencia, RepositorioUsuario repositorioUsuario) {
+        this.repositorioMensaje = repositorioMensaje;
+        this.repositorioAsistencia = repositorioAsistencia;
+        this.repositorioUsuario = repositorioUsuario;
     }
 
     @Override
-    public void crearPregunta(DatosMensajeria datosMensajeria) {
+    public Mensaje crearPregunta(DatosMensajeria datosMensajeria) {
 
         Mensaje mensaje = new Mensaje();
         Usuario usuario = repositorioUsuario.buscarUsuario(datosMensajeria.getIdUsuario());
@@ -40,6 +39,7 @@ public class ServicioMensajeriaImpl implements ServicioMensajeria{
         mensaje.setAsistencia(asistencia);
         mensaje.setUsuario(usuario);
         repositorioMensaje.crearPregunta(mensaje);
+        return mensaje;
     }
 
 
@@ -54,6 +54,12 @@ public class ServicioMensajeriaImpl implements ServicioMensajeria{
         mensaje.setRespuesta(datosMensajeria.getMensaje());
 
         repositorioMensaje.actualizar(mensaje);
+    }
+
+    @Override
+    public List<Mensaje> buscarPreguntasPorUsuarioRespondidas(Long idUsuario) {
+
+        return repositorioMensaje.buscarLosMensajesRespondidosPorIdUsuario(idUsuario);
     }
 
 

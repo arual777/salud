@@ -31,11 +31,16 @@
                     <td colspan="3">
                         <form:form action="responder" method="POST" modelAttribute="datosMensajeria">
                            <label for="respuesta"> Formule su respuesta: </label>
-                           <br/>
-                           <textarea id="mensaje" name="mensaje" rows="5" cols="100" >${pregunta.respuesta}</textarea>
-                           <br /><br />
-                          <input id="idMensaje" name="idMensaje" type="hidden" value= "${pregunta.idMensaje}" >
-                          <button id="btn-responder" class="btn btn-lg btn-primary" Type="Submit"/>Responder</button>
+                                <br/>
+                                <textarea <c:if test="${not empty pregunta.respuesta}">readonly</c:if> class="form-control" id="mensaje" name="mensaje" rows="5" cols="100" >${pregunta.respuesta}</textarea>
+                                    <br /><br />
+                                <input id="idMensaje" name="idMensaje" type="hidden" value="${pregunta.idMensaje}" >
+
+                            <c:choose>
+                                <c:when test="${empty pregunta.respuesta}">
+                                     <button id="btn-responder" class="btn btn-lg btn-primary" Type="Submit" onclick="javascript:document.getElementById('btn_submit').style.visibility = 'hidden'"/>Responder</button>
+                                </c:when>
+                            </c:choose>
                         </form:form>
                   </td>
                 </tr>
@@ -45,6 +50,8 @@
         </div>
     </div>
 </div>
+
+
 
 </body>
 </html>

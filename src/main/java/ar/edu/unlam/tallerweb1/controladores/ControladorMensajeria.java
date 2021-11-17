@@ -46,10 +46,15 @@ public class ControladorMensajeria {
     public ModelAndView preguntar(HttpServletRequest request,  @ModelAttribute("datosMensajeria") DatosMensajeria datosMensajeria) throws Exception{
         Long idUsuario = Long.parseLong(request.getSession().getAttribute("userID").toString());
         datosMensajeria.setIdUsuario(idUsuario);
-        servicioMensajeria.crearPregunta(datosMensajeria);
-
         ModelMap model = new ModelMap();
-        model.put("msg", "Usted ha enviado un mensaje exitosamente");
+
+        if(!(datosMensajeria).getMensaje().trim().isEmpty()) {
+            servicioMensajeria.crearPregunta(datosMensajeria);
+
+            model.put("msg", "Usted ha enviado un mensaje exitosamente");
+        } else{
+            model.put("msg", "Usted no ha formulado ninguna pregunta");
+        }
         return new ModelAndView("empleos-publicados", model);
     }
 
@@ -82,5 +87,17 @@ public class ControladorMensajeria {
         modelView.addObject("msg","Respuesta registrada");//le pasa por query string
         modelView.setViewName("redirect:/buzon");
         return modelView;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path="/respuestas")
+    public ModelAndView verRespuestas(HttpServletRequest request) {
+
+        Long idUsuario = obtenerIdUsuario(request);
+        Long idRol = obtenerIdRol(request);
+        ModelMap model = new ModelMap();
+        model.put("idRol", idRol);
+        List<Mensaje> preguntas = servicioMensajeria.buscarPreguntasPorUsuarioRespondidas(idUsuario);
+        model.put("preguntas", preguntas);
+        return new ModelAndView("casillaProfesional", model);
     }
 }

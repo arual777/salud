@@ -7,13 +7,14 @@ import java.util.List;
 
 public interface ServicioMensajeria {
 
-   void crearPregunta(DatosMensajeria datosMensajeria);
+   Mensaje crearPregunta(DatosMensajeria datosMensajeria);
 
     List<Mensaje> buscarPreguntasPorUsuario(Long idUsuario);
 
     void responder(DatosMensajeria datosMensajeria);
 
 
+    List<Mensaje> buscarPreguntasPorUsuarioRespondidas(Long idUsuario);
 }
 
 
