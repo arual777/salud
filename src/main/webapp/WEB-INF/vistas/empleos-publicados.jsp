@@ -33,6 +33,10 @@
                                    <input id="idAsistencia" name="idAsistencia" type="hidden" value= "${empleo.id}" >
                                </form>
                            </td>
+
+                           <td>
+                            <a href="ver-perfil-publico-cliente?idCli=${empleo.usuario.id}"><button class="btn btn-lg btn-info">Ver Perfil Empleador</button></a>
+                           </td>
                           </c:when>
                           <c:otherwise>
                          <td>
