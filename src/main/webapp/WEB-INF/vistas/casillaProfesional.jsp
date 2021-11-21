@@ -9,7 +9,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Mis preguntas</th>
-                        <th scope="col">Respuestas</th>
+
                         <th scope="col">Servicio Consultado</th>
                     </tr>
                 </thead>
@@ -17,16 +17,24 @@
                 <c:forEach  items="${preguntas}" var="pregunta">
                 <tr>
                     <td>
-                         ${pregunta.pregunta}
-                   </td>
-
-                    <td>
-                        ${pregunta.respuesta}
+                        ${pregunta.pregunta}
                     </td>
 
                     <td>
                         <a href="detalle-asistencia/${pregunta.asistencia.id}">${pregunta.asistencia.id}</a>
                     </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+
+                           <label for="respuesta"> Respuesta: </label>
+                                <br/>
+                                <textarea <c:if test="${not empty pregunta.respuesta}">readonly</c:if> class="form-control" id="mensaje" name="mensaje" rows="5" cols="100" >${pregunta.respuesta}</textarea>
+                                    <br /><br />
+                                <input id="idMensaje" name="idMensaje" type="hidden" value="${pregunta.idMensaje}" >
+
+
+                  </td>
                 </tr>
                 </c:forEach>
                 </body>
@@ -34,6 +42,14 @@
         </div>
     </div>
 </div>
+
+
+
+</body>
+</html>
+
+
+
 
 </body>
 </html>

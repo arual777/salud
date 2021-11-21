@@ -10,7 +10,9 @@
                 <thead>
                     <tr>
                         <th scope="col">Pregunta</th>
+
                         <th scope="col">Usuario</th>
+
                         <th scope="col">Asistencia</th>
                     </tr>
                 </thead>

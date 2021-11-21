@@ -41,3 +41,12 @@
         </ul>
     </c:otherwise>
 </c:choose>
+<script>
+$(document).ready(function(){
+        $.ajax({ url: "pendientes",
+            success: function(data){
+                alert(data);
+            }
+        });
+    });
+</script>

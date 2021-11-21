@@ -5,10 +5,12 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
 import ar.edu.unlam.tallerweb1.servicios.ServicioMensajeria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -99,5 +101,22 @@ public class ControladorMensajeria {
         List<Mensaje> preguntas = servicioMensajeria.buscarPreguntasPorUsuarioRespondidas(idUsuario);
         model.put("preguntas", preguntas);
         return new ModelAndView("casillaProfesional", model);
+    }
+
+
+
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.GET, path = "/pendientes")
+    public boolean ObtenerMensajesPendientes(HttpServletRequest request) {
+        Long idUsuario = obtenerIdUsuario(request);
+        List<Mensaje> mensajes = servicioMensajeria.buscarPreguntasPorUsuario(idUsuario);
+        boolean mensajesNuevos = false;
+
+        for (Mensaje mensaje : mensajes) {
+            if (mensaje.getRespuesta() == null) {
+                mensajesNuevos = true;
+            }
+        }
+        return mensajesNuevos;
     }
 }
