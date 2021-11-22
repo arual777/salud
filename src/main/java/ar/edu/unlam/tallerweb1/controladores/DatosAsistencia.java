@@ -9,6 +9,8 @@ public class DatosAsistencia {
     private Boolean camaAdentro;
     private Double tarifa;
     private long idTurno;
+    private Double latitud;
+    private Double longitud;
 
     public long getIdUsuario() {
         return idUsuario;
@@ -84,5 +86,19 @@ public class DatosAsistencia {
         this.nombre = nombre;
     }
 
+    public Double getLatitud() {
+        return latitud;
+    }
 
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+
+    public Double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
+    }
 }

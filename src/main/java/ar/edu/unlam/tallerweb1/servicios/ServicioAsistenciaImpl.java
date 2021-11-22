@@ -81,7 +81,8 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
         nuevaAsistencia.setIdTurno(turno);
         nuevaAsistencia.setIdFrecuencia(frecuencia);
         nuevaAsistencia.setZona(zona);
-
+        nuevaAsistencia.setLatitud(datos.getLatitud());
+        nuevaAsistencia.setLongitud(datos.getLongitud());
         repositorioAsistencia.guardar(nuevaAsistencia);
 
         return nuevaAsistencia;
