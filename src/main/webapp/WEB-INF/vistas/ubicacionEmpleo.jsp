@@ -4,18 +4,19 @@
 <div class = "container">
 
     <a href="ir-a-asistencias"><button class="btn btn-lg btn-secondary" style="margin-top: 2em;">Volver</button></a>
-    <h2>Detalle de Empleo</h2>
 
-        <div class="my-5">
+
+        <div class="mainbox col-md-10 col-md-offset-3 col-sm-8 col-sm-offset-2">
+            <h2>Detalle de Empleo</h2>
             <div class = "d-flex justify-content-center">
                 <div class="col-sm-8 my-5">
                     <div class="card mb-3" >
                         <div class="row no-gutters">
                             <div class="col-md-8">
                                 <div class="card-body">
-                                    <h3 class="card-title">Descripcion: ${empleo.descripcion}</h3>
-                                    <p class="card-text"> Por: ${empleo.usuario.email}</p>
-                                    <p class="card-text"> Tarifa por dia: ${empleo.tarifa}</p>
+                                    <h3 class="card-title">Descripci&oacute;n: ${empleo.descripcion}</h3>
+                                    <h3 class="card-title"> Empleo ofrecido por: ${empleo.usuario.email}</h3>
+                                    <h3 class="card-title"> Tarifa por d&iacute;a: $${empleo.tarifa}</h3>
                                     <hr>
                                 </div>
                             </div>
@@ -23,14 +24,15 @@
                     </div>
                 </div>
             </div>
+            <div style="margin: auto;">
+                <div>
+                    <div class="col-12" id="mapa" style="width:500px; height:400px;"></div>
+                </div>
+                <!--<button class="btn btn-danger my-3" onclick="initialize()">Mostrar Mapa</button>-->
+            </div>
         </div>
 
     <div class="container-md" >
-        <div class="row">
-            <div class="col-12" id="mapa" style="width:500px; height:400px;"></div>
-
-        </div>
-        <button class="btn btn-danger my-3" onclick="initialize()">Mostrar Mapa</button>
 
     </div>
 </div>
@@ -71,7 +73,20 @@
 
         // adds the marker on the map
         vMarker.setMap(map);
+
+        /**
+         * Creates the info Window at the top of the marker
+         */
+        var infoWindow = new google.maps.InfoWindow({
+            content: 'ubicacion'
+        });
+        infoWindow.open(map, vMarker);
+
+
+
+
     }
+    initialize();
 </script>
 
 

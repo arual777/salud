@@ -68,6 +68,12 @@
                 <form:input type="hidden" required="" path="longitud" name="longitud" id="longitudinput" class="form-control" />
             </div>
 
+            <label for="mapa">Indique una ubicaci&oacute;n de referencia en el mapa arrastrando el puntero</label>
+            <div class="form-group">
+                <div class="col-6" id="mapa" style="width:500px; height:400px;"></div>
+            </div>
+
+
             <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Publicar</button>
             </form:form>
             <c:if test="${not empty msg}">
@@ -94,14 +100,7 @@
     </div>
 
 
-    <div class="container-md" >
-        <div class="row">
-            <div class="col-12" id="mapa" style="width:500px; height:400px;"></div>
 
-        </div>
-        <button class="btn btn-danger my-3" onclick="initialize()">Mostrar Mapa</button>
-
-    </div>
 </div>
 
 
@@ -141,6 +140,7 @@
         // adds the marker on the map
         vMarker.setMap(map);
     }
+    initialize();
 </script>
 
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
