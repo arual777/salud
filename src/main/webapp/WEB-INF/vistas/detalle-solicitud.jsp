@@ -66,7 +66,7 @@
                                                    <option value="5">ZONA OESTE</option>
                                                </select>
 
-            <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Editar</button>
+            <button id="btn-registrarme" class="btn-light-blue" Type="Submit"/>Editar</button>
                 </form:form>
                  <c:if test="${not empty msg}">
                  <div class="container">

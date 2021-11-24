@@ -1,17 +1,16 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="header.jsp" %>
+<!DOCTYPE html>
 
+<%@include file="header.jsp" %>
 <div class = "container">
     <div id="solicitudBox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <form:form action="crearSolicitud" method="POST" modelAttribute="datos">
+        <br>
         <h3 class="form-signin-heading">Nueva Solicitud ${parametro}</h3>
-        <hr class="colorgraph"><br>
 
         <label for="nombre">Nombre de contacto:</label>
         <form:input path="nombre" id="nombre" class="form-control" />
 
-        <label for="descripcion"> Descripción del empleo: </label>
+        <label for="descripcion"> Descripcion del empleo: </label>
         <br/>
         <textarea id="descripcion" name="descripcion" rows="5" cols="40">
               </textarea>
@@ -58,8 +57,9 @@
                 <option value="4">ZONA ESTE</option>
                 <option value="5">ZONA OESTE</option>
             </select>
-
-            <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Publicar</button>
+            <br>
+            <button id="btn-registrarme" class="btn-light-blue" Type="Submit"/>Publicar</button>
+            <br>
             </form:form>
             <c:if test="${not empty msg}">
             <div class="container">

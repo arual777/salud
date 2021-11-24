@@ -24,6 +24,6 @@
     </div>
     <br>
     </c:if>
-
+</div>
 </body>
 </html>

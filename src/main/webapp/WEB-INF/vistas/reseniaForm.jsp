@@ -27,7 +27,7 @@
             <form:textarea path="comentario" type="text-area" id="text" class="form-control"/>
 
             <form:hidden path="idUsuarioProfesional" id="text" value="${profesional.id}"/>
-            <button id="btn-registroProfesional" class="btn btn-lg btn-primary btn-block my-3" Type="Submit"/>Registrar Resenia</button>
+            <button id="btn-registroProfesional" class="btn-light-blue" Type="Submit"/>Registrar Resenia</button>
         </form:form>
 
        <h5 class="my-3">${msgError}</h5>
