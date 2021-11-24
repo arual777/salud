@@ -49,12 +49,13 @@ public class ControladorPerfilProfesional {
         ModelMap model = new ModelMap();
         String logeado;
 
+
         if (request.getSession().getAttribute("userID")==null){
             logeado = "No ingresaste en el sistema";
             model.put("msglogeado", logeado);
             return new ModelAndView("errorAcceso", model);
         }
-
+        long idRol = (Long) request.getSession().getAttribute("rolID");
         long idUsuario = (Long) request.getSession().getAttribute("userID");
 
         PerfilProfesional perfilProfesional = servicioPerfilProfesional.buscarCVPorIdUsuario(idUsuario);
@@ -69,6 +70,7 @@ public class ControladorPerfilProfesional {
         logeado = "siLogeado";
         DatosRegistroProfesional datos = new DatosRegistroProfesional();
         model.put("datosRegistroProfesional", datos);
+        model.put("idRol",idRol);
 
         model.put("msglogeado", logeado);
         return new ModelAndView("registroProfesional", model);
@@ -138,7 +140,7 @@ public class ControladorPerfilProfesional {
             model.put("msglogeado", msgSesion);
             return new ModelAndView("errorAcceso", model);
         }
-
+        long idRol = (Long) request.getSession().getAttribute("rolID");
         PerfilProfesional perfilProfesional = servicioPerfilProfesional.buscarCV(id);
         Usuario usuario = perfilProfesional.getIdUsuario();
         long idUsuarioEnPerfilProfesional = usuario.getId();
@@ -151,6 +153,7 @@ public class ControladorPerfilProfesional {
         }
         ModelMap model = new ModelMap();
         model.put("curriculum", perfilProfesional);
+        model.put("idRol", idRol);
         return new ModelAndView("editarPerfilProfesional", model);
 
     }

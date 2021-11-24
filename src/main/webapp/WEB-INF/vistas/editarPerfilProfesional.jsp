@@ -1,11 +1,15 @@
 <%@include file="header.jsp" %>
 
 <div class = "container">
+
+
     <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <form:form action="./editarPerfilProfesional" method="POST" modelAttribute="datosRegistroProfesional">
             <form:hidden path="id" id="id" />
 
-
+            <div class="text-align-center">
+                <h1 style="margin-top: 4em">Editar Perfil Profesional</h1>
+            </div>
 
             <h4 class="my-2">Ingrese Su Nombre Completo</h4>
             <form:input path="nombreCompleto" id="text" class="form-control" value="${curriculum.nombreCompleto}"/>
@@ -17,7 +21,7 @@
             <form:textarea path="experiencia" type="text-area" id="clave" class="form-control" value="${curriculum.experiencia}"/>
             <h4 class="my-2">Ingrese un numero de telefono de contacto</h4>
             <form:input path="numeroTelefono" type="text" id="clave" class="form-control" value="${curriculum.numeroTelefono}"/>
-            <button id="btn-editarPerfilProfesional" class="btn btn-lg btn-primary btn-block my-3" Type="Submit"/>Registrar mi Perfil Profesional</button>
+            <button id="btn-editarPerfilProfesional" class="btn-light-blue" Type="Submit"/>Registrar mi Perfil Profesional</button>
         </form:form>
     </div>
 </div>
