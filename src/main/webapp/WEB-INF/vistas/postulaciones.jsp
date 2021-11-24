@@ -38,11 +38,11 @@
                         <c:when test="${idRol==1}">
                         <td>
                             <form action="contratado" method="POST" modelAttribute="datosPostulacion">
-                                <input type="submit" class="btn btn-lg btn-primary btn-block" value="Contratar"/>
+                                <input type="submit" class="btn-light-blue" value="Contratar"/>
                                 <input id="idPostulacion" name="idPostulacion" type="hidden" value= "${postulacion.id}" >
                             </form>
                         </td>
-                        <td> <a href="ver-perfil-publico-profesional?idProf=${postulacion.profesional.id}"><button class="btn btn-lg btn-primary">Ver Perfil</button></a></td>
+                        <td> <a href="ver-perfil-publico-profesional?idProf=${postulacion.profesional.id}"><button class="btn-light-blue">Ver Perfil</button></a></td>
                         </c:when>
                         </c:choose>
                     </tr>
