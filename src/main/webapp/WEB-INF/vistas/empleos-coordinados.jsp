@@ -4,22 +4,18 @@
 <div class = "container">
 
     <h2>Empleos Coordinados</h2>
-
-
     <c:forEach  items="${empleos}" var="empleo">
         <div class="my-5">
             <div class = "d-flex justify-content-center">
                 <div class="col-sm-8 my-5">
-                    <div class="card mb-3" >
+                    <div class="card mb-3" style="background: #B1D2CE;" >
                         <div class="row no-gutters">
                             <div class="col-md-8">
-                                <div class="card-body">
+                                <div class="card-body col-md-8">
                                     <h3 class="card-title">Empleo ID ${empleo.id}</h3>
                                     <p class="card-text"> Profesional Contratado: ${empleo.profesional.email}</p>
                                     <p class="card-text"> Descripción: ${empleo.asistencia.descripcion}</p>
-                                    <a href="./ir-a-reseniar?idProf=${empleo.profesional.id}"><button class="btn-primary">Reseniar</button></a>
-                                    <hr>
-
+                                    <a href="./ir-a-reseniar?idProf=${empleo.profesional.id}"><button class="btn-light-blue">Reseniar</button></a>
                                 </div>
                             </div>
                         </div>

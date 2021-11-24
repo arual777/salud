@@ -35,7 +35,7 @@
                            <textarea id="mensaje" name="mensaje" rows="5" cols="100" >${pregunta.respuesta}</textarea>
                            <br /><br />
                           <input id="idMensaje" name="idMensaje" type="hidden" value= "${pregunta.idMensaje}" >
-                          <button id="btn-responder" class="btn btn-lg btn-primary" Type="Submit"/>Responder</button>
+                          <button id="btn-responder" class="btn-light-blue" Type="Submit"/>Responder</button>
                         </form:form>
                   </td>
                 </tr>
