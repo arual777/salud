@@ -60,4 +60,5 @@ public class RepositorioMensajeImpl implements RepositorioMensaje{
                 .add(Restrictions.eq("usuario.id", idUsuario))
                 .add(Restrictions.isNotNull("respuesta")).list();
     }
+
 }

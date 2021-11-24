@@ -23,7 +23,7 @@
             <li><a href="ir-a-mis-asistencias">Mis Empleos</a></li>
             <li><a href="ir-a-asistencias">Empleos</a></li>
             <li><a href="ver-mis-empleos-coordinados">Empleos Coordinados</a></li>
-            <li> <a href="./buzon"><i class="far fa-envelope fa-2x" style="color: green" ></i> </a></li>
+            <li> <a href="./buzon"><i class="far fa-envelope fa-2x" style="color: green" ><label class="badge badge-light" id="mensajePendientes"/></i> </a></li>
             <li><a href="cerrar-sesion" class="link-light">Salir <i class="fas fa-sign-out-alt"></i></a></li>
         </ul>
     </c:when>
@@ -35,7 +35,8 @@
             <li><a href="ir-a-registrar-perfil-profesional">Editar perfil</a></li>
             <li><a href="#">Mi perfil</a></li>
             <li><a href="ver-resenias-profesional">Ver mis resenias</a></li>
-            <li><a href="respuestas">Respuestas</a></li>
+            <li><
+            <li> <a href="respuestas"><i class="far fa-envelope fa-2x" style="color: green"><label id="mensajePendientes" class="badge badge-light"/></i> </a></li>
             <li><a href="cerrar-sesion" class="link-light">Salir <i class="fas fa-sign-out-alt"></i></a></li>
 
         </ul>
@@ -45,7 +46,7 @@
 $(document).ready(function(){
         $.ajax({ url: "pendientes",
             success: function(data){
-                alert(data);
+                $("#mensajePendientes").html(data);
             }
         });
     });

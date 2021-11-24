@@ -17,7 +17,21 @@ public class Mensaje {
     @ManyToOne
     private Asistencia asistencia;
 
+    public void setIdMensaje(Long idMensaje) {
+        this.idMensaje = idMensaje;
+    }
+
+    public Boolean getRespuestaLeida() {
+        return respuestaLeida;
+    }
+
+    public void setRespuestaLeida(Boolean respuestaLeida) {
+        this.respuestaLeida = respuestaLeida;
+    }
+
     private String respuesta;
+
+    private Boolean respuestaLeida = false;
 
     public long getIdMensaje() {
         return idMensaje;

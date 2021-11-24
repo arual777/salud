@@ -12,9 +12,8 @@ public interface ServicioMensajeria {
     List<Mensaje> buscarPreguntasPorUsuario(Long idUsuario);
 
     void responder(DatosMensajeria datosMensajeria);
-
-
     List<Mensaje> buscarPreguntasPorUsuarioRespondidas(Long idUsuario);
+     Boolean tieneRespuestasSinLeer(Long idUsuario);
 }
 
 

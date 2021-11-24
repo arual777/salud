@@ -59,8 +59,25 @@ public class ServicioMensajeriaImpl implements ServicioMensajeria {
     @Override
     public List<Mensaje> buscarPreguntasPorUsuarioRespondidas(Long idUsuario) {
 
-        return repositorioMensaje.buscarLosMensajesRespondidosPorIdUsuario(idUsuario);
+        List <Mensaje> respuestas = repositorioMensaje.buscarLosMensajesRespondidosPorIdUsuario(idUsuario);
+
+        for(Mensaje respuesta : respuestas){
+            respuesta.setRespuestaLeida(true);
+            repositorioMensaje.actualizar(respuesta);
+        }
+        return respuestas;
     }
 
+    @Override
+    public Boolean tieneRespuestasSinLeer(Long idUsuario){
+        List <Mensaje> respuestas = repositorioMensaje.buscarLosMensajesRespondidosPorIdUsuario(idUsuario);
+        Boolean respuestaPendienteDeLeer = false;
 
+        for(Mensaje respuesta : respuestas) {
+            if (respuesta.getRespuestaLeida() == false){
+                respuestaPendienteDeLeer = true;
+            }
+        }
+        return respuestaPendienteDeLeer;
+    }
 }

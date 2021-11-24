@@ -107,14 +107,29 @@ public class ControladorMensajeria {
 
     @ResponseBody
     @RequestMapping(method = RequestMethod.GET, path = "/pendientes")
-    public boolean ObtenerMensajesPendientes(HttpServletRequest request) {
+    public String ObtenerMensajesPendientes(HttpServletRequest request) {
         Long idUsuario = obtenerIdUsuario(request);
+        Long idRol = obtenerIdRol(request);
+
+
+
+        if (idRol == 2) {
+
+            Boolean respuestasSinLeer = servicioMensajeria.tieneRespuestasSinLeer(idUsuario);
+            String mensajesNuevos = "0";
+            if(respuestasSinLeer == true){
+                mensajesNuevos = "Correo nuevo";
+            }
+            return mensajesNuevos;
+        }
+
         List<Mensaje> mensajes = servicioMensajeria.buscarPreguntasPorUsuario(idUsuario);
-        boolean mensajesNuevos = false;
+
+        String mensajesNuevos = "0";
 
         for (Mensaje mensaje : mensajes) {
             if (mensaje.getRespuesta() == null) {
-                mensajesNuevos = true;
+                mensajesNuevos = "Correo nuevo";
             }
         }
         return mensajesNuevos;
