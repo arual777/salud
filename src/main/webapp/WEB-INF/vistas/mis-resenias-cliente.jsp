@@ -4,7 +4,7 @@
 <div class = "container">
 
     <br><br>
-    <div class="text-center">
+    <div class="text-center" style="margin-top: 4em">
         <h2>${usuario.email}</h2>
         <h1>Puntaje general ${calificacion} / 10</h1>
     </div>
@@ -23,10 +23,10 @@
         <div class="my-5">
             <div class = "d-flex justify-content-center">
                 <div class="col-sm-8 my-5">
-                    <div class="card mb-3" >
+                    <div class="card mb-3" style="background: #B1D2CE;">
                         <div class="row no-gutters">
                             <div class="col-md-8">
-                                <div class="card-body">
+                                <div class="card-body col-md-8">
                                     <h3 class="card-title">Calificacion: ${resenia.calificacion}</h3>
                                     <p class="card-text"> Por: ${resenia.idUsuarioProfesional.email}</p>
                                     <p class="card-text"> Comentario: ${resenia.comentario}</p>

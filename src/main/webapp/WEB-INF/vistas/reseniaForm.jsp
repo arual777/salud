@@ -1,3 +1,4 @@
+<%@include file="header.jsp" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -8,7 +9,7 @@
 </head>
 <body>
 <div class = "container">
-    <div class="text-align-center">
+    <div class="text-align-center" style="margin-top: 8em">
         <h1>Registro de Resenia</h1>
     </div>
 

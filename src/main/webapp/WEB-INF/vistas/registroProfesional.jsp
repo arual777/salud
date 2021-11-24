@@ -28,7 +28,7 @@
             <br>
         </c:if>
 
-        ${msglogeado}
+
     </div>
 </div>
 
