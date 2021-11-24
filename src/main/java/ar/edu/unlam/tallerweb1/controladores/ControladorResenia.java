@@ -61,7 +61,7 @@ public class ControladorResenia {
         model.put ("profesional", usuarioProfesional);
         DatosResenia datos = new DatosResenia();
         model.put("datosResenia", datos);
-
+        model.put("idRol", idRol);
 
         return new ModelAndView("reseniaForm",model);
     }
@@ -109,7 +109,7 @@ public class ControladorResenia {
             model.put("msglogeado", msg);
             return new ModelAndView("errorAcceso", model);
         }
-
+        long idRol = (Long) request.getSession().getAttribute("rolID");
         long idUsuario = (Long) request.getSession().getAttribute("userID");
 
         List<ReseniaAProfesional> reseniaAProfesionals = servicioResenia.buscarReseniasPorIdProfesional(idUsuario);
@@ -118,7 +118,7 @@ public class ControladorResenia {
 
         model.put("resenias", reseniaAProfesionals);
         model.put("usuario", usuario);
-
+        model.put("idRol", idRol);
         return new ModelAndView("mis-resenias-profesional", model);
 
     }
@@ -181,7 +181,7 @@ public class ControladorResenia {
         model.put ("cliente", usuarioCliente);
         DatosResenia datos = new DatosResenia();
         model.put("datosResenia", datos);
-
+        model.put("idRol", idRol);
 
         return new ModelAndView("reseniaAClienteForm",model);
     }

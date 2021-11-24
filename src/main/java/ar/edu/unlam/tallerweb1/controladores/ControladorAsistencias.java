@@ -291,13 +291,14 @@ public class ControladorAsistencias {
     @RequestMapping(method = RequestMethod.GET, path = "/ver-ubicacion-empleo", params={"empleo"})
     public ModelAndView verUbicacionEmpleo(HttpServletRequest request, @RequestParam Long empleo) throws Exception{
         ModelMap model = new ModelMap();
+        long idRol = (Long) request.getSession().getAttribute("rolID");
         if (request.getSession().getAttribute("userID")==null){
             String msg = "No ingresaste en el sistema";
             model.put("msglogeado", msg);
             return new ModelAndView("errorAcceso", model);
         }
         Asistencia asistenciaBuscada  =servicioAsistencia.buscarAsistenciaPorId(empleo);
-
+        model.put("idRol", idRol);
         model.put("empleo", asistenciaBuscada);
         return new ModelAndView("ubicacionEmpleo", model);
 

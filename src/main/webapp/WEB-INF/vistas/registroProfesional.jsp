@@ -2,7 +2,7 @@
 
 <div class = "container">
     <div class="text-align-center">
-    <h1>Registro de Perfil Profesional</h1>
+    <h1 style="margin-top: 4em">Registro de Perfil Profesional</h1>
     </div>
 
     <h3>Ingrese sus datos en el formulario para que los demas usuarios puedan saber su experiencia</h3>
