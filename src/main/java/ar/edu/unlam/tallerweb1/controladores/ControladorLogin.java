@@ -27,6 +27,17 @@ public class ControladorLogin {
 		this.servicioLogin = servicioLogin;
 	}
 
+	@RequestMapping("/index")
+	public ModelAndView irAlIndex() {
+
+		ModelMap modelo = new ModelMap();
+		// Se agrega al modelo un objeto con key 'datosLogin' para que el mismo sea asociado
+		// al model attribute del form que esta definido en la vista 'login'
+		modelo.put("datosLogin", new DatosLogin());
+		// Se va a la vista login (el nombre completo de la lista se resuelve utilizando el view resolver definido en el archivo spring-servlet.xml)
+		// y se envian los datos a la misma  dentro del modelo
+		return new ModelAndView("index", modelo);
+	}
 	// Este metodo escucha la URL localhost:8080/NOMBRE_APP/login si la misma es invocada por metodo http GET
 	@RequestMapping("/login")
 	public ModelAndView irALogin() {
@@ -60,10 +71,10 @@ public class ControladorLogin {
 		} else {
 			mensaje = 0;
 			model.put("msg", "Usuario o clave incorrecta");
-		}
-		model.put("mensaje", mensaje);
+			model.put("mensaje", mensaje);
 
-		return new ModelAndView("login", model);
+			return new ModelAndView("login", model);
+		}
 	}
 
 	// Escucha la URL /home por GET, y redirige a una vista.
@@ -89,7 +100,7 @@ public class ControladorLogin {
 	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {
-		return new ModelAndView("redirect:/login");
+		return new ModelAndView("redirect:/index");
 	}
 
 	private Long obtenerIdUsuario(HttpServletRequest request){

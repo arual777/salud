@@ -29,23 +29,17 @@
                        <c:when test="${idRol==2}">
                            <td>
                                <form action="postularme" method="POST" modelAttribute="datosPostulacion">
-                                   <button type="submit" class="btn btn-lg btn-primary btn-block">Postularme</button>
+                                   <button type="submit" class="btn-light-blue">Postularme</button>
                                    <input id="idAsistencia" name="idAsistencia" type="hidden" value= "${empleo.id}" >
                                </form>
                            </td>
                            <td><a href="ver-ubicacion-empleo?empleo=${empleo.id}"><button class="btn btn-lg btn-warning">Ver En El Mapa</button></a></td>
                           </c:when>
                           <c:otherwise>
-                         <td>
-                          <form action="postularme" method="POST" modelAttribute="datosPostulacion">
-                             <button type="submit" class="btn btn-lg btn-primary btn-block">Postularme</button>
-                             <input id="idAsistencia" name="idAsistencia" type="hidden" value= "${empleo.id}" >
-                          </form>
-                        </td>
 
                           <td>
                                 <form action= "ir-a-crear-pregunta" method="GET" modelAttribute="datosMensajeria">
-                                       <button type="submit" class="btn btn-lg btn-primary btn-block">Preguntar</button>
+                                       <button type="submit" class="btn-light-blue">Preguntar</button>
                                         <input id="idAsistencia" name="idAsistencia" type="hidden" value= "${empleo.id}" >
                                  </form>
                             </td>

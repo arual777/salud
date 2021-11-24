@@ -53,13 +53,41 @@ public class ControladorAsistencias {
         ModelMap model = new ModelMap();
         Integer mensaje = null;
         try {
+            List <Postulacion> postulaciones = servicioAsistencia.buscarPostulacionesPorCreadorNoAceptados(idUsuario);
+
+           // List <Asistencia> postulaciones = servicioAsistencia.buscarAsistenciaPorIdDelCliente(idUsuario);
+            if(postulaciones.isEmpty()){
+                mensaje = 0;
+                model.put("msg", "Usted no tiene empleos creados");
+            }else{
+                mensaje = 1;
+                model.put("msg", "Estos son sus empleos creados sin postulados");
+            }
+            model.put ("titulo", "Todos mis servicios");
+            model.put("empleos", postulaciones);
+            model.put("idRol", idRol);
+        } catch(Exception e){
+            mensaje = 0;
+            model.put("msg", "No tiene empleos para ver");
+        }
+        model.put("mensaje", mensaje);
+        return new ModelAndView("mis-empleos", model);
+    }
+
+    @RequestMapping (method = RequestMethod.GET, path = "/historial")
+    public ModelAndView historial(HttpServletRequest request){
+        Long idUsuario = obtenerIdUsuario(request);
+        Long idRol = obtenerIdRol(request);
+        ModelMap model = new ModelMap();
+        Integer mensaje = null;
+        try {
             List <Asistencia> asistencias = servicioAsistencia.buscarAsistenciaPorIdDelCliente(idUsuario);
             if(asistencias.isEmpty()){
                 mensaje = 0;
                 model.put("msg", "Usted no tiene empleos creados");
             }else{
                 mensaje = 1;
-                model.put("msg", "Estos son sus empleos creados");
+                model.put("msg", "Este es su historial de empleos creados");
             }
             model.put ("titulo", "Todos mis servicios");
             model.put("empleos", asistencias);
@@ -69,7 +97,7 @@ public class ControladorAsistencias {
             model.put("msg", "No tiene empleos para ver");
         }
         model.put("mensaje", mensaje);
-        return new ModelAndView("mis-empleos", model);
+        return new ModelAndView("historial", model);
     }
 
     @RequestMapping (method = RequestMethod.GET, path = "/ir-a-asistencias-diarias")
