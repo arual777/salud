@@ -1,12 +1,20 @@
 <%@include file="header.jsp" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
+<head>
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">-->
+</head>
+
+<body>
+
 <div class = "container">
 
     <br><br>
     <div class="text-center">
-        <h2>${usuario.email}</h2>
-    <h1>Puntaje general ${calificacion} / 10</h1>
+        <h2>${cv.nombreCompleto}</h2>
+        <h1>Puntaje general ${calificacion} / 10</h1>
+        <h1>${mensaje}</h1>
     </div>
     <br>
     <div class="text-center">
@@ -15,6 +23,17 @@
         </c:forEach>
     </div>
     <br>
+
+    <h2>CV</h2>
+    <div class="my-5 text-center">
+        <h3 class="card-title"> Email: ${cv.email}</h3>
+        <p class="card-text">Fecha de nacimiento: ${cv.fechaNacimiento}</p>
+        <p class="card-text"> Numero de Telefono: ${cv.numeroTelefono}</p>
+        <p class="card-text"> Experiencia: ${cv.experiencia}</p>
+        <hr>
+    </div>
+
+
 
     <h2>Resenias:</h2>
 
@@ -29,7 +48,6 @@
                                     <h3 class="card-title">Calificacion: ${resenia.calificacion}</h3>
                                     <p class="card-text"> Por: ${resenia.idUsuarioCliente.email}</p>
                                     <p class="card-text"> Comentario: ${resenia.comentario}</p>
-                                    <a href="./ir-a-reseniar-cliente?idCli=${resenia.idUsuarioCliente.id}"><button class="btn-primary">Reseniar</button></a>
                                     <hr>
                                 </div>
                             </div>
@@ -39,6 +57,7 @@
             </div>
         </div>
     </c:forEach>
+
 
 </div>
 

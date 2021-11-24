@@ -6,7 +6,8 @@
     <br><br>
     <div class="text-center">
         <h2>${usuario.email}</h2>
-    <h1>Puntaje general ${calificacion} / 10</h1>
+        <h1>Puntaje general ${calificacion} / 10</h1>
+        <h1> ${mensaje}</h1>
     </div>
     <br>
     <div class="text-center">
@@ -29,7 +30,6 @@
                                     <h3 class="card-title">Calificacion: ${resenia.calificacion}</h3>
                                     <p class="card-text"> Por: ${resenia.idUsuarioCliente.email}</p>
                                     <p class="card-text"> Comentario: ${resenia.comentario}</p>
-                                    <a href="./ir-a-reseniar-cliente?idCli=${resenia.idUsuarioCliente.id}"><button class="btn-primary">Reseniar</button></a>
                                     <hr>
                                 </div>
                             </div>

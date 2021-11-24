@@ -77,6 +77,7 @@
             <li><a href="ir-a-mis-asistencias">Empelos sin postulados</a></li>
             <li><a href="ir-a-asistencias">Empleos</a></li>
             <li><a href="ver-mis-empleos-coordinados">Empleos Coordinados</a></li>
+            <li><a href="ver-mi-perfil-publico-cliente">Mi perfil</a></li>
             <li><a href="cerrar-sesion" class="link-light">Salir <i class="fas fa-sign-out-alt"></i></a></li>
         </ul>
         </nav>
@@ -87,7 +88,7 @@
             <li><a href="ir-a-asistencias">Empleos</a></li>
             <li><a href="ir-a-registrar-perfil-profesional">Registrar perfil</a></li>
             <li><a href="ir-a-registrar-perfil-profesional">Editar perfil</a></li>
-            <li><a href="#">Mi perfil</a></li>
+            <li><a href="ver-mi-perfil-publico-profesional">Mi perfil</a></li>
             <li><a href="ver-resenias-profesional">Ver mis resenias</a></li>
             <li><a href="cerrar-sesion" class="link-light">Salir <i class="fas fa-sign-out-alt"></i></a></li>
         </ul>

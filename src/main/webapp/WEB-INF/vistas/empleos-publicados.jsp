@@ -33,6 +33,10 @@
                                    <input id="idAsistencia" name="idAsistencia" type="hidden" value= "${empleo.id}" >
                                </form>
                            </td>
+
+                           <td>
+                            <a href="ver-perfil-publico-cliente?idCli=${empleo.usuario.id}"><button class="btn-light-blue">Ver Perfil Empleador</button></a>
+                           </td>
                            <td><a href="ver-ubicacion-empleo?empleo=${empleo.id}"><button class="btn-light-blue">Ver En El Mapa</button></a></td>
                           </c:when>
                           <c:otherwise>

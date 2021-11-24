@@ -42,6 +42,7 @@
                                 <input id="idPostulacion" name="idPostulacion" type="hidden" value= "${postulacion.id}" >
                             </form>
                         </td>
+                        <td> <a href="ver-perfil-publico-profesional?idProf=${postulacion.profesional.id}"><button class="btn btn-lg btn-primary">Ver Perfil</button></a></td>
                         </c:when>
                         </c:choose>
                     </tr>
