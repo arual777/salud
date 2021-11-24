@@ -57,9 +57,29 @@
                 <option value="4">ZONA ESTE</option>
                 <option value="5">ZONA OESTE</option>
             </select>
+
+
+            <div class="form-group">
+                <!--<label for="latitudinput">Latitud</label>-->
+                <form:input type="hidden" required="" path="latitud" name="latitud" id="latitudinput" class="form-control"/>
+            </div>
+            <div class="form-group">
+                <!--<label for="longitudinput">Longitud</label>-->
+                <form:input type="hidden" required="" path="longitud" name="longitud" id="longitudinput" class="form-control" />
+            </div>
+
+            <label for="mapa">Indique una ubicaci&oacute;n de referencia en el mapa arrastrando el puntero</label>
+            <div class="form-group">
+                <div class="col-6" id="mapa" style="width:500px; height:400px;"></div>
+            </div>
+
+
+            
+
             <br>
             <button id="btn-registrarme" class="btn-light-blue" Type="Submit"/>Publicar</button>
             <br>
+
             </form:form>
             <c:if test="${not empty msg}">
             <div class="container">
@@ -83,11 +103,51 @@
             <br>
             </c:if>
     </div>
+
+
+
 </div>
+
 
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src = "http://maps.googleapis.com/maps/api/js?key=AIzaSyAiq3xISXSZYgkd9GDAOdajy4NK2d3L7dY"></script>
+
+<script type="text/javascript">
+    function initialize() {
+        // Creating map object
+        var map = new google.maps.Map(document.getElementById('mapa'), {
+            zoom: 12,
+            center: new google.maps.LatLng(-34.6537328, -58.5429665),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+        // creates a draggable marker to the given coords
+        var vMarker = new google.maps.Marker({
+            position: new google.maps.LatLng(-34.6537328, -58.5429665),
+            draggable: true
+        });
+
+        // adds a listener to the marker
+        // gets the coords when drag event ends
+        // then updates the input with the new coords
+        google.maps.event.addListener(vMarker, 'dragend', function (evt) {
+            $("#latitudinput").val(evt.latLng.lat().toFixed(6));
+            $("#longitudinput").val(evt.latLng.lng().toFixed(6));
+
+            map.panTo(evt.latLng);
+        });
+
+        // centers the map on markers coords
+        map.setCenter(vMarker.position);
+
+        // adds the marker on the map
+        vMarker.setMap(map);
+    }
+    initialize();
+</script>
+
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
 </body>
 </html>
