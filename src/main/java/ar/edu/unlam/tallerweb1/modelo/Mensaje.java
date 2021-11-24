@@ -19,6 +19,20 @@ public class Mensaje {
 
     private String respuesta;
 
+    private Boolean respuestaLeida = false;
+
+    public void setIdMensaje(Long idMensaje) {
+        this.idMensaje = idMensaje;
+    }
+
+    public Boolean getRespuestaLeida() {
+        return respuestaLeida;
+    }
+
+    public void setRespuestaLeida(Boolean respuestaLeida) {
+        this.respuestaLeida = respuestaLeida;
+    }
+
     public long getIdMensaje() {
         return idMensaje;
     }
