@@ -43,19 +43,23 @@ public class ControladorPerfilPublico {
         List<ReseniaAProfesional> resenias = servicioResenia.buscarReseniasPorIdProfesional(idProf);
         Usuario usuario = servicioResenia.buscarUsuario(idProf);
 
-        int calificacion=0;
+        int calificacion=0;String mensaje="";
         for (int i=0; i < resenias.size(); i++){
             ReseniaAProfesional resenia = resenias.get(i);
             calificacion = calificacion + resenia.getCalificacion();
         }
-        calificacion = calificacion / resenias.size();
-
+        if (resenias.size()==0){
+            mensaje = "(Este usuario aún no tiene resenias)";
+        }else {
+            calificacion = calificacion / resenias.size();
+        }
         PerfilProfesional perfilProfesional = servicioPerfilProfesional.buscarCVPorIdUsuario(idProf);
 
         model.put("cv", perfilProfesional);
         model.put("resenias", resenias);
         model.put("usuario", usuario);
         model.put("calificacion", calificacion);
+        model.put("mensaje", mensaje);
 
         return new ModelAndView("perfilPublicoProfesional", model);
     }
@@ -86,16 +90,21 @@ public class ControladorPerfilPublico {
             return new ModelAndView("errorAcceso", model);
         }
 
-        int calificacion=0;
+        int calificacion=0;String mensaje="";
         for (int i=0; i < resenias.size(); i++){
             ReseniaACliente resenia = resenias.get(i);
             calificacion = calificacion + resenia.getCalificacion();
         }
-        calificacion = calificacion / resenias.size();
+        if (resenias.size()==0){
+            mensaje = "(Este usuario aún no tiene resenias)";
+        }else {
+            calificacion = calificacion / resenias.size();
+        }
 
         model.put("resenias", resenias);
         model.put("usuario", usuario);
         model.put("calificacion", calificacion);
+        model.put("mensaje", mensaje);
 
         return new ModelAndView("perfilPublicoCliente", model);
     }
@@ -116,12 +125,16 @@ public class ControladorPerfilPublico {
         List<ReseniaAProfesional> resenias = servicioResenia.buscarReseniasPorIdProfesional(idProf);
         Usuario usuario = servicioResenia.buscarUsuario(idProf);
 
-        int calificacion=0;
+        int calificacion=0;String mensaje="";
         for (int i=0; i < resenias.size(); i++){
             ReseniaAProfesional resenia = resenias.get(i);
             calificacion = calificacion + resenia.getCalificacion();
         }
-        calificacion = calificacion / resenias.size();
+        if (resenias.size()==0){
+            mensaje = "(Este usuario aún no tiene resenias)";
+        }else {
+            calificacion = calificacion / resenias.size();
+        }
 
         PerfilProfesional perfilProfesional = servicioPerfilProfesional.buscarCVPorIdUsuario(idProf);
 
@@ -129,6 +142,7 @@ public class ControladorPerfilPublico {
         model.put("resenias", resenias);
         model.put("usuario", usuario);
         model.put("calificacion", calificacion);
+        model.put("mensaje", mensaje);
 
         return new ModelAndView("perfilPublicoProfesional", model);
     }
@@ -160,16 +174,21 @@ public class ControladorPerfilPublico {
             return new ModelAndView("errorAcceso", model);
         }
 
-        int calificacion=0;
+        int calificacion=0;String mensaje="";
         for (int i=0; i < resenias.size(); i++){
             ReseniaACliente resenia = resenias.get(i);
             calificacion = calificacion + resenia.getCalificacion();
         }
-        calificacion = calificacion / resenias.size();
+        if (resenias.size()==0){
+            mensaje = "(Este usuario aún no tiene resenias)";
+        }else {
+            calificacion = calificacion / resenias.size();
+        }
 
         model.put("resenias", resenias);
         model.put("usuario", usuario);
         model.put("calificacion", calificacion);
+        model.put("mensaje", mensaje);
 
         return new ModelAndView("perfilPublicoCliente", model);
     }

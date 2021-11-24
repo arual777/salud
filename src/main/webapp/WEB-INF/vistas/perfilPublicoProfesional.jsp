@@ -14,6 +14,7 @@
     <div class="text-center">
         <h2>${cv.nombreCompleto}</h2>
         <h1>Puntaje general ${calificacion} / 10</h1>
+        <h1>${mensaje}</h1>
     </div>
     <br>
     <div class="text-center">

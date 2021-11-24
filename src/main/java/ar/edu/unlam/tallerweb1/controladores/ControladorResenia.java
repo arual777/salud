@@ -115,18 +115,22 @@ public class ControladorResenia {
         List<ReseniaAProfesional> reseniaAProfesionals = servicioResenia.buscarReseniasPorIdProfesional(idUsuario);
 
 
-        int calificacion=0;
+        int calificacion=0;String mensaje="";
         for (int i=0; i < reseniaAProfesionals.size(); i++){
             ReseniaAProfesional resenia = reseniaAProfesionals.get(i);
             calificacion = calificacion + resenia.getCalificacion();
         }
-        calificacion = calificacion / reseniaAProfesionals.size();
-
+        if (reseniaAProfesionals.size()==0){
+            mensaje="(Aún no tiene resenias)";
+        }else {
+            calificacion = calificacion / reseniaAProfesionals.size();
+        }
         Usuario usuario = servicioResenia.buscarUsuario(idUsuario);
 
         model.put("resenias", reseniaAProfesionals);
         model.put("usuario", usuario);
         model.put("calificacion", calificacion);
+        model.put("mensaje", mensaje);
 
         return new ModelAndView("mis-resenias-profesional", model);
 
@@ -147,17 +151,21 @@ public class ControladorResenia {
 
         List<ReseniaACliente> resenias = servicioResenia.buscarReseniasAClientePorIdCliente(idUsuario);
         
-        int calificacion=0;
+        int calificacion=0;String mensaje="";
         for (int i=0; i< resenias.size(); i++){
             ReseniaACliente resenia = resenias.get(i);
             calificacion = calificacion + resenia.getCalificacion();
         }
-        calificacion = calificacion / resenias.size();
-
+        if(resenias.size()==0){
+            mensaje="(Aún no tiene resenias)";
+        }else {
+            calificacion = calificacion / resenias.size();
+        }
         Usuario usuario = servicioResenia.buscarUsuario(idUsuario);
         model.put("resenias", resenias);
         model.put("usuario", usuario);
         model.put("calificacion", calificacion);
+        model.put("mensaje", mensaje);
 
         return new ModelAndView("mis-resenias-cliente", model);
 
