@@ -20,7 +20,7 @@
             <form:textarea path="experiencia" type="text-area" id="clave" class="form-control"/>
             <h4 class="my-2">Ingrese un numero de telefono de contacto</h4>
             <form:input path="numeroTelefono" type="text" id="clave" class="form-control"/>
-            <button id="btn-registroProfesional" class="btn btn-lg btn-primary btn-block my-3" Type="Submit"/>Registrar mi Perfil Profesional</button>
+            <button id="btn-registroProfesional" class="btn-light-blue" Type="Submit"/>Registrar mi Perfil Profesional</button>
         </form:form>
 
         <c:if test="${not empty msg}">

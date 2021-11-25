@@ -12,7 +12,7 @@
                     <input id="idAsistencia" name="idAsistencia" type="hidden"
                      value= "${datosMensajeria.idAsistencia}" >
 
-    <button id="btn-registrarme" class="btn btn-lg btn-primary btn-block" Type="Submit"/>Preguntar</button>
+    <button id="btn-registrarme" class="btn-light-blue" Type="Submit"/>Preguntar</button>
 </form:form>
 
 </body>

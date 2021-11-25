@@ -17,7 +17,7 @@
             <form:textarea path="experiencia" type="text-area" id="clave" class="form-control" value="${curriculum.experiencia}"/>
             <h4 class="my-2">Ingrese un numero de telefono de contacto</h4>
             <form:input path="numeroTelefono" type="text" id="clave" class="form-control" value="${curriculum.numeroTelefono}"/>
-            <button id="btn-editarPerfilProfesional" class="btn btn-lg btn-primary btn-block my-3" Type="Submit"/>Registrar mi Perfil Profesional</button>
+            <button id="btn-editarPerfilProfesional" class="btn-light-blue" Type="Submit"/>Registrar mi Perfil Profesional</button>
         </form:form>
     </div>
 </div>

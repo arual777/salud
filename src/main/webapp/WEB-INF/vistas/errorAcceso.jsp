@@ -17,7 +17,7 @@
 
     <h5>${msglogeado}</h5>
 
-    <a href="./login"><button type="button" class="btn btn-primary">Ir a Login</button></a>
+    <a href="./login"><button type="button" class="btn-light-blue">Ir a Login</button></a>
 </div>
 
 

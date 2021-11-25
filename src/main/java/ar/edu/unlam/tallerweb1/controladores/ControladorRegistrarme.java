@@ -21,7 +21,7 @@ public class ControladorRegistrarme {
     public ModelAndView irARegistrarme(){
         ModelMap model = new ModelMap();
         DatosRegistro datos = new DatosRegistro();
-        datos.setEmail("ingrese su email...");
+      //  datos.setEmail("Ingrese email");
         model.put("datos", datos);
         return new ModelAndView("registro-usuario", model);
     }
