@@ -31,7 +31,7 @@ public class ServicioMensajeriaImpl implements ServicioMensajeria{
     }
 
     @Override
-    public void crearPregunta(DatosMensajeria datosMensajeria) {
+    public Mensaje crearPregunta(DatosMensajeria datosMensajeria) {
 
         Mensaje mensaje = new Mensaje();
         Usuario usuario = repositorioUsuario.buscarUsuario(datosMensajeria.getIdUsuario());
@@ -40,6 +40,7 @@ public class ServicioMensajeriaImpl implements ServicioMensajeria{
         mensaje.setAsistencia(asistencia);
         mensaje.setUsuario(usuario);
         repositorioMensaje.crearPregunta(mensaje);
+        return mensaje;
     }
 
 
@@ -56,5 +57,29 @@ public class ServicioMensajeriaImpl implements ServicioMensajeria{
         repositorioMensaje.actualizar(mensaje);
     }
 
+    @Override
+    public List<Mensaje> buscarPreguntasPorUsuarioRespondidas(Long idUsuario) {
+
+        List <Mensaje> respuestas = repositorioMensaje.buscarLosMensajesRespondidosPorIdUsuario(idUsuario);
+
+        for(Mensaje respuesta : respuestas){
+            respuesta.setRespuestaLeida(true);
+            repositorioMensaje.actualizar(respuesta);
+        }
+        return respuestas;
+    }
+
+    @Override
+    public Boolean tieneRespuestasSinLeer(Long idUsuario){
+        List <Mensaje> respuestas = repositorioMensaje.buscarLosMensajesRespondidosPorIdUsuario(idUsuario);
+        Boolean respuestaPendienteDeLeer = false;
+
+        for(Mensaje respuesta : respuestas) {
+            if (respuesta.getRespuestaLeida() == false){
+                respuestaPendienteDeLeer = true;
+            }
+        }
+        return respuestaPendienteDeLeer;
+    }
 
 }

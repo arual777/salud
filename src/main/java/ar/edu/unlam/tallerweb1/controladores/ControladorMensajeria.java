@@ -9,6 +9,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -45,11 +46,17 @@ public class ControladorMensajeria {
     @RequestMapping(method = RequestMethod.POST, path = "/preguntar")
     public ModelAndView preguntar(HttpServletRequest request,  @ModelAttribute("datosMensajeria") DatosMensajeria datosMensajeria) throws Exception{
         Long idUsuario = Long.parseLong(request.getSession().getAttribute("userID").toString());
+        Long idRol = obtenerIdRol(request);
         datosMensajeria.setIdUsuario(idUsuario);
-        servicioMensajeria.crearPregunta(datosMensajeria);
-
         ModelMap model = new ModelMap();
-        model.put("msg", "Usted ha enviado un mensaje exitosamente");
+        model.put("idRol", idRol);
+        model.put("idUsuario", idUsuario);
+        if(!(datosMensajeria).getMensaje().trim().isEmpty()) {
+        servicioMensajeria.crearPregunta(datosMensajeria);
+            model.put("msg", "Usted ha enviado un mensaje exitosamente");
+        } else{
+            model.put("msg", "Usted no ha formulado ninguna pregunta");
+        }
         return new ModelAndView("empleos-publicados", model);
     }
 
@@ -82,5 +89,46 @@ public class ControladorMensajeria {
         modelView.addObject("msg","Respuesta registrada");//le pasa por query string
         modelView.setViewName("redirect:/buzon");
         return modelView;
+    }
+
+    @RequestMapping(method = RequestMethod.GET, path="/respuestas")
+    public ModelAndView verRespuestas(HttpServletRequest request) {
+        Long idUsuario = obtenerIdUsuario(request);
+        Long idRol = obtenerIdRol(request);
+        ModelMap model = new ModelMap();
+        model.put("idRol", idRol);
+        List<Mensaje> preguntas = servicioMensajeria.buscarPreguntasPorUsuarioRespondidas(idUsuario);
+        model.put("preguntas", preguntas);
+
+        return new ModelAndView("casillaProfesional", model);
+    }
+
+
+
+    @ResponseBody
+    @RequestMapping(method = RequestMethod.GET, path = "/pendientes")
+    public String ObtenerMensajesPendientes(HttpServletRequest request) {
+
+    Long idUsuario = obtenerIdUsuario(request);
+    Long idRol = obtenerIdRol(request);
+
+        if (idRol == 2) {
+            Boolean respuestasSinLeer = servicioMensajeria.tieneRespuestasSinLeer(idUsuario);
+            String mensajesNuevos = "0";
+        if(respuestasSinLeer == true){
+                mensajesNuevos = "Correo nuevo";
+            }
+        return mensajesNuevos;
+        }
+
+        List<Mensaje> mensajes = servicioMensajeria.buscarPreguntasPorUsuario(idUsuario);
+        String mensajesNuevos = "0";
+
+        for (Mensaje mensaje : mensajes) {
+        if (mensaje.getRespuesta() == null) {
+                mensajesNuevos = "Correo nuevo";
+            }
+        }
+        return mensajesNuevos;
     }
 }

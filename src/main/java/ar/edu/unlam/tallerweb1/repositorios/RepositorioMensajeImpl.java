@@ -51,4 +51,13 @@ public class RepositorioMensajeImpl implements RepositorioMensaje{
     public void actualizar(Mensaje mensaje) {
         sessionFactory.getCurrentSession().update(mensaje);
     }
+
+    @Override
+    public List<Mensaje> buscarLosMensajesRespondidosPorIdUsuario(Long idUsuario){
+        final Session session = sessionFactory.getCurrentSession();
+
+        return (List<Mensaje>)session.createCriteria(Mensaje.class)
+                .add(Restrictions.eq("usuario.id", idUsuario))
+                .add(Restrictions.isNotNull("respuesta")).list();
+    }
 }

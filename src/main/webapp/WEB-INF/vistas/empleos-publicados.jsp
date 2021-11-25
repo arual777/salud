@@ -13,6 +13,8 @@
                     <th scope="col">Descripcion</th>
                     <th scope="col">Tarifa</th>
                     <th scope="col">Zona</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -38,16 +40,15 @@
                             <a href="ver-perfil-publico-cliente?idCli=${empleo.usuario.id}"><button class="btn-light-blue">Ver Perfil Empleador</button></a>
                            </td>
                            <td><a href="ver-ubicacion-empleo?empleo=${empleo.id}"><button class="btn-light-blue">Ver En El Mapa</button></a></td>
-                          </c:when>
-                          <c:otherwise>
-
-                          <td>
-                                <form action= "ir-a-crear-pregunta" method="GET" modelAttribute="datosMensajeria">
-                                       <button type="submit" class="btn-light-blue">Preguntar</button>
-                                        <input id="idAsistencia" name="idAsistencia" type="hidden" value= "${empleo.id}" >
-                                 </form>
-                            </td>
-                         </c:otherwise>
+                               </form>
+                                <td>
+                                   <div>
+                                       <button type="button" asistenciaId="${empleo.id}" class="btn btn-info btn-lg botonPreguntar" data-id="10"
+                                           btn-sm" data-toggle="modal"  data-target="#myModal">
+                                           Preguntar
+                                       </button>
+                                </td>
+                            </c:when>
                      </c:choose>
                     </tr>
                 </c:forEach>
@@ -78,6 +79,48 @@
     <br>
 </c:if>
 
+<!-- Modal -->
+                 <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true">
+                   <div class="modal-dialog" role="document">
+                     <!-- Modal content-->
+                     <div class="modal-content">
+                       <div class="modal-header">
+                                                <h4 class="modal-title">Formule su pregunta</h4>
+
+                         <button type="button" class="close" aria-label="Close" data-dismiss="modal">&times;</button>
+                       </div>
+                       <div class="modal-body">
+                            <form action="preguntar" method="POST" modelAttribute="datosMensajeria">
+                           <textarea class="form-control" style="resize:vertical;" id="mensaje" name="mensaje" rows="10" cols="40" required></textarea>
+                            <input id="idAsistencia" name="idAsistencia" class="idAsistencia" type="hidden">
+                           <div class="modal-footer">
+                                <button id="botonCerrarModal" type="button" class="btn btn-lg btn-danger" data-dismiss="modal">Cerrar</button>
+                                <button id="btn-registrarme" class="btn btn-lg btn-success" Type="Submit"/>Enviar pregunta</button>
+                           </div>
+                            </form>
+                       </div>
+                     </div>
+                   </div>
+                 </div>
+
+    <script>
+        $(".botonPreguntar").click(function ()
+        {
+                let id = $(this).attr('asistenciaId');
+                $(".idAsistencia").val(id);
+                $('#myModal').modal("show");
+        });
+
+        $("#botonCerrarModal").click(function(){
+            $("#mensaje").val('');
+            $('#myModal').modal("hide");
+
+        });
+
+    </script>
+
+
 
 </body>
 </html>
+
