@@ -207,6 +207,8 @@ public class ControladorAsistenciaTest {
         Mockito.when(servicioAsistenciaMock.buscarPostulacionesPorCreador(postulacion.get(0).getId())).thenReturn(postulacion);
     }
 
+
+
     /*@Test
     public void contratarUnProfesionalDeLaListaDePostulados() {
         givenPostuladoId();
