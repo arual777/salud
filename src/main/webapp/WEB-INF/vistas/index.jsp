@@ -11,7 +11,7 @@
                 <h1>Cuidado de mayores a domicilio</h1>
                 <h2>La tranquilidad de tener a tus mayores con los mejores profesionales</h2>
                 <div>
-                    <a href="login" class="btn-get-started scrollto">Registrar</a>
+                    <a href="login" class="btn-get-started scrollto">Log in</a>
                 </div>
             </div>
             <div class="col-lg-6 order-1 order-lg-2 hero-img">

@@ -43,7 +43,7 @@
                                </form>
                                 <td>
                                    <div>
-                                       <button type="button" asistenciaId="${empleo.id}" class="btn btn-info btn-lg botonPreguntar" data-id="10"
+                                       <button type="button" asistenciaId="${empleo.id}" class="btn-light-blue botonPreguntar" data-id="10"
                                            btn-sm" data-toggle="modal"  data-target="#myModal">
                                            Preguntar
                                        </button>

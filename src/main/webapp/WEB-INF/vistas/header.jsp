@@ -87,7 +87,7 @@
             <li><a href="ver-postulados">Postulantes</a></li>
             <li><a href="historial">Historial</a></li>
             <li><a href="ir-a-mis-asistencias">Empelos sin postulados</a></li>
-            <li><a href="ir-a-asistencias">Empleos</a></li>
+            <!--<li><a href="ir-a-asistencias">Empleos</a></li>-->
             <li><a href="ver-mis-empleos-coordinados">Empleos Coordinados</a></li>
             <li><a href="ver-mi-perfil-publico-cliente">Mi perfil</a></li>
             <li> <a href="./buzon"><i class="far fa-envelope fa-2x" style="color: green" ><label class="badge badge-light" id="mensajePendientes"/></i> </a></li>
@@ -113,7 +113,7 @@
             <li><a class="nav-link scrollto" href="index#about">Nosotros</a></li>
             <li><a class="nav-link scrollto" href="index#services">Servicios</a></li>
             <li><a class="nav-link scrollto" href="index#contact">Contacto</a></li>
-            <li><a class="getstarted scrollto" href="login">Registrarse</a></li>
+            <li><a class="getstarted scrollto" href="login">Log in</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
     </c:otherwise>
