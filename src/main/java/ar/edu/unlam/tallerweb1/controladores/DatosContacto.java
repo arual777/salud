@@ -1,5 +1,7 @@
 package ar.edu.unlam.tallerweb1.controladores;
 
+import ar.edu.unlam.tallerweb1.modelo.Contacto;
+
 public class DatosContacto {
     String name;
     String email;
