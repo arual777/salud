@@ -41,15 +41,16 @@ public class ControladorPerfilProfesionalTest {
     ,"1136008899","2002-06-02", 1);
 
 
-    /*@Test
+    @Test
     public void puedoRegistrarPerfilProfesional() {
 
         when(request.getSession()).thenReturn(session);
         when(session.getAttribute("userID")).thenReturn(1L);
+        when(session.getAttribute("rolID")).thenReturn(2L);
 
         ModelAndView mav = whenRegistroElPerfilProfesional(PERFILPROFESIONAL, request);
         thenElRegistroEsExitoso(mav);
-    }*/
+    }
 
     @Test
     public void sinSesionNoPuedoIrARegistrarPerfilProfesional(){
