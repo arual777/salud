@@ -26,10 +26,10 @@
                         <div class="row no-gutters">
                             <div class="col-md-8">
                                 <div class="card-body col-md-8">
-                                    <h3 class="card-title">Calificacion: ${resenia.calificacion}</h3>
+                                    <h3 class="card-title">Calificaci&oacute;n: ${resenia.calificacion}</h3>
                                     <p class="card-text"> Por: ${resenia.idUsuarioCliente.email}</p>
                                     <p class="card-text"> Comentario: ${resenia.comentario}</p>
-                                    <a href="./ir-a-reseniar-cliente?idCli=${resenia.idUsuarioCliente.id}"><button class="btn-light-blue">Reseniar</button></a>
+                                    <a href="./ir-a-reseniar-cliente?idCli=${resenia.idUsuarioCliente.id}"><button class="btn-light-blue">Rese&ntilde;ar</button></a>
                                     <hr>
                                 </div>
                             </div>
