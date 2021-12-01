@@ -70,13 +70,7 @@
         // adds the marker on the map
         vMarker.setMap(map);
 
-        /**
-         * Creates the info Window at the top of the marker
-         */
-        var infoWindow = new google.maps.InfoWindow({
-            content: 'ubicacion'
-        });
-        infoWindow.open(map, vMarker);
+
     }
     initialize();
 </script>

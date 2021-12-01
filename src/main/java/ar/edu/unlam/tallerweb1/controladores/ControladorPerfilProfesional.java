@@ -88,6 +88,8 @@ public class ControladorPerfilProfesional {
             return new ModelAndView("errorAcceso", model);
         }
         long idUsuario = (Long) request.getSession().getAttribute("userID");
+        long idRol = (Long) request.getSession().getAttribute("rolID");
+        model.put("idRol", idRol);
 
 
         try {
@@ -95,11 +97,13 @@ public class ControladorPerfilProfesional {
                     datos.getExperiencia(), datos.getNumeroTelefono(), datos.getFechaNacimiento(), idUsuario);
 
             model.put("msg", "Su perfil profesional ha sido cargado");
+            return new ModelAndView("redirect:/home");
         } catch (Exception e){
             model.put("msg", "No se pudo registrar su perfil profesional, complete todos los campos");
+            return new ModelAndView("registroProfesional", model);
         }
 
-       return new ModelAndView("home", model);
+
     }
 
 
@@ -173,7 +177,7 @@ public class ControladorPerfilProfesional {
         if (idUsuarioSesion == idUsuarioEnPerfilProfesional) {
             datos.setIdUsuario(idUsuarioEnPerfilProfesional);
             servicioPerfilProfesional.editarPerfil(datos);
-            modelView.setViewName("redirect:/home-profesional");
+            modelView.setViewName("redirect:/home");
             return modelView;
         }
         else{

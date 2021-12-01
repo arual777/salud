@@ -43,7 +43,7 @@ public class ControladorPerfilPublico {
         List<ReseniaAProfesional> resenias = servicioResenia.buscarReseniasPorIdProfesional(idProf);
         Usuario usuario = servicioResenia.buscarUsuario(idProf);
 
-        int calificacion=0;String mensaje="";
+        int calificacion=0;String mensaje="";int restante=0;
         for (int i=0; i < resenias.size(); i++){
             ReseniaAProfesional resenia = resenias.get(i);
             calificacion = calificacion + resenia.getCalificacion();
@@ -52,6 +52,7 @@ public class ControladorPerfilPublico {
             mensaje = "(Este usuario aún no tiene resenias)";
         }else {
             calificacion = calificacion / resenias.size();
+            restante = 10 - calificacion;
         }
         PerfilProfesional perfilProfesional = servicioPerfilProfesional.buscarCVPorIdUsuario(idProf);
 
@@ -59,6 +60,7 @@ public class ControladorPerfilPublico {
         model.put("resenias", resenias);
         model.put("usuario", usuario);
         model.put("calificacion", calificacion);
+        model.put("restante", restante);
         model.put("mensaje", mensaje);
 
         return new ModelAndView("perfilPublicoProfesional", model);
