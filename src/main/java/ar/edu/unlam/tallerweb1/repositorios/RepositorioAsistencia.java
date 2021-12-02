@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import ar.edu.unlam.tallerweb1.controladores.DatosFiltro;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
+import ar.edu.unlam.tallerweb1.modelo.Mensaje;
 import ar.edu.unlam.tallerweb1.modelo.Tipo_Turno;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,4 +33,6 @@ public interface RepositorioAsistencia {
     void eliminarSolicitudDeEmpleo(Long id);
 
    Asistencia buscarAsistenciaPorNombreEspecifico(String nombre);
+
+    List<Asistencia> buscarEmpleos(DatosFiltro datosFiltro);
 }

@@ -5,7 +5,6 @@ import ar.edu.unlam.tallerweb1.servicios.ServicioAsistencia;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -303,4 +302,56 @@ public class ControladorAsistencias {
         return new ModelAndView("ubicacionEmpleo", model);
 
     }
+
+    @RequestMapping(method = RequestMethod.GET, path = "/buscarEmpleos")
+    public ModelAndView buscarEmpleos(HttpServletRequest request) throws Exception{
+        String zona =  request.getParameter("zona");
+        String turno = request.getParameter("turno");
+        String camaAdentro = request.getParameter("camaAdentro");
+        ModelMap model = new ModelMap();
+        DatosFiltro datosFiltro = new DatosFiltro();
+
+        if(!zona.equals("TODOS")) {
+            long idZona= Long.parseLong(zona);
+            datosFiltro.setIdZona(idZona);
+        }
+
+        if(!turno.equals("TODOS")) {
+            long idTurno= Long.parseLong(turno);
+            datosFiltro.setIdTurno(idTurno);
+        }
+
+        if(!camaAdentro.equals("TODOS")){
+            boolean adentro = Boolean.parseBoolean(camaAdentro);
+            datosFiltro.setCamaAdentro(adentro);
+        }
+
+        Long idRol = obtenerIdRol(request);
+        Integer mensaje = null;
+        model.put ("titulo", "Todos los servicios");
+        try{
+            List<Asistencia> asistencias = servicioAsistencia.buscarEmpleos(datosFiltro);
+            mensaje = 1;
+            model.put("msg", "Estos son los empleos");
+
+            if(asistencias.isEmpty()){
+                mensaje = 0;
+                model.put("msg", "No tiene empleos para ver");
+            }
+
+            model.put("hZona",zona);
+            model.put("hCama",camaAdentro);
+            model.put("hTurno",turno);
+            model.put("empleos", asistencias);
+            model.put("idRol", idRol);
+
+        }catch(Exception e){
+            mensaje = 0;
+            model.put("msg", "No tiene empleos para ver");
+        }
+        model.put("mensaje", mensaje);
+        return new ModelAndView("empleos-publicados", model);
+    }
+
+
 }
