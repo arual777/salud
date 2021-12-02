@@ -205,32 +205,32 @@
                 </div>
 
                 <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
-                    <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                    <form:form action="contactarContratar" method="POST" modelAttribute="datosContacto"  class="php-email-form">
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <label for="name">Nombre</label>
-                                <input type="text" name="name" class="form-control" id="name" placeholder="Tu nombre" required>
+                                <form:input type="text" name="name" class="form-control" id="name" placeholder="Tu nombre" required="true" path="name" />
                             </div>
                             <div class="form-group col-md-6 mt-3 mt-md-0">
                                 <label for="name">Email</label>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Tu email" required>
+                                <form:input type="email" class="form-control" name="email" id="email" placeholder="Tu email" required="true" path="email" />
                             </div>
                         </div>
                         <div class="form-group mt-3">
                             <label for="name">Motivo</label>
-                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Motivo" required>
+                            <form:input type="text" class="form-control" name="subject" id="subject" placeholder="Motivo" required="true" path="subject" />
                         </div>
                         <div class="form-group mt-3">
                             <label for="name">Mensaje</label>
-                            <textarea class="form-control" name="message" rows="10" required></textarea>
+                            <form:textarea class="form-control" name="message" id="message" rows="10" required="true" path="message" />
                         </div>
                         <div class="my-3">
                             <div class="loading">Cargando</div>
                             <div class="error-message"></div>
                             <div class="sent-message">Tu mensaje ha sido enviado. Muchas gracias</div>
                         </div>
-                        <div class="text-center"><button type="submit">Enviar mensaje</button></div>
-                    </form>
+                        <div class="text-center"><button Type="Submit">Enviar mensaje</button></div>
+                    </form:form>
                 </div>
 
             </div>

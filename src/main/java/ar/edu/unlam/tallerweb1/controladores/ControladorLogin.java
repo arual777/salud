@@ -34,6 +34,7 @@ public class ControladorLogin {
 		// Se agrega al modelo un objeto con key 'datosLogin' para que el mismo sea asociado
 		// al model attribute del form que esta definido en la vista 'login'
 		modelo.put("datosLogin", new DatosLogin());
+		modelo.put("datosContacto", new DatosContacto());
 		// Se va a la vista login (el nombre completo de la lista se resuelve utilizando el view resolver definido en el archivo spring-servlet.xml)
 		// y se envian los datos a la misma  dentro del modelo
 		return new ModelAndView("index", modelo);
@@ -87,6 +88,7 @@ public class ControladorLogin {
 
 		model.put("idUsuario", idUsuario);
 		model.put("idRol", idRol);
+		model.put("datosLogin", new DatosLogin());
 		return new ModelAndView("home", model);
 		//return new ModelAndView("home");
 	}
@@ -100,7 +102,10 @@ public class ControladorLogin {
 	// Escucha la url /, y redirige a la URL /login, es lo mismo que si se invoca la url /login directamente.
 	@RequestMapping(path = "/", method = RequestMethod.GET)
 	public ModelAndView inicio() {
-		return new ModelAndView("redirect:/index");
+		ModelMap model = new ModelMap();
+		model.put("datosLogin", new DatosLogin());
+		model.put("datosContacto", new DatosContacto());
+		return new ModelAndView("redirect:/index", model);
 	}
 
 	private Long obtenerIdUsuario(HttpServletRequest request){
