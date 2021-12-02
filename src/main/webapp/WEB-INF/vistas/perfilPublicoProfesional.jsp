@@ -21,11 +21,15 @@
         <c:forEach begin="1" step="1" end="${calificacion}" >
             <i class="fas fa-star fa-3x"></i>
         </c:forEach>
+        <c:forEach begin="1" step="1" end="${restante}" >
+            <i class="far fa-star fa-3x"></i>
+        </c:forEach>
     </div>
     <br>
 
-    <h2>CV</h2>
+
     <div class="my-5 text-center">
+        <h2>Bio:</h2>
         <h3 class="card-title"> Email: ${cv.email}</h3>
         <p class="card-text">Fecha de nacimiento: ${cv.fechaNacimiento}</p>
         <p class="card-text"> Numero de Telefono: ${cv.numeroTelefono}</p>
@@ -35,7 +39,7 @@
 
 
 
-    <h2>Resenias:</h2>
+    <h2>Rese&ntilde;as:</h2>
 
     <c:forEach  items="${resenias}" var="resenia">
         <div class="my-5">

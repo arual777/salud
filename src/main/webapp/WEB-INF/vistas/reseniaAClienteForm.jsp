@@ -10,10 +10,10 @@
 <body>
 <div class = "container">
     <div class="text-align-center" style="margin-top: 8em">
-        <h1>Registro de Resenia</h1>
+        <h1>Registro de Rese&ntilde;a</h1>
     </div>
 
-    <h4 class="my-2"> Resenia Para Cliente: ${cliente.email}</h4>
+    <h4 class="my-2"> Rese&ntilde;a Para Cliente: ${cliente.email}</h4>
 
     <div id="loginbox" style="margin-top:50px;" class="mt-3 mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 
@@ -22,13 +22,13 @@
 
 
 
-            <h4 class="my-2">Ingrese una calificacion</h4>
+            <h4 class="my-2">Ingrese una calificaci&oacute;n</h4>
             <form:input path="calificacion" type="number" id="text" class="form-control"/>
             <h4 class="my-2">Comentario</h4>
             <form:textarea path="comentario" type="text-area" id="text" class="form-control"/>
 
             <form:hidden path="idUsuarioCliente" id="text" value="${cliente.id}"/>
-            <button id="btn-registroProfesional" class="btn-light-blue" Type="Submit"/>Registrar Resenia</button>
+            <button id="btn-registroProfesional" class="btn-light-blue" Type="Submit"/>Registrar Rese&ntilde;a</button>
         </form:form>
 
         <h5 class="my-3">${msgError}</h5>

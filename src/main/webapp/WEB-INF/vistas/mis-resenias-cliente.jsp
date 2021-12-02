@@ -16,7 +16,7 @@
     </div>
     <br>
 
-    <h2>Resenias:</h2>
+    <h2>Rese&ntilde;as:</h2>
 
 
     <c:forEach  items="${resenias}" var="resenia">
@@ -27,7 +27,7 @@
                         <div class="row no-gutters">
                             <div class="col-md-8">
                                 <div class="card-body col-md-8">
-                                    <h3 class="card-title">Calificacion: ${resenia.calificacion}</h3>
+                                    <h3 class="card-title">Calificaci&oacute;n: ${resenia.calificacion}</h3>
                                     <p class="card-text"> Por: ${resenia.idUsuarioProfesional.email}</p>
                                     <p class="card-text"> Comentario: ${resenia.comentario}</p>
                                     <hr>
