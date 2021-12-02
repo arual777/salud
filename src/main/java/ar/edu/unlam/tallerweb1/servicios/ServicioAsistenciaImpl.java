@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.controladores.DatosAsistencia;
+import ar.edu.unlam.tallerweb1.controladores.DatosFiltro;
 import ar.edu.unlam.tallerweb1.controladores.DatosPostulacion;
 import ar.edu.unlam.tallerweb1.modelo.*;
 import ar.edu.unlam.tallerweb1.repositorios.RepositorioAsistencia;
@@ -182,6 +183,11 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
     @Override
     public List<Postulacion> buscarEmpleosOfrecidosCoordinados(long id){
         return repositorioPostulacion.buscarEmpleosOfrecidosCoordinados(id);
+    }
+
+    @Override
+    public List<Asistencia> buscarEmpleos(DatosFiltro datosFiltro) {
+        return repositorioAsistencia.buscarEmpleos(datosFiltro);
     }
 }
 

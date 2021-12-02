@@ -28,7 +28,7 @@ public class ControladorEmpleos {
 
     @RequestMapping(method = RequestMethod.GET, path = "/ver-mis-empleos-coordinados")
     public ModelAndView MostrarEmpleosCoordinadosCliente(HttpServletRequest request){
-
+        String mensaje = request.getParameter("msg");
         long idUsuario = (Long) request.getSession().getAttribute("userID");
         long idRol = (Long) request.getSession().getAttribute("rolID");
 

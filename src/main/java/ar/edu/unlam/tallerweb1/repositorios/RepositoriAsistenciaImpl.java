@@ -1,8 +1,11 @@
 package ar.edu.unlam.tallerweb1.repositorios;
 
+import ar.edu.unlam.tallerweb1.controladores.DatosFiltro;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
+import ar.edu.unlam.tallerweb1.modelo.Mensaje;
 import ar.edu.unlam.tallerweb1.modelo.Tipo_Turno;
 import ar.edu.unlam.tallerweb1.modelo.Usuario;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.MatchMode;
@@ -111,4 +114,20 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
                 .add(Restrictions.eq("nombre", nombre)).uniqueResult();
     }
 
+    @Override
+    public List<Asistencia> buscarEmpleos(DatosFiltro datosFiltro) {
+        final Session session = sessionFactory.getCurrentSession();
+
+        Criteria criteria = session.createCriteria(Asistencia.class);
+        if (datosFiltro.getIdTurno() != null) {
+            criteria.add(Restrictions.eq("idTurno.id", datosFiltro.getIdTurno()));
+        }
+        if (datosFiltro.getIdZona() != null) {
+            criteria.add(Restrictions.eq("zona.id", datosFiltro.getIdZona()));
+        }
+        if(datosFiltro.getCamaAdentro() !=null){
+            criteria.add(Restrictions.eq("camaAdentro", datosFiltro.getCamaAdentro()));
+        }
+        return (List<Asistencia>) criteria.list();
+    }
 }

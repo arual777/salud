@@ -1,8 +1,10 @@
 package ar.edu.unlam.tallerweb1.servicios;
 
 import ar.edu.unlam.tallerweb1.controladores.DatosAsistencia;
+import ar.edu.unlam.tallerweb1.controladores.DatosFiltro;
 import ar.edu.unlam.tallerweb1.controladores.DatosPostulacion;
 import ar.edu.unlam.tallerweb1.modelo.Asistencia;
+import ar.edu.unlam.tallerweb1.modelo.Mensaje;
 import ar.edu.unlam.tallerweb1.modelo.Postulacion;
 
 import java.util.List;
@@ -45,4 +47,5 @@ public interface ServicioAsistencia {
     //Para asi, desde alli, ir a reseniar al profesional
     List<Postulacion> buscarEmpleosOfrecidosCoordinados(long id);
 
+    List<Asistencia> buscarEmpleos(DatosFiltro datosFiltro);
 }

@@ -206,7 +206,16 @@ public class ControladorAsistenciaTest {
         postulacion.add(new Postulacion(1L, profesional, asistencia, false));
         Mockito.when(servicioAsistenciaMock.buscarPostulacionesPorCreador(postulacion.get(0).getId())).thenReturn(postulacion);
     }
+    @Test
+    public void queUnProfesionalPuedaBuscarEmpleosPorZona() throws Exception{
+        //dadoQueExistenEmpleos();
+        cuandoBuscoUnEmpleoPorZona();
+        //entoncesMeDirigeALaVista();
+    }
 
+    private void cuandoBuscoUnEmpleoPorZona() {
+
+    }
 
 
     /*@Test

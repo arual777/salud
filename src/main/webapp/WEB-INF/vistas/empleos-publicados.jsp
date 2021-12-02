@@ -2,6 +2,45 @@
 
 <div class="container">
     <h1>${titulo}</h1>
+
+     <form action="buscarEmpleos" method="GET">
+        <h2 style="color: green"> ${msg} </h2>
+      <h3> Buscar empleos por: </h3>
+    <div>
+     <label for="zona"> Zona:</label>
+                <select name="zona" id="zona" class="form-control" style="width:auto;">
+                    <option value="TODOS">TODOS</option>
+                    <option value="1">CABA</option>
+                    <option value="2">ZONA NORTE</option>
+                    <option value="3">ZONA SUR</option>
+                    <option value="4">ZONA ESTE</option>
+                    <option value="5">ZONA OESTE</option>
+                </select>
+    </div>
+    <div>
+    <label for="turno">Turno:</label>
+        <select name="turno" id="turno" class="form-control" style="width:auto;">
+            <option value="TODOS">TODOS</option>
+            <option value="1">MANANA</option>
+            <option value="2">TARDE</option>
+            <option value="3">NOCHE</option>
+        </select>
+     </div>
+     <label for="camaAdentro">Cama adentro:</label>
+         <select name="camaAdentro" id="camaAdentro"  class="form-control" style="width:auto;">
+             <option value="TODOS">TODOS</option>
+             <option value="1">SI</option>
+             <option value="0">NO</option>
+         </select>
+      </div>
+      <input type=hidden value="${hTurno}" id="hTurno"/>
+      <input type=hidden value="${hCama}" id="hCama"/>
+      <input type=hidden value="${hZona}" id="hZona"/>
+
+<td><button type:"submit" class="btn-light-danger" value= "zona">Buscar</button></a></td>
+
+</form>
+
     <div class="row" >
         <div class="col-md-10">
             <table class="table table-striped">
@@ -116,6 +155,17 @@
             $('#myModal').modal("hide");
 
         });
+
+
+
+    let valorZona = $('#hZona').val();
+    let valorCama = $('#hCama').val();
+    let valorTurno = $('#hTurno').val();
+
+$('#zona').val(valorZona);
+$('#turno').val(valorTurno);
+$('#camaAdentro').val(valorCama);
+
 
     </script>
 
