@@ -14,6 +14,6 @@
 
     <button id="btn-registrarme" class="btn-light-blue" Type="Submit"/>Preguntar</button>
 </form:form>
-
+  <%@include file="footer.jsp" %>
 </body>
 </html>

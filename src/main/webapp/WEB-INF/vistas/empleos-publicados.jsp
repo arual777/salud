@@ -170,7 +170,7 @@ $('#camaAdentro').val(valorCama);
     </script>
 
 
-
+<%@include file="footer.jsp" %>
 </body>
 </html>
 
