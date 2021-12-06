@@ -2,6 +2,9 @@
 
 
 <div class="container">
+    <br>
+    <br>
+    <br>
     <h1>${titulo}</h1>
     <div class="row" >
         <div class="col-md-10">
@@ -24,7 +27,7 @@
                         ${pregunta.usuario.email}
                     </td>
                     <td>
-                        <a href="detalle-asistencia/${pregunta.asistencia.id}">${pregunta.asistencia.id}</a>
+                        <a href="detalle-asistencia/${pregunta.asistencia.id}">${pregunta.asistencia.descripcion}</a>
                     </td>
                 </tr>
                 <tr>
@@ -49,6 +52,6 @@
         </div>
     </div>
 </div>
-
+<%@include file="footer.jsp" %>
 </body>
 </html>

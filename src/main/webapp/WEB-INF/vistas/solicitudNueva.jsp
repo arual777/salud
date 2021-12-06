@@ -72,12 +72,13 @@
             <div class="form-group">
                 <div class="col-6" id="mapa" style="width:500px; height:400px;"></div>
             </div>
-
-
-            
-
             <br>
             <button id="btn-registrarme" class="btn-light-blue" Type="Submit"/>Publicar</button>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <br>
 
             </form:form>
@@ -103,11 +104,7 @@
             <br>
             </c:if>
     </div>
-
-
-
 </div>
-
 
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
@@ -149,5 +146,6 @@
 </script>
 
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
+<%@include file="footer.jsp" %>
 </body>
 </html>
