@@ -12,10 +12,10 @@
                         <div class="row no-gutters">
                             <div class="col-md-8">
                                 <div class="card-body col-md-8">
-                                    <h3 class="card-title">Empleo ID ${empleo.id}</h3>
+                                    <h3 class="card-title">Empleo de ${empleo.asistencia.zona.nombre}</h3>
                                     <p class="card-text"> Profesional Contratado: ${empleo.profesional.email}</p>
                                     <p class="card-text"> Descripción: ${empleo.asistencia.descripcion}</p>
-                                    <a href="./ir-a-reseniar?idProf=${empleo.profesional.id}"><button class="btn-light-blue">Reseniar</button></a>
+                                    <a href="./ir-a-reseniar?idProf=${empleo.profesional.id}"><button class="btn-light-blue">Rese&ntilde;ar</button></a>
                                 </div>
                             </div>
                         </div>

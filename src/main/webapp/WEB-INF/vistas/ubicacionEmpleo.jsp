@@ -3,7 +3,7 @@
 
 <div class = "container">
 
-    <a href="ir-a-asistencias"><button class="btn btn-lg btn-secondary" style="margin-top: 5em;">Volver</button></a>
+    <a href="ir-a-asistencias"><button class="btn-light-blue" style="margin-top: 5em;">Volver</button></a>
 
 
         <div class="">
