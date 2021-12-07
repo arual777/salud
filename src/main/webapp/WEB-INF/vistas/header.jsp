@@ -8,12 +8,12 @@
       src="https://code.jquery.com/jquery-3.6.0.min.js"
       integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
       crossorigin="anonymous"></script>
-
-    <script src="js/bootstrap.min.js"></script>
+|
+    <script src="${pageContext.request.contextPath}/js/bootstrap.min.js"></script>
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" >
+    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" >
     <!-- Bootstrap theme -->
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <!--<link href="css/menu.css" rel="stylesheet">-->
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
@@ -63,12 +63,12 @@
 
 
     <!-- Template Main CSS File -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/style.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" >
+    <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" >
     <!-- Bootstrap theme -->
 
-    <link href="css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="${pageContext.request.contextPath}/css/bootstrap-theme.min.css" rel="stylesheet">
 </head>
 <body>
 <header id="header" class="fixed-top d-flex align-items-center">
@@ -83,28 +83,28 @@
 <c:choose>
     <c:when test="${idRol==1}">
         <ul>
-            <li><a href="ir-a-crear-solicitud">Nueva Solicitud</a></li>
-            <li><a href="ver-postulados">Postulantes</a></li>
-            <li><a href="historial">Historial</a></li>
-            <li><a href="ir-a-mis-asistencias">Empelos sin postulados</a></li>
-            <!--<li><a href="ir-a-asistencias">Empleos</a></li>-->
-            <li><a href="ver-mis-empleos-coordinados">Empleos Coordinados</a></li>
-            <li><a href="ver-mi-perfil-publico-cliente">Mi perfil</a></li>
-            <li> <a href="./buzon"><i class="far fa-envelope fa-2x" style="color: green" ><label class="badge badge-light" id="mensajePendientes"/></i> </a></li>
-            <li><a href="cerrar-sesion" class="link-light">Salir <i class="fas fa-sign-out-alt"></i></a></li>
+            <li><a href="${pageContext.request.contextPath}/ir-a-crear-solicitud">Nueva Solicitud</a></li>
+            <li><a href="${pageContext.request.contextPath}/ver-postulados">Postulantes</a></li>
+            <li><a href="${pageContext.request.contextPath}/historial">Historial</a></li>
+            <li><a href="${pageContext.request.contextPath}/ir-a-mis-asistencias">Empelos sin postulados</a></li>
+            <!--<li><a href="${pageContext.request.contextPath}/ir-a-asistencias">Empleos</a></li>-->
+            <li><a href="${pageContext.request.contextPath}/ver-mis-empleos-coordinados">Empleos Coordinados</a></li>
+            <li><a href="${pageContext.request.contextPath}/ver-mi-perfil-publico-cliente">Mi perfil</a></li>
+            <li> <a href="${pageContext.request.contextPath}/buzon"><i class="far fa-envelope fa-2x" style="color: green" ><label class="badge badge-light" id="mensajePendientes"/></i> </a></li>
+            <li><a href="${pageContext.request.contextPath}/cerrar-sesion" class="link-light">Salir <i class="fas fa-sign-out-alt"></i></a></li>
         </ul>
         </nav>
     </c:when>
     <c:when test="${idRol==2}">
         <ul>
             <li><a href="#">Home</a></li>
-            <li><a href="ir-a-asistencias">Empleos</a></li>
-            <li><a href="ir-a-registrar-perfil-profesional">Registrar perfil</a></li>
-            <li><a href="ir-a-registrar-perfil-profesional">Editar perfil</a></li>
-            <li><a href="ver-mi-perfil-publico-profesional">Mi perfil</a></li>
-            <li><a href="ver-resenias-profesional">Ver mis rese&ntilde;as</a></li>
-            <li> <a href="respuestas"><i class="far fa-envelope fa-2x" style="color: green"><label id="mensajePendientes" class="badge badge-light"/></i> </a></li>
-            <li><a href="cerrar-sesion" class="link-light">Salir <i class="fas fa-sign-out-alt"></i></a></li>
+            <li><a href="${pageContext.request.contextPath}/ir-a-asistencias">Empleos</a></li>
+            <li><a href="${pageContext.request.contextPath}/ir-a-registrar-perfil-profesional">Registrar perfil</a></li>
+            <li><a href="${pageContext.request.contextPath}/ir-a-registrar-perfil-profesional">Editar perfil</a></li>
+            <li><a href="${pageContext.request.contextPath}/ver-mi-perfil-publico-profesional">Mi perfil</a></li>
+            <li><a href="${pageContext.request.contextPath}/ver-resenias-profesional">Ver mis rese&ntilde;as</a></li>
+            <li> <a href="${pageContext.request.contextPath}/respuestas"><i class="far fa-envelope fa-2x" style="color: green"><label id="mensajePendientes" class="badge badge-light"/></i> </a></li>
+            <li><a href="${pageContext.request.contextPath}/cerrar-sesion" class="link-light">Salir <i class="fas fa-sign-out-alt"></i></a></li>
         </ul>
     </c:when>
     <c:otherwise>
