@@ -184,12 +184,12 @@ public class ControladorPerfilPublico {
         for (int i=0; i < resenias.size(); i++){
             ReseniaACliente resenia = resenias.get(i);
             calificacion = calificacion + resenia.getCalificacion();
-            restante = 10 - calificacion;
         }
         if (resenias.size()==0){
             mensaje = "(Este usuario aún no tiene reseñas)";
         }else {
             calificacion = calificacion / resenias.size();
+            restante = 10 - calificacion;
         }
 
         model.put("resenias", resenias);

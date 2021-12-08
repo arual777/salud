@@ -119,12 +119,13 @@ public class ControladorResenia {
         for (int i=0; i < reseniaAProfesionals.size(); i++){
             ReseniaAProfesional resenia = reseniaAProfesionals.get(i);
             calificacion = calificacion + resenia.getCalificacion();
-            restante = 10 - calificacion;
+
         }
         if (reseniaAProfesionals.size()==0){
             mensaje="(Aún no tiene reseñas)";
         }else {
             calificacion = calificacion / reseniaAProfesionals.size();
+            restante = 10 - calificacion;
         }
         Usuario usuario = servicioResenia.buscarUsuario(idUsuario);
 
