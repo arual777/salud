@@ -6,7 +6,7 @@
     </div>
 
     <h3>Ingrese sus datos en el formulario para que los demas usuarios puedan saber su experiencia</h3>
-    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 
         <form:form action="registroProfesional" method="POST" modelAttribute="datosRegistroProfesional">
 
@@ -27,11 +27,14 @@
             <h4><span>${msg}</span></h4>
             <br>
         </c:if>
-
-
     </div>
 </div>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
 <%@include file="footer.jsp" %>

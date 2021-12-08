@@ -97,14 +97,13 @@
     </c:when>
     <c:when test="${idRol==2}">
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="${pageContext.request.contextPath}/ir-a-asistencias">Empleos</a></li>
-            <li><a href="${pageContext.request.contextPath}/ir-a-registrar-perfil-profesional">Registrar perfil</a></li>
-            <li><a href="${pageContext.request.contextPath}/ir-a-registrar-perfil-profesional">Editar perfil</a></li>
-            <li><a href="${pageContext.request.contextPath}/ver-mi-perfil-publico-profesional">Mi perfil</a></li>
-            <li><a href="${pageContext.request.contextPath}/ver-resenias-profesional">Ver mis rese&ntilde;as</a></li>
-            <li> <a href="${pageContext.request.contextPath}/respuestas"><i class="far fa-envelope fa-2x" style="color: green"><label id="mensajePendientes" class="badge badge-light"/></i> </a></li>
-            <li><a href="${pageContext.request.contextPath}/cerrar-sesion" class="link-light">Salir <i class="fas fa-sign-out-alt"></i></a></li>
+            <li><a href="ir-a-asistencias">Empleos</a></li>
+            <li><a href="ir-a-registrar-perfil-profesional">Registrar perfil</a></li>
+            <li><a href="ir-a-registrar-perfil-profesional">Editar perfil</a></li>
+            <li><a href="ver-mi-perfil-publico-profesional">Mi perfil</a></li>
+            <li><a href="ver-resenias-profesional">Ver mis rese&ntilde;as</a></li>
+            <li> <a href="respuestas"><i class="far fa-envelope fa-2x" style="color: green"><label id="mensajePendientes" class="badge badge-light"/></i> </a></li>
+            <li><a href="cerrar-sesion" class="link-light">Salir <i class="fas fa-sign-out-alt"></i></a></li>
         </ul>
     </c:when>
     <c:otherwise>

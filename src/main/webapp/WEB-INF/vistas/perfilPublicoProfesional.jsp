@@ -40,7 +40,7 @@
                         <!-- Category -->
                         <div class="kanban-category d-flex ">
 
-                            <form:form action="generate/pdf.pdf" method="get" >
+                            <form:form action="generate/pdf.pdf" target="_blank" method="get" >
                                 <input type="hidden" id="id" name="bio" value="${cv.id}"/>
                                 <button type="submit" class="btn btn-primary">Imprimir bio</button>
                             </form:form>
@@ -75,7 +75,9 @@
             </div>
         </div>
     </div>
-
+    <br>
+    <br>
+    <br>
 
 </div>
 </div>

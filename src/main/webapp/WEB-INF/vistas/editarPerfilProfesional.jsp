@@ -1,9 +1,7 @@
 <%@include file="header.jsp" %>
 
 <div class = "container">
-
-
-    <div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div id="loginbox" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <form:form action="./editarPerfilProfesional" method="POST" modelAttribute="datosRegistroProfesional">
             <form:hidden path="id" id="id" />
 
@@ -25,7 +23,12 @@
         </form:form>
     </div>
 </div>
-
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
