@@ -13,12 +13,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Service("servicioAsistencia")
 @Transactional
-public class ServicioAsistenciaImpl implements ServicioAsistencia{
+public class ServicioAsistenciaImpl implements ServicioAsistencia {
 
     private RepositorioAsistencia repositorioAsistencia;
     private RepositorioUsuario repositorioUsuario;
@@ -26,7 +29,7 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
     private RepositorioPerfilProfesional repositorioPerfilProfesional;
 
     @Autowired
-    public ServicioAsistenciaImpl(RepositorioAsistencia repositorioAsistencia, RepositorioUsuario repositorioUsuario, RepositorioPostulacion repositorioPostulacion, RepositorioPerfilProfesional repositorioPerfilProfesional){
+    public ServicioAsistenciaImpl(RepositorioAsistencia repositorioAsistencia, RepositorioUsuario repositorioUsuario, RepositorioPostulacion repositorioPostulacion, RepositorioPerfilProfesional repositorioPerfilProfesional) {
         this.repositorioAsistencia = repositorioAsistencia;
         this.repositorioUsuario = repositorioUsuario;
         this.repositorioPostulacion = repositorioPostulacion;
@@ -103,6 +106,7 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
         return repositorioPostulacion.buscarPostulacionesPorCreador(usuarioId);
     }
 
+
     @Override
     public List<Postulacion> buscarPostulaciones() {
         return repositorioPostulacion.buscarPostulaciones();
@@ -112,6 +116,23 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
     public List<Postulacion> buscarPostulacionesPorCreadorNoAceptados(Long idUsuario) {
         return repositorioPostulacion.buscarPostulacionesPorCreadorNoAceptados(idUsuario);
     }
+
+    @Override
+    public List<Asistencia> buscarAsistenciasSinPostulantes(Long idUsuario) {
+        List<Postulacion> postulaciones = repositorioPostulacion.buscarPostulacionesPorCreador(idUsuario);
+        HashSet<Long> idAsistencia = new HashSet<Long>();
+
+        for (Postulacion postulacion : postulaciones) {
+            idAsistencia.add(postulacion.getAsistencia().getId());
+        }
+
+        if (idAsistencia.isEmpty()) {
+            return repositorioAsistencia.buscarAsistenciaPorIdDelCliente(idUsuario);
+        }
+
+        return repositorioAsistencia.buscarAsistenciasPorIds(idAsistencia);
+    }
+
 
     @Override
     public Asistencia actualizarAsistencia(DatosAsistencia datos) {
@@ -137,7 +158,8 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia{
         repositorioAsistencia.actualizar(asistenciaAEditar);
         return asistenciaAEditar;
     }
-        @Override
+
+    @Override
     @ExceptionHandler
     public Asistencia buscarAsistenciaPorId(long id) throws Exception {
 

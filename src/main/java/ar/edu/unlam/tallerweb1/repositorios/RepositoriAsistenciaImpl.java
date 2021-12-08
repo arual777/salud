@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 
 @Repository("repositorioAsistencia")
@@ -129,5 +130,15 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
             criteria.add(Restrictions.eq("camaAdentro", datosFiltro.getCamaAdentro()));
         }
         return (List<Asistencia>) criteria.list();
+    }
+
+    @Override
+    public List <Asistencia> buscarAsistenciasPorIds(HashSet<Long> idAsistencia) {
+
+        final Session session = sessionFactory.getCurrentSession();
+        return (List<Asistencia>) session.createCriteria(Asistencia.class)
+                .add(Restrictions.not(Restrictions.in("id", idAsistencia.toArray())))
+                .add(Restrictions.eq("usuario.id",33L))
+                .list();
     }
 }
