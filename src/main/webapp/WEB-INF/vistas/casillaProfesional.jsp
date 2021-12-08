@@ -1,6 +1,9 @@
 <%@include file="header.jsp" %>
 
 <div class="container">
+    <br>
+    <br>
+    <br>
     <h1>${titulo}</h1>
     <div class="row" >
         <div class="col-md-10">
