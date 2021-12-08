@@ -1,15 +1,16 @@
 <%@include file="header.jsp" %>
 
 <div class="container">
-    <h1>${titulo}</h1>
 
-     <form action="buscarEmpleos" method="GET">
-        <h2 style="color: green"> ${msg} </h2>
-      <h3> Buscar empleos por: </h3>
-    <div>
-     <label for="zona"> Zona:</label>
-                <select name="zona" id="zona" class="form-control" style="width:auto;">
-                    <option value="TODOS">TODOS</option>
+    <h1>${titulo}</h1><br>
+    <h3> Buscar empleos por: </h3>
+
+     <form action="buscarEmpleos" method="GET" class="form-inline">
+
+    <div class="form-group mb-2">
+     <label for="zona" class="sr-only"> Zona:</label>
+                <select name="zona" id="zona" class="form-control-plaintext" style="width:auto;">
+                    <option value="TODOS">Zona</option>
                     <option value="1">CABA</option>
                     <option value="2">ZONA NORTE</option>
                     <option value="3">ZONA SUR</option>
@@ -17,32 +18,39 @@
                     <option value="5">ZONA OESTE</option>
                 </select>
     </div>
-    <div>
-    <label for="turno">Turno:</label>
-        <select name="turno" id="turno" class="form-control" style="width:auto;">
-            <option value="TODOS">TODOS</option>
+    <div class="form-group mx-sm-3 mb-2">
+    <label for="turno" class="sr-only">Turno:</label>
+        <select name="turno" id="turno"  class="form-control-plaintext" style="width:auto;">
+            <option value="TODOS">Turno</option>
             <option value="1">MANANA</option>
             <option value="2">TARDE</option>
             <option value="3">NOCHE</option>
         </select>
      </div>
-     <label for="camaAdentro">Cama adentro:</label>
-         <select name="camaAdentro" id="camaAdentro"  class="form-control" style="width:auto;">
-             <option value="TODOS">TODOS</option>
+         <div class="form-group mx-sm-3 mb-2">
+     <label for="camaAdentro" class="sr-only">Cama adentro:</label>
+         <select name="camaAdentro" id="camaAdentro"  class="form-control-plaintext" style="width:auto;">
+             <option value="TODOS">Cama adentro</option>
              <option value="1">SI</option>
              <option value="0">NO</option>
          </select>
       </div>
+
       <input type=hidden value="${hTurno}" id="hTurno"/>
       <input type=hidden value="${hCama}" id="hCama"/>
       <input type=hidden value="${hZona}" id="hZona"/>
-
-<td><button type:"submit" class="btn-light-danger" value= "zona">Buscar</button></a></td>
+<div>
+<td><button type="submit" class="btn-light-blue mb-2" value="zona">Buscar</button></td>
+</div>
+<br>
+         <br>
 
 </form>
-
-    <div class="row" >
-        <div class="col-md-10">
+    <div>
+        <h2>${msg} </h2><br>
+    </div>
+    <div class="row d-flex justify-content-center" >
+        <div class="col-md-12">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -63,7 +71,7 @@
                         <td>  ${empleo.idFrecuencia.nombre}</td>
                         <td>  ${empleo.camaAdentro}</td>
                         <td>  ${empleo.descripcion}</td>
-                        <td>  ${empleo.tarifa}</td>
+                        <td>  $ ${empleo.tarifa}</td>
                         <td>  ${empleo.zona.nombre}</td>
 
                         <c:choose>
@@ -78,7 +86,7 @@
                            <td>
                             <a href="ver-perfil-publico-cliente?idCli=${empleo.usuario.id}"><button class="btn-light-blue">Ver Perfil Empleador</button></a>
                            </td>
-                           <td><a href="ver-ubicacion-empleo?empleo=${empleo.id}"><button class="btn-light-blue">Ver En El Mapa</button></a></td>
+                           <td><a href="ver-ubicacion-empleo?empleo=${empleo.id}"><button class="btn-light-blue">Ver ubicacion</button></a></td>
                                </form>
                                 <td>
                                    <div>
@@ -86,6 +94,7 @@
                                            btn-sm" data-toggle="modal"  data-target="#myModal">
                                            Preguntar
                                        </button>
+                                   </div>
                                 </td>
                             </c:when>
                      </c:choose>
@@ -115,6 +124,9 @@
             </div>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
     <br>
 </c:if>
 
