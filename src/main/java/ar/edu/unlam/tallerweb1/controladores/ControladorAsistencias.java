@@ -326,7 +326,7 @@ public class ControladorAsistencias {
         }
 
         if(!camaAdentro.equals("TODOS")){
-            boolean adentro = Boolean.parseBoolean(camaAdentro);
+            boolean adentro = camaAdentro.equals("1") ? true :false;
             datosFiltro.setCamaAdentro(adentro);
         }
 
