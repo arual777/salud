@@ -52,7 +52,7 @@ public class ControladorResenia {
         List <ReseniaAProfesional> resenias = servicioResenia.buscarReseniaPorClienteYProfesional(idUsuario, idUsuarioProfesional);
 
         if(!resenias.isEmpty()){
-            String msg = "No Podes Reseniar Dos veces a un mismo profesional";
+            String msg = "No podes reseñar dos veces a un mismo profesional";
             model.put("msglogeado", msg);
             return new ModelAndView("errorAcceso", model);
         }
@@ -115,15 +115,17 @@ public class ControladorResenia {
         List<ReseniaAProfesional> reseniaAProfesionals = servicioResenia.buscarReseniasPorIdProfesional(idUsuario);
 
 
-        int calificacion=0;String mensaje="";
+        int calificacion=0;String mensaje="";int restante=0;
         for (int i=0; i < reseniaAProfesionals.size(); i++){
             ReseniaAProfesional resenia = reseniaAProfesionals.get(i);
             calificacion = calificacion + resenia.getCalificacion();
+
         }
         if (reseniaAProfesionals.size()==0){
-            mensaje="(Aún no tiene resenias)";
+            mensaje="(Aún no tiene reseñas)";
         }else {
             calificacion = calificacion / reseniaAProfesionals.size();
+            restante = 10 - calificacion;
         }
         Usuario usuario = servicioResenia.buscarUsuario(idUsuario);
 
@@ -131,6 +133,7 @@ public class ControladorResenia {
         model.put("usuario", usuario);
 
         model.put("calificacion", calificacion);
+        model.put("restante",restante);
         model.put("mensaje", mensaje);
         model.put("idRol", idRol);
 
@@ -153,20 +156,22 @@ public class ControladorResenia {
 
         List<ReseniaACliente> resenias = servicioResenia.buscarReseniasAClientePorIdCliente(idUsuario);
         
-        int calificacion=0;String mensaje="";
+        int calificacion=0;String mensaje="";int restante = 0;
         for (int i=0; i< resenias.size(); i++){
             ReseniaACliente resenia = resenias.get(i);
             calificacion = calificacion + resenia.getCalificacion();
         }
         if(resenias.size()==0){
-            mensaje="(Aún no tiene resenias)";
+            mensaje="(Aún no tiene reseñas)";
         }else {
             calificacion = calificacion / resenias.size();
+            restante = 10 - calificacion;
         }
         Usuario usuario = servicioResenia.buscarUsuario(idUsuario);
         model.put("resenias", resenias);
         model.put("usuario", usuario);
         model.put("calificacion", calificacion);
+        model.put("restante", restante);
         model.put("mensaje", mensaje);
 
         return new ModelAndView("mis-resenias-cliente", model);
@@ -199,7 +204,7 @@ public class ControladorResenia {
         List <ReseniaACliente> resenias = servicioResenia.buscarReseniaAClientePorClienteYProfesional(idUsuarioCliente, idUsuario);
 
         if(!resenias.isEmpty()){
-            String msg = "No Podes Reseniar Dos veces a un mismo profesional";
+            String msg = "No podes reseñar dos veces a un mismo profesional";
             model.put("msglogeado", msg);
             return new ModelAndView("errorAcceso", model);
         }

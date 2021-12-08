@@ -13,6 +13,9 @@
         <c:forEach begin="1" step="1" end="${calificacion}" >
             <i class="fas fa-star fa-3x"></i>
         </c:forEach>
+        <c:forEach begin="1" step="1" end="${restante}" >
+            <i class="far fa-star fa-3x"></i>
+        </c:forEach>
     </div>
     <br>
 
