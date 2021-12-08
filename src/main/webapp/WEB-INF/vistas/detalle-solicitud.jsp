@@ -1,7 +1,5 @@
-<!DOCTYPE html>
-
 <%@include file="header.jsp" %>
-<div class = "container">
+<div class ="container">
     <h1>${titulo}</h1>
     <div id="solicitudBox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <form:form action="../editarSolicitud" method="POST" modelAttribute="asistencia">
@@ -116,14 +114,7 @@
             $("#camaAdentro").prop("checked", false);
         }
     });
-
 </script>
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" ></script>
-<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
-<script src="js/bootstrap.min.js" type="text/javascript"></script>
-
-
 <%@include file="footer.jsp" %>
 </body>
 </html>

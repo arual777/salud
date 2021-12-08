@@ -115,6 +115,7 @@ public class ControladorAsistenciaTest {
        dadoQueNoExisteUnaSolicitud(SOLICITUD_NUEVA);
        ModelAndView mav = cuandoCreoUnaSolicitud(SOLICITUD_NUEVA);
        DatosAsistencia a = new DatosAsistencia();
+
        entoncesLaCreacionEsExitosa(mav);
    }
 
@@ -133,7 +134,7 @@ public class ControladorAsistenciaTest {
     }
 
     private void entoncesLaCreacionEsExitosa(ModelAndView mav) {
-        assertThat(mav.getViewName()).isEqualTo("redirect:/ir-a-asistencias");
+        assertThat(mav.getViewName()).isEqualTo("redirect:/ir-a-mis-asistencias");
     }
 
     @Test

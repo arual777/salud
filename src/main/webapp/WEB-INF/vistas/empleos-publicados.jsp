@@ -153,22 +153,28 @@
         $("#botonCerrarModal").click(function(){
             $("#mensaje").val('');
             $('#myModal').modal("hide");
-
         });
-
-
 
     let valorZona = $('#hZona').val();
     let valorCama = $('#hCama').val();
     let valorTurno = $('#hTurno').val();
 
-$('#zona').val(valorZona);
-$('#turno').val(valorTurno);
-$('#camaAdentro').val(valorCama);
+    if(valorZona == ""){
+        valorZona ="TODOS";
+    }
 
+    if(valorCama == ""){
+        valorCama ="TODOS";
+    }
 
-    </script>
+    if(valorTurno == ""){
+        valorTurno ="TODOS";
+    }
 
+    $('#zona').val(valorZona);
+    $('#turno').val(valorTurno);
+    $('#camaAdentro').val(valorCama);
+</script>
 
 <%@include file="footer.jsp" %>
 </body>

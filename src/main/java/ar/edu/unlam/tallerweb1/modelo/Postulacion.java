@@ -27,6 +27,7 @@ public class Postulacion {
         this.id = id;
         this.profesional = profesional;
         this.Aceptado = aceptado;
+        this.asistencia = asistencia;
     }
 
     public Postulacion(){}

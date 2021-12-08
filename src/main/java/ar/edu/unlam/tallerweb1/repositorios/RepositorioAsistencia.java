@@ -6,6 +6,7 @@ import ar.edu.unlam.tallerweb1.modelo.Mensaje;
 import ar.edu.unlam.tallerweb1.modelo.Tipo_Turno;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 @Transactional
 public interface RepositorioAsistencia {
@@ -35,4 +36,6 @@ public interface RepositorioAsistencia {
    Asistencia buscarAsistenciaPorNombreEspecifico(String nombre);
 
     List<Asistencia> buscarEmpleos(DatosFiltro datosFiltro);
+
+     List <Asistencia> buscarAsistenciasPorIds(HashSet<Long> idAsistencia);
 }
