@@ -43,9 +43,13 @@ public interface ServicioAsistencia {
 
     List<Postulacion> buscarPostulacionesPorCreadorNoAceptados(Long idUsuario);
 
+
+
     //Metodos creados para mostrar empleos coordinados (que hayan aceptado al postulante)
     //Para asi, desde alli, ir a reseniar al profesional
     List<Postulacion> buscarEmpleosOfrecidosCoordinados(long id);
 
     List<Asistencia> buscarEmpleos(DatosFiltro datosFiltro);
+
+     List<Asistencia> buscarAsistenciasSinPostulantes(Long idUsuario);
 }

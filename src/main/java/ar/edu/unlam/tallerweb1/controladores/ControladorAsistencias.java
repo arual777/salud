@@ -46,16 +46,18 @@ public class ControladorAsistencias {
     }
 
     @RequestMapping (method = RequestMethod.GET, path = "/ir-a-mis-asistencias")
+    //mostrar solo mis empleos que no tienen postulantes
     public ModelAndView mostrarMisEMpleos(HttpServletRequest request){
         Long idUsuario = obtenerIdUsuario(request);
         Long idRol = obtenerIdRol(request);
         ModelMap model = new ModelMap();
         Integer mensaje = null;
         try {
-            List <Postulacion> postulaciones = servicioAsistencia.buscarPostulacionesPorCreadorNoAceptados(idUsuario);
 
-           // List <Asistencia> postulaciones = servicioAsistencia.buscarAsistenciaPorIdDelCliente(idUsuario);
-            if(postulaciones.isEmpty()){
+            List <Asistencia> asistencias = servicioAsistencia.buscarAsistenciasSinPostulantes(idUsuario);
+
+
+            if(asistencias.isEmpty()){
                 mensaje = 0;
                 model.put("msg", "Usted no tiene empleos creados");
             }else{
@@ -63,8 +65,9 @@ public class ControladorAsistencias {
                 model.put("msg", "Estos son sus empleos creados sin postulados");
             }
             model.put ("titulo", "Todos mis servicios");
-            model.put("empleos", postulaciones);
+            model.put("empleos", asistencias);
             model.put("idRol", idRol);
+            model.put("idUsuario", idUsuario);
         } catch(Exception e){
             mensaje = 0;
             model.put("msg", "No tiene empleos para ver");
@@ -148,7 +151,8 @@ public class ControladorAsistencias {
         servicioAsistencia.crearServicio(datos);
 
         ModelAndView modelView = new ModelAndView();
-        modelView.setViewName("redirect:/ir-a-asistencias");
+
+        modelView.setViewName("redirect:/ir-a-mis-asistencias");
         return modelView;
     }
 
