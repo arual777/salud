@@ -37,5 +37,5 @@ public interface RepositorioAsistencia {
 
     List<Asistencia> buscarEmpleos(DatosFiltro datosFiltro);
 
-     List <Asistencia> buscarAsistenciasPorIds(HashSet<Long> idAsistencia);
+     List <Asistencia> buscarAsistenciasPorIds(HashSet<Long> idAsistencia, Long idUsuario);
 }
