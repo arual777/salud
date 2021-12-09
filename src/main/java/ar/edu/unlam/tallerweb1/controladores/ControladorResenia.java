@@ -204,7 +204,7 @@ public class ControladorResenia {
         List <ReseniaACliente> resenias = servicioResenia.buscarReseniaAClientePorClienteYProfesional(idUsuarioCliente, idUsuario);
 
         if(!resenias.isEmpty()){
-            String msg = "No podes reseñar dos veces a un mismo profesional";
+            String msg = "No podes reseñar dos veces a un mismo cliente";
             model.put("msglogeado", msg);
             return new ModelAndView("errorAcceso", model);
         }

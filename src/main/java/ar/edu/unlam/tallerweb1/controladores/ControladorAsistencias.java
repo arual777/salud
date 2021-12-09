@@ -260,6 +260,33 @@ public class ControladorAsistencias {
         return new ModelAndView("postulaciones",modelo);
     }
 
+    @RequestMapping(path="/ver-postulaciones", method=RequestMethod.GET)
+    public ModelAndView verPostulaciones(HttpServletRequest request){
+        Long idUsuario = obtenerIdUsuario(request);
+        Long idRol = obtenerIdRol(request);
+        ModelMap modelo = new ModelMap();
+        Integer mensaje;
+        try {
+            List <Postulacion> postulaciones = servicioAsistencia.buscarPostulacionesPorUsuario(idUsuario);
+            if(postulaciones.isEmpty()){
+                mensaje = 0;
+                modelo.put("msg", "Usted no ha realizado ninguna postulación");
+            }else{
+                mensaje = 1;
+                modelo.put("msg", "Estas son sus postulaciones");
+            }
+            modelo.put("idRol", idRol);
+            modelo.put("titulo", "Postulaciones");
+            modelo.put("postulaciones", postulaciones);
+        } catch(Exception e){
+            mensaje = 0;
+            modelo.put("msg", "No tiene postulaciones para ver");
+        }
+        modelo.put("mensaje", mensaje);
+
+        return new ModelAndView("postulaciones",modelo);
+    }
+
     @RequestMapping(path="/contratado", method=RequestMethod.POST)
     public ModelAndView contratarPostulado(HttpServletRequest request, @ModelAttribute("datosPostulacion") DatosPostulacion datosPostulacion) throws Exception {
 
