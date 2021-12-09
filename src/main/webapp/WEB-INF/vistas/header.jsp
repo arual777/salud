@@ -98,6 +98,7 @@
     <c:when test="${idRol==2}">
         <ul>
             <li><a href="ir-a-asistencias">Empleos</a></li>
+            <li><a href="ver-postulaciones">Postulaciones</a></li>
             <li><a href="ir-a-registrar-perfil-profesional">Registrar perfil</a></li>
             <li><a href="ir-a-registrar-perfil-profesional">Editar perfil</a></li>
             <li><a href="ver-mi-perfil-publico-profesional">Mi perfil</a></li>
