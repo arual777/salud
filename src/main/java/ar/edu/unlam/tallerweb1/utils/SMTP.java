@@ -39,16 +39,17 @@ public class SMTP {
             MimeMessage message = new MimeMessage(session);
 
             // Set From: header field of the header.
-            message.setFrom(new InternetAddress(FROM));
+            message.setFrom(new InternetAddress(contacto.getEmail()));
 
             // Set To: header field of the header.
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(contacto.getEmail()));
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(FROM));
 
             // Set Subject: header field
             message.setSubject(contacto.getSubject());
 
+
             // Now set the actual message
-            message.setText(contacto.getMessage());
+            message.setText(contacto.getEmail() + " se quiere comunicar con usted con el siguiente mensaje: " + contacto.getMessage());
 
             System.out.println("sending...");
             // Send message

@@ -2,7 +2,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class = "container">
-
+<br>
+    <br>
+    <br>
     <h2>Empleos Coordinados</h2>
     <c:forEach  items="${empleos}" var="empleo">
         <div class="my-5">

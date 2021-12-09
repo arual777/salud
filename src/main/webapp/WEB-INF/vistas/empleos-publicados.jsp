@@ -71,7 +71,7 @@
                         <td>  ${empleo.idFrecuencia.nombre}</td>
                         <td>  ${empleo.camaAdentro}</td>
                         <td>  ${empleo.descripcion}</td>
-                        <td>  $ ${empleo.tarifa}</td>
+                        <td>  $${empleo.tarifa}</td>
                         <td>  ${empleo.zona.nombre}</td>
 
                         <c:choose>
@@ -84,7 +84,7 @@
                            </td>
 
                            <td>
-                            <a href="ver-perfil-publico-cliente?idCli=${empleo.usuario.id}"><button class="btn-light-blue">Ver Perfil Empleador</button></a>
+                            <a href="ver-perfil-publico-cliente?idCli=${empleo.usuario.id}"><button class="btn-light-blue">Ver empleador</button></a>
                            </td>
                            <td><a href="ver-ubicacion-empleo?empleo=${empleo.id}"><button class="btn-light-blue">Ver ubicacion</button></a></td>
                                </form>

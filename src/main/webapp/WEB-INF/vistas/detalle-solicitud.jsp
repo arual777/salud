@@ -64,6 +64,8 @@
             </select>
 
             <button id="btn-registrarme" class="btn-light-blue" Type="Submit"/>Editar</button>
+            <br>
+            <br><br>
             </form:form>
             <c:if test="${not empty msg}">
             <div class="container">
@@ -88,6 +90,8 @@
             </c:if>
     </div>
 </div>
+<br>
+<br><br>
 <script>
     // cuando la pagina se termina de cargar ejecuto esto
     $( document ).ready(function() {
