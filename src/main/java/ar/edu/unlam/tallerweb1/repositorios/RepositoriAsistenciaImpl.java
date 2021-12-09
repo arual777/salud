@@ -133,12 +133,12 @@ public class RepositoriAsistenciaImpl implements RepositorioAsistencia{
     }
 
     @Override
-    public List <Asistencia> buscarAsistenciasPorIds(HashSet<Long> idAsistencia) {
+    public List <Asistencia> buscarAsistenciasPorIds(HashSet<Long> idAsistencia, Long idUsuario) {
 
         final Session session = sessionFactory.getCurrentSession();
         return (List<Asistencia>) session.createCriteria(Asistencia.class)
                 .add(Restrictions.not(Restrictions.in("id", idAsistencia.toArray())))
-                .add(Restrictions.eq("usuario.id",33L))
+                .add(Restrictions.eq("usuario.id",idUsuario))
                 .list();
     }
 }

@@ -130,7 +130,7 @@ public class ServicioAsistenciaImpl implements ServicioAsistencia {
             return repositorioAsistencia.buscarAsistenciaPorIdDelCliente(idUsuario);
         }
 
-        return repositorioAsistencia.buscarAsistenciasPorIds(idAsistencia);
+        return repositorioAsistencia.buscarAsistenciasPorIds(idAsistencia,idUsuario);
     }
 
 
