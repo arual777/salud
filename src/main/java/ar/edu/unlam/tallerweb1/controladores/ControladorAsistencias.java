@@ -180,7 +180,7 @@ public class ControladorAsistencias {
         model.put("asistencia", asistenciaBuscada);
         model.put("idRol", idRol);
 
-        return new ModelAndView("detalle-solicitud", model);
+        return new ModelAndView("detalle-solicitud-sin-editar", model);
     }
 /*
     al tener el mismo path que detalle-asistencia/{idAsistencia} , cuando se edita la asistencia se rompe.
@@ -224,6 +224,7 @@ public class ControladorAsistencias {
 
         } catch (Exception e){
             mensaje = 0;
+            modelo.put("idRol", idRol);
             modelo.put("msg", "No puede postularse por segunda vez");
         }
         modelo.put("mensaje", mensaje);

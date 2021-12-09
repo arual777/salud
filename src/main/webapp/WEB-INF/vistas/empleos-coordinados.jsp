@@ -29,6 +29,27 @@
     <br>
     <br>
 </div>
+<c:if test="${not empty msg}">
+    <div class="container">
+        <div class="row mb-3">
+            <div class="col-md-8">
+                <c:choose>
+                    <c:when test="${mensaje==1}">
+                        <div class="alert alert-info">
+                            <span>${msg}</span>
+                        </div>
+                    </c:when>
+                    <c:otherwise>
+                        <div class="alert alert-danger">
+                            <span>${msg}</span>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+            </div>
+        </div>
+    </div>
+    <br>
+</c:if>
 
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

@@ -10,32 +10,32 @@
         <form:hidden path="zona.id" id="idZonaHidden" />
         <form:hidden path="camaAdentro" id="idCamaHidden" />
 
-        <h3 class="form-signin-heading">Editar ${parametro}</h3>
+        <h3 class="form-signin-heading">Ver detalle ${parametro}</h3>
         <hr class="colorgraph"><br>
 
         <label for="nombre">Nombre de contacto:</label>
-        <form:input path="nombre" id="nombre" class="form-control" />
+        <form:input path="nombre" id="nombre" class="form-control" disabled="true"/>
 
         <label for="descripcion"> Descripci&oacute;n del empleo: </label>
         <br/>
-        <form:textarea id="descripcion" name="descripcion" rows="5" cols="40" path="descripcion"/>
+        <form:textarea id="descripcion" name="descripcion" rows="5" cols="40" path="descripcion" disabled="true"/>
 <br>
             <label for= "c"> Cama adentro: </label>
             <br/>
             <input type="radio"  id="camaAdentro" name="camaAdentro" value="1">
-            <label for="si">SI: </label>
+            <label for="si" disabled="true">SI: </label>
             <br/>
             <input type="radio" id="camaAdentro" name="camaAdentro" value="0">
-            <label for="no">NO: </label>
+            <label for="no" disabled="true">NO: </label>
             <br/> <br/>
 
             <label for="tarifa"> Tarifa:</label>
-                <form:input  path="tarifa" type="number" id="tarifa"/>
+                <form:input  path="tarifa" type="number" id="tarifa" disabled="true"/>
 
             <br/> <br/>
 
             <label for="turno"> Turno:</label>
-            <select id="idTurno" name="idTurno" required>
+            <select id="idTurno" name="idTurno" required disabled="true">
                 <option value="">  </option>
                 <option value="1"> MANANA </option>
                 <option value="2"> TARDE </option>
@@ -44,7 +44,7 @@
             <br/> <br/>
 
             <label for="frecuencia"> Frecuencia:</label>
-            <select name="idFrecuencia" id= "idFrecuencia" required>
+            <select name="idFrecuencia" id= "idFrecuencia" required disabled="true">
                 <option value="">  </option>
                 <option value="1"> CUIDADO POR DIA </option>
                 <option value="2"> CUIDADO POR SEMANA </option>
@@ -54,7 +54,7 @@
             </select>
             <br/> <br/>
             <label for="zona"> Zona:</label>
-            <select name="zona" id= "idZona" required>
+            <select name="zona" id= "idZona" required disabled="true">
                 <option value="">  </option>
                 <option value="1"> CABA </option>
                 <option value="2"> ZONA NORTE </option>
@@ -63,7 +63,6 @@
                 <option value="5">ZONA OESTE</option>
             </select>
 
-            <button id="btn-registrarme" class="btn-light-blue" Type="Submit"/>Editar</button>
             <br>
             <br><br>
             </form:form>

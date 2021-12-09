@@ -35,6 +35,7 @@ public class ControladorEmpleos {
         ModelMap model = new ModelMap();
         if (request.getSession().getAttribute("userID")==null){
             String msg = "No ingresaste en el sistema";
+
             model.put("msglogeado", msg);
             return new ModelAndView("errorAcceso", model);
         }

@@ -51,12 +51,16 @@ public class ControladorMensajeria {
         ModelMap model = new ModelMap();
         model.put("idRol", idRol);
         model.put("idUsuario", idUsuario);
+        Integer mensaje = null;
         if(!(datosMensajeria).getMensaje().trim().isEmpty()) {
         servicioMensajeria.crearPregunta(datosMensajeria);
+            mensaje = 1;
             model.put("msg", "Usted ha enviado un mensaje exitosamente");
         } else{
+            mensaje = 0;
             model.put("msg", "Usted no ha formulado ninguna pregunta");
         }
+        model.put("mensaje", mensaje);
         return new ModelAndView("empleos-publicados", model);
     }
 
